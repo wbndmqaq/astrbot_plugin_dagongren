@@ -24,10 +24,6 @@ AstrBot 大型群聊职场生存模拟插件。以「上班族的现实」为主
 | 项 | 要求 |
 |---|---|
 | AstrBot | `>= 4.9.2`（见 `metadata.yaml` 的 `astrbot_version`） |
-| Python | 3.11+（`ruff.toml` 的 `target-version`；语法本身最低 3.10，用到 `X \| None`） |
-| Python 依赖 | `playwright`、`aiohttp`、`jinja2`、`argon2-cffi`、`pyjwt`（全部在 `requirements.txt`，随插件自动安装）。`pytest` 只在跑自检时需要，不随插件安装 |
-| 额外手动步骤 | 仅 Chromium 浏览器内核需手动下载一次（见下节；不装则所有指令回退纯文本） |
-| 数据库升级 | 插件启动时自动对比 `players` 表列集并补 `ALTER TABLE ADD COLUMN`，老版本数据目录可直接覆盖升级 |
 
 ---
 
@@ -39,7 +35,7 @@ AstrBot WebUI → 插件管理 → 搜索 `astrbot_plugin_shangbanzu` → 安装
 
 ### 卡片渲染环境安装教程（缺了也能玩，只是回退纯文本）
 
-卡片渲染基于本地 Playwright 截图实现。`playwright` **Python 包**写在 `requirements.txt` 里，AstrBot 安装插件时会随依赖一并装上；但**浏览器内核（Chromium）体积大，必须手动下载一次**——插件绝不会自动执行系统级安装：不修改 apt 源、不运行 apt-get、不自动下载浏览器内核。
+卡片渲染基于本地 Playwright 截图实现。`playwright` **Python 包**写在 `requirements.txt` 里，AstrBot 安装插件时会随依赖一并装上；但**浏览器内核（Chromium）体积大，必须手动下载一次**
 
 #### ① 确认 playwright Python 包已装
 
@@ -163,19 +159,6 @@ astrbot_plugin_shangbanzu/
 ├── ruff.toml                # Lint 规则（签入以保证 `ruff check .` 结果可复现）
 └── tests/                   # pytest（513 项）：纯函数、存储层事务、并发守恒、模板渲染、资源与配置一致性、历史缺陷回归
 ```
-
-> 数据与代码的边界，按「这个数值需不需要运维在线调」分两类：
->
-> - **只在 JSON 里**：条目本身的固有属性（饭价、通勤费、证书报名费、房租押金、
->   公司基薪、股票初始价）。改这些要编辑 `resources/data/*.json`。
-> - **JSON 存「配置键名 + 默认值」，实际数值在插件配置里**：跨档位的平衡参数
->   （考评阈值与奖金倍数 `review.json`、年终奖概率与倍数 `yearbonus.json`、
->   双色球各奖级占比 `lottery.json`）。这样运维调数值不用改 JSON，改文案不用改代码。
->
-> 文案、条目名、图标配色一律在 JSON；代码只保留规则与判定。指令正则也不枚举 JSON 里的
-> 内容名——吃法、通勤方式、宠物种类、排行榜别名都由 JSON 拼装或交服务层校验，
-> 所以新增一种吃法/宠物/榜单只改 JSON 即可，不必碰代码（`tests/test_resources.py` 会验证这一点）。
-
 ---
 
 ## 📮 用户群
@@ -185,24 +168,6 @@ QQ 群（插件讨论）：[点击加入](https://qm.qq.com/q/8sOZdZTnaw)
 ---
 
 ## 🎮 完整指令一览
-
-> 指令统一以 `#` 前缀触发（例如 `#打卡`），无前缀的裸指令不会响应。下表为完整指令速查（共 95 条，含 5 条管理员指令）。
->
-> ⚠️ **这 95 条全部注册为 `@filter.regex` 正则，而不是 AstrBot 的 `@filter.command`。**
-> 这是「# 前缀免唤醒 + 同一功能多个别名（`#签到`/`#打卡`）」的必然代价：正则路由不参与
-> AstrBot 的指令注册表，因此**不会出现在指令管理面板里，也不能单独停用 / 改名 / 配置触发权限**，
-> 只有插件的总开关（启用/停用本插件）对它们生效。也正因为如此，
-> **没有指令重名保护**——与其它插件撞正则时 AstrBot 不会提示，需要自己避让；
-> 想改触发词请直接改 `handlers/*.py` 里的正则，或用 `resources/data/*.json`
-> 里已外置的正则片段（如 `rankings.json` 的 `aliases`、`pets.json` 的 `action`）。
-> 同样因为不注册指令，`#帮助` 里的菜单是插件自己渲染的，不随 AstrBot 面板变化。
->
-> 绝大多数指令是群聊玩法，私聊会提示「只能在群聊中使用」；`#帮助`、`#职场早报`、`#今日事件`
-> 与 4 条备份指令不依赖群 ID，私聊同样可用（`Route.group_only=False`）。
->
-> 表中方括号里的可选值（通勤方式、技能、证书、房型…）都来自 `resources/data/*.json`，
-> 不带参数发送对应指令即会列出当前可选项——改了 JSON 就以 JSON 为准。
-> 例外：`#吃饭` 不带参数时会**随机挑一档便宜的**直接吃掉，想看菜单请发一个不存在的吃法。
 
 | 分类 | 指令示例 | 说明 |
 |---|---|---|

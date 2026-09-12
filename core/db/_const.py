@@ -4,9 +4,8 @@ import datetime
 import logging
 import threading
 import time
-import zlib
 
-try:  # 存储层可能被脱离 AstrBot 的脚本单独导入（备份/迁移工具）
+try:  # 存储层可能被脱离 AstrBot 的脚本单独导入（备份/导出工具）
     from astrbot.api import logger
 except ImportError:  # pragma: no cover
     logger = logging.getLogger("shangbanzu.db")
@@ -238,9 +237,8 @@ CREATE TABLE IF NOT EXISTS webui_sessions (
 CREATE INDEX IF NOT EXISTS idx_webui_sessions_exp ON webui_sessions(expires_at);
 """
 
-# 索引单独一段：它们引用 players 的 value / rank_score 等列，而老库要等
-# _migrate 补完列才有这些字段。放在 SCHEMA 里会让 executescript 直接
-# "no such column: value"，整个 init() 失败。DB.init 因此分两步执行。
+# 索引单独一段，由 DB.init 在建表之后单独执行一次：建索引语句一旦挂在建表
+# 脚本里失败就会中止整个 executescript，让出错的只是一条索引却拖垮建表。
 SCHEMA_INDEXES = """
 -- 以下索引补的都是 EXPLAIN QUERY PLAN 实测出来的全表扫描 / 临时排序：
 -- 排行榜（#富豪榜/#职级榜）此前是 SEARCH players(gid) + USE TEMP B-TREE，
@@ -285,26 +283,6 @@ SCHEMA_CONSTRAINTS = (
         "同一群同一周存在多份周榜快照（archives 有重复行）",
     ),
 )
-
-
-def _parse_players_ddl(schema: str) -> dict[str, str]:
-    """从 SCHEMA 里解析 players 表的列定义，供缺列自动迁移拼 ALTER TABLE。
-
-    直接复用 SCHEMA 而不是再维护一份「列名 → 类型」映射：players 的字段定义
-    已经散落在 SCHEMA / COLUMNS / DEFAULTS / DELTA_* / START_CONFIG_KEYS 多处，
-    再加一份手写映射必然漂移。这里解析的是同一段 DDL，加列时只改 SCHEMA 即可。
-    """
-    body = schema.split("CREATE TABLE IF NOT EXISTS players (", 1)[-1]
-    body = body.split("\n);", 1)[0]
-    out: dict[str, str] = {}
-    for raw in body.splitlines():
-        line = raw.strip().rstrip(",").strip()
-        if not line or line.startswith(("--", "PRIMARY KEY", "UNIQUE", "FOREIGN KEY")):
-            continue
-        name, _, rest = line.partition(" ")
-        if name and rest.strip():
-            out[name] = rest.strip()
-    return out
 
 
 COLUMNS = [
@@ -364,89 +342,6 @@ COLUMNS = [
     "created_at",
     "updated_at",
 ]
-
-
-# {列名: "TYPE DEFAULT x"}，由 SCHEMA 解析而来，_CoreMixin.init 用它补缺列
-PLAYER_COLUMN_DDL = _parse_players_ddl(SCHEMA)
-
-# 解析器有两个静默失效模式：① 上面的定位串一旦和 SCHEMA 不再逐字一致，split
-# 会返回整个 SCHEMA，解析出一堆垃圾键；② 列定义写成跨行会把类型和 DEFAULT 拆散。
-# 两种情况下缺列都查不到 DDL，于是自动迁移退化成它本该防住的 "no such column"。
-# 这个断言在【导入时】就炸，比运行到 save_player 才报错好得多。
-if set(PLAYER_COLUMN_DDL) != set(COLUMNS):
-    raise RuntimeError(
-        "players 表的 DDL 解析结果与 COLUMNS 不一致，schema 自动迁移会失效。"
-        f"DDL 多出 {sorted(set(PLAYER_COLUMN_DDL) - set(COLUMNS))}，"
-        f"COLUMNS 多出 {sorted(set(COLUMNS) - set(PLAYER_COLUMN_DDL))}"
-    )
-
-
-def _parse_schema_tables(schema: str) -> dict[str, dict[str, str]]:
-    """把整段 SCHEMA 解析成 {表名: {列名: "TYPE DEFAULT x"}}。
-
-    players 之外的表此前没有任何补齐机制：SCHEMA 全是 CREATE TABLE IF NOT
-    EXISTS，表一旦存在就再也不会变，往 SCHEMA 里给 redpackets / webui_sessions /
-    archives / lottery_* / player_* / push_groups / group_info 加一列，老库连
-    建表语句都不会重跑，直到某条指令撞上 "no such column"（症状只是「指令执行
-    异常」，完全指不到 schema）。这份解析结果就是那 16 张表的同一个兜底。
-
-    解析约束（与 _parse_players_ddl 一致，列定义必须单行、注释独占一行）：
-    多行定义会让类型与 DEFAULT 被拆散、解析出的 DDL 不完整，因此下面用导入期
-    断言把「解析结果 == players 的既有解析结果」钉死，漂移在导入时就炸。
-    """
-    out: dict[str, dict[str, str]] = {}
-    for chunk in schema.split("CREATE TABLE IF NOT EXISTS ")[1:]:
-        name = chunk.split(" (", 1)[0].strip()
-        if not name:
-            continue
-        # 第一行是表头（"<表名> ("），列定义从第二行开始
-        body = chunk.split("\n);", 1)[0]
-        lines = body.splitlines()[1:]
-        cols: dict[str, str] = {}
-        for raw in lines:
-            # 先切掉行尾注释：带着 "-- ..." 去拼 ALTER TABLE 是语法错误
-            line = raw.split("--", 1)[0].strip().rstrip(",").strip()
-            if not line or line.startswith(")"):
-                continue
-            col, _, rest = line.partition(" ")
-            if col.upper() in ("PRIMARY", "UNIQUE", "FOREIGN", "CHECK", "CONSTRAINT"):
-                continue
-            if col and rest.strip():
-                cols[col] = rest.strip()
-        if cols:
-            out[name] = cols
-    return out
-
-
-TABLE_COLUMNS = _parse_schema_tables(SCHEMA)
-
-# 两个解析器必须给出同一份 players 列集：否则其中一处静默失效时，另一处也补不上
-# 缺口（这正是「导入期断言」要防的事，比运行到某条指令才报错好得多）。
-if TABLE_COLUMNS.get("players") != PLAYER_COLUMN_DDL:
-    raise RuntimeError(
-        "SCHEMA 的表解析结果与 players 专用解析器不一致，缺列自动迁移会失效。"
-        f"表解析多出 {sorted(set(TABLE_COLUMNS.get('players', {})) - set(PLAYER_COLUMN_DDL))}，"
-        f"专用解析多出 {sorted(set(PLAYER_COLUMN_DDL) - set(TABLE_COLUMNS.get('players', {})))}"
-    )
-
-# schema 指纹，写进 PRAGMA user_version 当「版本门」：
-# - user_version 原本恒为 0（没人写过），既不能表达「这个库已经补齐到当前
-#   schema」，也挡不住反复逐表比对；
-# - 指纹取的是「表名 + 列名集合」的 crc32，所以往 SCHEMA 加一列就自动变化，
-#   不需要人记得手改一个版本号（手写版本号必然有人忘了加）——指纹变了就会重扫
-#   一遍并把缺列补上，扫完再写回，下次 init 直接跳过。
-# 只取列名集合而不是完整 DDL：改默认值/类型不影响「缺不缺列」，不必重扫。
-def schema_stamp(tables: dict[str, dict[str, str]]) -> int:
-    """{表: 列} → 32 位正整数指纹（PRAGMA user_version 的取值范围）。"""
-    payload = "\n".join(f"{t}:{','.join(sorted(c))}" for t, c in sorted(tables.items()))
-    return zlib.crc32(payload.encode()) & 0x7FFFFFFF
-
-
-SCHEMA_STAMP = schema_stamp(TABLE_COLUMNS)
-
-# v1 曾把背包/技能/冷却存在 players 的 JSON 列里，v2 拆成了三张子表。
-# 迁移时要把这些列的内容搬进子表，搬完保留原列（SQLite 删列需重建表，不值得）。
-LEGACY_JSON_COLUMNS = ("items", "skills", "cds")
 
 
 DELTA_FLOAT_COLUMNS = {

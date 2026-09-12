@@ -10,16 +10,12 @@ from ._const import (
     DEFAULTS,
     DELTA_FLOAT_COLUMNS,
     DELTA_INT_COLUMNS,
-    LEGACY_JSON_COLUMNS,
     MIN_REAL_TIMESTAMP,
     MONEY_GUARD_COLUMNS,
-    PLAYER_COLUMN_DDL,
     SCHEMA,
     SCHEMA_CONSTRAINTS,
     SCHEMA_INDEXES,
-    SCHEMA_STAMP,
     START_CONFIG_KEYS,
-    TABLE_COLUMNS,
     MoneyIntegrityError,
     _write_lock,
     logger,
@@ -57,13 +53,13 @@ class _CoreMixin:
         try:
             # executescript 会隐式提交并抢 SQLite 的写锁：init 不只在启动时跑，
             # 「#恢复备份」之后也会再跑一次，那时其它群的写操作正在进行。
-            # 和 _migrate 一样纳入进程内写锁，避免与它们互相 SQLITE_BUSY。
+            # 与 save_player / cleanup_old_data 一样纳入进程内写锁，避免互相 SQLITE_BUSY。
             with _write_lock:
                 conn.executescript(SCHEMA)
                 conn.commit()
-            self._migrate(conn)
-            # 索引必须在补列之后建：idx_players_value 等引用的是 _migrate 才补上的
-            # 列，先建会在老库上 "no such column"。
+            # 索引与唯一约束都在建表之后单独执行：它们引用 players 的 value /
+            # rank_score 等列，塞进 SCHEMA 那段建表脚本里一旦失败会中止整个
+            # executescript（一条索引出错连建表都保不住）。
             with _write_lock:
                 try:
                     conn.executescript(SCHEMA_INDEXES)
@@ -89,159 +85,6 @@ class _CoreMixin:
                         )
         finally:
             conn.close()
-
-    def _migrate(self, conn: sqlite3.Connection):
-        """把已有库补齐到当前 schema。
-
-        SCHEMA 里全是 CREATE TABLE IF NOT EXISTS，所以【新表】会自动建好，但
-        players 表一旦存在就再也不会被改动——给玩家加一个字段后，老库的每一次
-        save_player 都会 "no such column"，而症状只是「指令执行异常」，完全指不到
-        schema。所以这里显式对比列集并补 ALTER TABLE ADD COLUMN。
-
-        幂等：每次都重新读 PRAGMA table_info，已存在的列不会被再加一次。
-        """
-        # init() 里的 executescript 建表失败会直接抛出，所以这里 players 表一定存在
-        have = {r["name"] for r in conn.execute("PRAGMA table_info(players)")}
-        missing = [c for c in COLUMNS if c not in have]
-        if missing:
-            added = []
-            with _write_lock:
-                for col in missing:
-                    ddl = PLAYER_COLUMN_DDL.get(col)
-                    if not ddl:  # _const 的导入期断言已挡住，这里只是双保险
-                        logger.error(
-                            f"[上班族物语] 列 {col} 在 COLUMNS 里但 SCHEMA 没定义，无法迁移"
-                        )
-                        continue
-                    conn.execute(f"ALTER TABLE players ADD COLUMN {col} {ddl}")
-                    added.append(col)
-                conn.commit()
-            if added:  # 只报真正加上的，别把跳过的也算进去
-                logger.info(
-                    f"[上班族物语] 数据库已升级：players 表补齐 {len(added)} 个字段"
-                    f"（{', '.join(added)}）"
-                )
-        # v1 的 players.items/skills/cds JSON 列 → v2 的三张子表。
-        # 判据是「老列还在且内容非空」；搬完把那些行的老列清成空串，所以第二次
-        # init 就匹配不到了（幂等）。注意 _save_children 是全量替换，因此这条
-        # 路径只适用于「子表还没有数据」的 v1→v2 首次升级。
-        legacy = [c for c in LEGACY_JSON_COLUMNS if c in have]
-        if legacy:
-            self._migrate_legacy_json(conn, legacy)
-        # 其余 16 张表：同一个兜底（此前只覆盖了 players）
-        self._migrate_tables(conn)
-
-    def _migrate_tables(self, conn: sqlite3.Connection):
-        """把 players 之外的每张表补齐到 SCHEMA 定义的列集。
-
-        为什么需要：`CREATE TABLE IF NOT EXISTS` 只保证【新表】建得出来。表一旦
-        存在，之后往 SCHEMA 里加列（redpackets 的 remain_amount、webui_sessions
-        的 subject、archives 的 payload、lottery_* / player_* / push_groups /
-        group_info …）对老库完全无效，直到某条指令撞上 "no such column"，而症状
-        只是「指令执行异常」，运维根本指不到 schema。
-
-        版本门（`PRAGMA user_version` 里存 SCHEMA 的列集指纹 SCHEMA_STAMP）：指纹
-        一致曾经直接 return。但那只证明【上一次 init 时】这个库补齐过，不能证明
-        【现在】还齐 —— 实测手工 `ALTER TABLE redpackets DROP COLUMN claimed_records`
-        之后，stamp 仍然一致，下一次 init 直接跳过，随后 #抢红包 抛
-        "no such column: claimed_records"（而 players 不受影响，因为它的列检查没有
-        门禁）。所以现在 stamp 相同时也照样做一次只读 `PRAGMA table_info` 比对
-        （17 次 PRAGMA，微秒级），只有确实需要 ADD COLUMN 时才走补列/盖章这条路径；
-        stamp 只用来决定「需不需要再写一次」（已经是它就不重复写，省掉一次无意义
-        的写事务）。
-        """
-        try:
-            stamp = int(conn.execute("PRAGMA user_version").fetchone()[0])
-        except (sqlite3.Error, TypeError, IndexError, ValueError):
-            stamp = -1  # 读不出来就当没补过，宁可多扫一次
-        added: list[str] = []
-        failed: list[str] = []
-        with _write_lock:
-            pending: list[tuple[str, str]] = []  # [(表.列, DDL)]
-            for table, cols in TABLE_COLUMNS.items():
-                have = {r["name"] for r in conn.execute(f"PRAGMA table_info({table})")}
-                if not have:
-                    # 表不存在：建表脚本没跑成功过，或表被外部工具删了。这里不硬造
-                    # 一张可能缺索引/约束的表，但【必须计入 failed】：盖章等于宣称
-                    # 「这个库已是最新」，而缺表是比缺列更严重的不一致，盖章后每次
-                    # init 都跳过它、问题永远不再被发现。
-                    failed.append(f"{table}（表不存在）")
-                    continue
-                for col, ddl in cols.items():
-                    if col not in have:
-                        pending.append(
-                            (f"{table}.{col}", f"ALTER TABLE {table} ADD COLUMN {col} {ddl}")
-                        )
-            for label, ddl in pending:
-                # 表名/列名/DDL 均来自本地 SCHEMA 常量（_const.TABLE_COLUMNS），
-                # 不含任何外部输入；SQLite 也不支持给标识符绑定参数。
-                try:
-                    conn.execute(ddl)
-                except sqlite3.Error as e:
-                    # 典型情况：新列写成 NOT NULL 却没有 DEFAULT —— SQLite 拒绝
-                    # 往已有数据的表里加这种列。单独记下来继续补其它列，但【不盖章】：
-                    # 盖章等于宣称「这个库已是最新」，后面的 "no such column"
-                    # 就会静默复发。留在日志里每次启动都提示，直到 SCHEMA 补上默认值。
-                    failed.append(f"{label}（{e}）")
-                    continue
-                added.append(label)
-            if failed:
-                logger.error(
-                    "[上班族物语] 数据库与 schema 不一致，补齐失败（"
-                    + "；".join(failed[:10])
-                    + "）。缺列的请给这些列补 DEFAULT，缺表的请确认它为何被删，"
-                    "然后重载插件；未盖章，每次启动都会重报。"
-                )
-            elif stamp != SCHEMA_STAMP:
-                # 全部补完（或确认无需补）才盖章；指纹已经一致就不重复写
-                conn.execute(f"PRAGMA user_version = {int(SCHEMA_STAMP)}")
-            conn.commit()
-        if added:
-            logger.info(
-                f"[上班族物语] 数据库已升级：{len(added)} 个字段补齐"
-                f"（{', '.join(added[:20])}{'…' if len(added) > 20 else ''}）"
-            )
-
-    def _migrate_legacy_json(self, conn: sqlite3.Connection, legacy: list[str]):
-        """把 v1 的 JSON 列内容搬进 player_items / player_skills / player_cds。"""
-        cols = ",".join(legacy)
-        # 空串 / '{}' / '[]' 都算「没有内容」，搬完的行会被清成空串因此不会重复搬
-        empty = "('', '{}', '[]')"
-        where = " OR ".join(f"COALESCE({c},'') NOT IN {empty}" for c in legacy)
-        moved = 0
-        skipped = 0
-        migrated_keys: list[tuple[str, str]] = []
-        with _write_lock:
-            rows = conn.execute(
-                f"SELECT gid, uid, {cols} FROM players WHERE {where}"  # noqa: S608 - 列名来自本地常量白名单
-            ).fetchall()
-            for row in rows:
-                gid, uid = str(row["gid"]), str(row["uid"])
-                items = self._parse_items(row["items"]) if "items" in legacy else None
-                cds = self._parse_items(row["cds"]) if "cds" in legacy else None
-                skills = self._parse_skills(row["skills"]) if "skills" in legacy else None
-                if not (items or cds or skills):
-                    skipped += 1  # 老列有内容但解析不出东西：坏 JSON
-                    continue
-                self._save_children(conn, gid, uid, items, cds, skills)
-                moved += 1
-                migrated_keys.append((gid, uid))
-            # 只清【真的搬过】的行：解析失败的行保留原始串，运维还有手工抢救的
-            # 余地（一并清掉就只剩一句 warning 了）
-            if migrated_keys:
-                sets = ",".join(f"{c}=''" for c in legacy)
-                conn.executemany(
-                    f"UPDATE players SET {sets} WHERE gid=? AND uid=?",  # noqa: S608 - 列名来自本地常量白名单
-                    migrated_keys,
-                )
-            conn.commit()
-        if moved:
-            logger.info(f"[上班族物语] 数据库已升级：{moved} 名玩家的背包/技能/冷却已迁入子表")
-        if skipped:
-            logger.warning(
-                f"[上班族物语] {skipped} 名玩家的旧 JSON 列无法解析，"
-                "已保留原始内容未迁移（可在 WebUI 导出后手工处理）"
-            )
 
     def _conn(self) -> sqlite3.Connection:
         timeout_s = self.busy_timeout / 1000.0
@@ -316,7 +159,9 @@ class _CoreMixin:
                 p[k] = dv
         p["gid"] = str(p["gid"])
         p["uid"] = str(p["uid"])
-        # 子表合并键的统一默认值：保证任何路径返回的玩家 dict 都有这些键
+        # 子表合并键的统一默认值：保证任何路径返回的玩家 dict 都有这些键。
+        # items/cds/skills 是 JSON 字符串形态（读接口，life_items 等按此写回），
+        # _cds/_skills 是解析后的对象形态（业务层按此读写）。
         p.setdefault("items", "{}")
         p.setdefault("skills", "[]")
         p.setdefault("cds", "{}")
@@ -329,10 +174,11 @@ class _CoreMixin:
         return p
 
     def _row_to_player(self, conn, row) -> dict:
-        """把 players 行 + 子表数据合并成业务层可见的玩家 dict。
+        """把 players 行 + 子表（player_items/player_skills/player_cds）合并成业务层
+        可见的玩家 dict。
 
-        合并后与旧版 JSON 列格式完全一致（items/skills/cds 为 JSON 字符串，
-        _cds/_skills 为解析后的对象），业务层零改动即可使用。
+        items/skills/cds 是子表内容的 JSON 字符串形态（life_items 等直接按此读写），
+        _cds/_skills 是解析后的对象形态。
         """
         p = self.normalize(dict(row))
         gid, uid = p["gid"], p["uid"]
@@ -417,9 +263,8 @@ class _CoreMixin:
         """单事务写回：并发列增量 + 其余列覆盖 + 子表（背包/技能/冷却）全量替换。
 
         子表数据来源：p["_cds"]（dict）、p["_skills"]（list）、p["items"]
-        （JSON 字符串或 dict）。skills/cds 同 items：若下划线解析版缺失，
-        回退到 JSON 字符串版（p["skills"]/p["cds"]）归一，避免只改 JSON 串
-        时被静默丢弃——三种子表两种写法一律兼容。
+        （JSON 字符串或 dict）。_cds/_skills 缺失表示调用方没打算改冷却/技能，
+        对应的子表整体跳过（见 _save_children 的 None 语义）。
 
         返回 True = 已提交；返回 False = 目标行在本次指令执行期间被删档，本次
         写入按「不复活」处理（见 _save_delta/_save_full 的行不存在分支）。
@@ -434,20 +279,13 @@ class _CoreMixin:
         # 说明它只是改主表字段，_save_children 就不该碰那张子表——否则 DELETE +
         # 空重建会把背包/技能/冷却静默清空（例如补录一张缺 items 的玩家档案）。
         has_items = "items" in p
-        has_cds = "_cds" in p or "cds" in p
-        has_skills = "_skills" in p or "skills" in p
-        # 不能用 `or`：业务层只改 p["_cds"]（如 cds.pop 消耗掉最后一个冷却），
-        # 而 p["cds"] 还是加载时的旧 JSON 串。`{} or 旧串` 会取旧串，
-        # 把刚刚消耗掉的冷却/护盾原样写回去。空 dict 是有效值，只有 None 才算缺失。
+        has_cds = "_cds" in p
+        has_skills = "_skills" in p
+        # 空 dict 是有效值：业务层 cds.pop 消耗掉最后一个冷却后，p["_cds"] 就是
+        # 空 dict，必须照常写回（清空该子表），只有「键不存在」才表示别碰这张表。
         cds = p.pop("_cds", None)
-        if cds is None:
-            cds = self._parse_cds(p.get("cds"))
         skills = p.pop("_skills", None)
-        if skills is None:
-            skills = self._parse_skills(p.get("skills"))
         items = p.pop("items", None)
-        p.pop("skills", None)
-        p.pop("cds", None)
         p["updated_at"] = int(time.time())
         gid, uid = str(p["gid"]), str(p["uid"])
         with _write_lock:
@@ -506,30 +344,6 @@ class _CoreMixin:
         if isinstance(items, str):
             try:
                 v = json.loads(items)
-                return v if isinstance(v, dict) else {}
-            except json.JSONDecodeError:
-                return {}
-        return {}
-
-    def _parse_skills(self, skills) -> list:
-        """把技能列的表示（JSON 字符串 / list / None）归一成 list。"""
-        if isinstance(skills, list):
-            return skills
-        if isinstance(skills, str):
-            try:
-                v = json.loads(skills)
-                return v if isinstance(v, list) else []
-            except json.JSONDecodeError:
-                return []
-        return []
-
-    def _parse_cds(self, cds) -> dict:
-        """把冷却列的表示（JSON 字符串 / dict / None）归一成 {key: expires_at}。"""
-        if isinstance(cds, dict):
-            return cds
-        if isinstance(cds, str):
-            try:
-                v = json.loads(cds)
                 return v if isinstance(v, dict) else {}
             except json.JSONDecodeError:
                 return {}
