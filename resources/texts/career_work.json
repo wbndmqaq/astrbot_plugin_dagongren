@@ -1,0 +1,376 @@
+{
+  "err_unemployed_checkin": [
+    "你目前处于失业状态，先发送「#找工作」拿到 Offer 再来打卡吧"
+  ],
+  "err_already_checkin": [
+    "今天已经打过卡了，一天只上一次班（这是打工人的底线）"
+  ],
+  "err_slack_unemployed": [
+    "失业的人摸什么鱼，先找工作！"
+  ],
+  "err_slack_cd": [
+    "鱼都让你摸秃了，冷却中：{remaining}"
+  ],
+  "err_ot_unemployed": [
+    "你都没有公司给你加班，真让人羡慕"
+  ],
+  "err_ot_limit": [
+    "今天已经加了 {ot_done} 次班（每日上限 {ot_limit} 次），再卷下去就要进 ICU 了，明天再来"
+  ],
+  "err_ot_cd": [
+    "身体是革命的本钱，休息够再来：剩余 {remaining}"
+  ],
+  "err_leave_unemployed": [
+    "无业游民不需要请假，你天天都在放假"
+  ],
+  "err_leave_limit": [
+    "本周 {limit} 次请假额度已用完，全勤奖它不香吗"
+  ],
+  "err_compleave_unemployed": [
+    "失业人士没有调休一说，你每天都在休假"
+  ],
+  "err_no_compleave": [
+    "你没有调休券。多发一次「#加班」，有 {rate} 概率获得一张"
+  ],
+  "err_compleave_after_checkin": [
+    "今天已经打过卡了，今天没法请调休啦"
+  ],
+  "err_report_unemployed": [
+    "失业人士不用写周报，这是打工人才有的浪漫"
+  ],
+  "err_report_cd": [
+    "周报刚交过，下次可写还要等 {remaining}，好好搬砖"
+  ],
+  "salary_note": [
+    "基本+绩效{pay}，五险一金-{insurance}"
+  ],
+  "hospital_note": [
+    "加班过度被送医"
+  ],
+  "compleave_note": [
+    "用调休券休息一天，工资照发"
+  ],
+  "report_note": [
+    "敷衍了事被领导识破"
+  ],
+  "titles": {
+    "title_layoff": "很遗憾，你被优化了",
+    "title_checkin_late": "打卡成功（迟到了） · ",
+    "title_checkin": "打卡成功 · ",
+    "title_slack_shield": "摸鱼被抓 · 护盾生效！",
+    "title_slack_caught": "摸鱼被抓！",
+    "title_slack_ok": "摸鱼成功",
+    "title_ot_hospital": "深夜医院见",
+    "title_ot_done": "加班完成",
+    "title_leave_ok": "请假成功",
+    "title_compleave_ok": "带薪调休成功！",
+    "title_report_fail": "周报被打回",
+    "title_report_grade": "周报评级"
+  },
+  "lbl_severance": [
+    "离职补偿"
+  ],
+  "lbl_today_income": [
+    "今日到账"
+  ],
+  "lbl_insurances": [
+    "五险一金"
+  ],
+  "lbl_commute": [
+    "通勤"
+  ],
+  "foot_work_hint": [
+    "发送「#加班」可额外赚钱，「#写周报」每周一次拿绩效奖"
+  ],
+  "foot_health_warn": [
+    "注意身体，健康低于警戒线再加班可能住院"
+  ],
+  "lbl_week_left": [
+    "本周剩余额度"
+  ],
+  "foot_reset_checkin": [
+    "连续出勤已中断，明天记得重新打卡"
+  ],
+  "foot_next_report": [
+    "下周同一时间，继续汇报你在工位上的一举一动"
+  ],
+  "err_leave_after_checkin": [
+    "今天已经打过卡了，请假得提前打招呼，明天再来"
+  ],
+  "commute_walk": [
+    "步行（余额不足）"
+  ],
+  "ev_checkin_fallback": [
+    "平淡的一天"
+  ],
+  "ev_overtime_fallback": [
+    "加班结束"
+  ],
+  "ev_layoff": [
+    "{name} 被「{company}」裁员，获得补偿 {severance} 元"
+  ],
+  "ev_hospital": [
+    "{name} 加班过度被送医，医疗费 {medical} 元"
+  ],
+  "lbl_current_status": [
+    "当前状态"
+  ],
+  "val_status_unemployed": [
+    "失业中，发送「#找工作」再就业"
+  ],
+  "val_severance": [
+    "+{severance} 元（N+1？不存在的）"
+  ],
+  "text_layoff": [
+    "你被裁员了！获得补偿 {severance} 元。发送「#找工作」再就业。"
+  ],
+  "lbl_today_rent": [
+    "今日房租"
+  ],
+  "val_today_rent": [
+    "-{rent} 元"
+  ],
+  "lbl_house_change": [
+    "住房变动"
+  ],
+  "val_house_downgrade": [
+    "降级为「{name}」"
+  ],
+  "val_today_income": [
+    "+{net} 元（绩效 x{perf}）"
+  ],
+  "val_today_income_late": [
+    "+{net} 元（绩效 x{perf}，迟到按 {rate}% 计薪）"
+  ],
+  "val_insurances": [
+    "-{insurance} → 公积金 {fund}"
+  ],
+  "val_commute_cost": [
+    " -{cost} 元"
+  ],
+  "val_commute_late": [
+    "（迟到！）"
+  ],
+  "lbl_attend_streak": [
+    "连续出勤"
+  ],
+  "val_attend_streak": [
+    "{days} 天"
+  ],
+  "lbl_exp": [
+    "经验"
+  ],
+  "val_exp_gain": [
+    "+{gain}（当前 {exp}）"
+  ],
+  "lbl_health_mind": [
+    "健康 / 精神"
+  ],
+  "val_health_mind": [
+    "{health} / {mind}"
+  ],
+  "subtitle_news": [
+    "今日职场早报：{news}"
+  ],
+  "text_checkin_head": [
+    "打卡成功！实发 {net} 元"
+  ],
+  "text_checkin_late": [
+    "（迟到，按 {rate}% 计薪）"
+  ],
+  "text_checkin_tail": [
+    "｜五险一金 -{insurance}｜健康 {health}｜精神 {mind}\n{ev}"
+  ],
+  "lbl_shield_status": [
+    "护盾状态"
+  ],
+  "val_shield_used": [
+    "已消耗 1 层"
+  ],
+  "lbl_fine_waived": [
+    "罚款减免"
+  ],
+  "val_fine_waived_pct": [
+    "100%"
+  ],
+  "text_slack_shield": [
+    "摸鱼被抓！但你的【防甩锅护盾】生效：{line}"
+  ],
+  "lbl_fine": [
+    "罚款"
+  ],
+  "val_fine": [
+    "-{fine} 元"
+  ],
+  "val_fine_unpaid": [
+    "未扣款（余额不足）"
+  ],
+  "lbl_mind": [
+    "精神"
+  ],
+  "val_mind_down5": [
+    "-5（当前 {mind}）"
+  ],
+  "lbl_cash": [
+    "现金"
+  ],
+  "val_cash": [
+    "{cash} 元"
+  ],
+  "text_slack_caught": [
+    "摸鱼被抓！罚款 {fine} 元：{line}"
+  ],
+  "lbl_mind_recover": [
+    "精神恢复"
+  ],
+  "val_mind_recover": [
+    "+{gain}（当前 {mind} / 100）"
+  ],
+  "text_slack_ok": [
+    "摸鱼成功！精神 +{gain}（当前 {mind}）：{line}"
+  ],
+  "lbl_ot_pay": [
+    "加班费"
+  ],
+  "val_ot_pay": [
+    "+{pay} 元"
+  ],
+  "lbl_ev_cash": [
+    "事件收支"
+  ],
+  "val_gain_yuan": [
+    "+{amount} 元"
+  ],
+  "val_loss_yuan": [
+    "-{amount} 元"
+  ],
+  "kind_slack_fine": [
+    "摸鱼罚款"
+  ],
+  "lbl_ot_today": [
+    "今日加班"
+  ],
+  "val_ot_today": [
+    "{done}/{limit} 次"
+  ],
+  "lbl_health": [
+    "健康"
+  ],
+  "val_health_100": [
+    "{health} / 100"
+  ],
+  "val_mind_100": [
+    "{mind} / 100"
+  ],
+  "lbl_comp_leave": [
+    "调休券"
+  ],
+  "val_comp_leave_gain": [
+    "+1（持有 {count} 张）"
+  ],
+  "lbl_medical": [
+    "医疗费"
+  ],
+  "val_medical": [
+    "-{medical} 元"
+  ],
+  "foot_doctor_advice": [
+    "医生建议：少加班"
+  ],
+  "text_ot_hospital": [
+    "住院了！医疗费 -{medical} 元"
+  ],
+  "text_ot_done": [
+    "加班完成！"
+  ],
+  "text_ot_tail": [
+    " 加班费 +{pay} 元\n{ev}"
+  ],
+  "lbl_today_salary": [
+    "今日薪资"
+  ],
+  "val_leave_no_pay": [
+    "0 元（请假无薪）"
+  ],
+  "val_mind_gain": [
+    "+{gain}（当前 {mind}）"
+  ],
+  "val_health_gain": [
+    "+{gain}（当前 {health}）"
+  ],
+  "val_week_left": [
+    "{left} 次"
+  ],
+  "text_leave_ok": [
+    "请假成功！精神+{mg} 健康+{hg}。{line}"
+  ],
+  "line_compleave": [
+    "你用调休券换来了一个带薪的躺平日，工资照发，全勤不断"
+  ],
+  "val_compleave_income": [
+    "+{net} 元"
+  ],
+  "lbl_comp_leave_left": [
+    "剩余调休券"
+  ],
+  "val_comp_leave_left": [
+    "{count} 张"
+  ],
+  "text_compleave_ok": [
+    "带薪调休成功！到账 {net} 元，剩余调休券 {count} 张"
+  ],
+  "val_report_fine": [
+    "-{fine} 元（态度问题）"
+  ],
+  "tx_report_grade": [
+    "评级 {grade}"
+  ],
+  "lbl_report_bonus": [
+    "绩效奖金"
+  ],
+  "val_report_bonus": [
+    "+{bonus} 元"
+  ],
+  "line_report_intro": [
+    "你熬了一个小时写的周报："
+  ],
+  "text_report": [
+    "{title}！{result}"
+  ],
+  "kind_layoff": [
+    "裁员"
+  ],
+  "layoff_tx_note": [
+    "裁员补偿"
+  ],
+  "kind_salary": [
+    "薪资"
+  ],
+  "kind_overtime_pay": [
+    "加班费"
+  ],
+  "kind_comp_leave": [
+    "带薪调休"
+  ],
+  "kind_rent": [
+    "房租"
+  ],
+  "kind_commute": [
+    "通勤"
+  ],
+  "kind_work_event": [
+    "职场事件"
+  ],
+  "kind_hospital": [
+    "住院"
+  ],
+  "kind_report": [
+    "周报"
+  ],
+  "kind_report_perf": [
+    "周报绩效"
+  ],
+  "kind_medical": [
+    "医疗费"
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "err_has_job": [
+    "你已经有工作了，想换工作请使用「#跳槽」，不想干了请使用「#辞职」"
+  ],
+  "err_job_cd": [
+    "面试太频繁，休息一下，剩余：{remaining}"
+  ],
+  "err_no_eligible": [
+    "你当前的经验还投不了任何公司，先加班攒攒经验吧"
+  ],
+  "err_no_company": [
+    "没有叫「{name}」的公司。在招的有：{names}"
+  ],
+  "err_low_exp": [
+    "「{name}」要求 {need} 点经验，你当前只有 {exp}。先去门槛低的公司攒经验吧"
+  ],
+  "err_hop_unemployed": [
+    "你都失业了还跳什么槽，先「#找工作」"
+  ],
+  "err_hop_cd": [
+    "骑驴找马也别太频繁，冷却中：{remaining}"
+  ],
+  "err_hop_peak": [
+    "你的经验已经登顶所有公司，没有更好的去处了（宇宙大厂在向你招手？）"
+  ],
+  "err_resign_none": [
+    "你本来就没有工作，无需辞职"
+  ],
+  "titles": {
+    "title_interview_fail": "面试失败",
+    "title_offer_ok": "Offer 到手！",
+    "title_hop_fail": "跳槽失败",
+    "title_hop_ok": "跳槽成功！",
+    "title_resign_ok": "裸辞快乐！",
+    "title_job_market": "跳槽市场"
+  },
+  "foot_interview_fail": [
+    "当前经验：{exp}｜{cd} 分钟后可以再次投递"
+  ],
+  "text_interview_fail": [
+    "面试失败：{line}"
+  ],
+  "ev_onboard": [
+    "{name} 入职「{company}」担任{title}"
+  ],
+  "lbl_company": [
+    "公司"
+  ],
+  "val_company": [
+    "{name}（{tag}）"
+  ],
+  "lbl_position": [
+    "职位"
+  ],
+  "lbl_salary": [
+    "月薪"
+  ],
+  "val_salary": [
+    "{salary} 元"
+  ],
+  "lbl_company_desc": [
+    "公司简介"
+  ],
+  "lbl_perks": [
+    "员工福利"
+  ],
+  "val_perks_none": [
+    "暂无（画饼阶段）"
+  ],
+  "foot_offer_ok": [
+    "发送「#上班」开始每日打卡赚钱"
+  ],
+  "text_offer_ok": [
+    "入职成功！{name} · {title} · 月薪 {salary} 元"
+  ],
+  "foot_hop_fail": [
+    "{cd} 小时后可再次尝试，驴还得继续骑"
+  ],
+  "text_hop_fail": [
+    "跳槽失败：{line}"
+  ],
+  "fallback_old_company": [
+    "原公司"
+  ],
+  "ev_hop": [
+    "{name} 从「{old}」跳槽至「{new}」"
+  ],
+  "lbl_old_company": [
+    "原公司"
+  ],
+  "lbl_new_company": [
+    "新公司"
+  ],
+  "lbl_new_salary": [
+    "新月薪"
+  ],
+  "val_new_salary_same_level": [
+    "{salary} 元（职级不变：{title}）"
+  ],
+  "text_hop_ok": [
+    "跳槽成功！{old} → {new}，月薪 {salary} 元"
+  ],
+  "fallback_unknown_company": [
+    "未知企业"
+  ],
+  "ev_resign": [
+    "{name} 从「{company}」裸辞"
+  ],
+  "lbl_former_company": [
+    "前公司"
+  ],
+  "lbl_mind": [
+    "精神"
+  ],
+  "val_mind_up10": [
+    "+10（当前 {mind}）"
+  ],
+  "val_mind_unchanged": [
+    "无变化（当前 {mind}）"
+  ],
+  "lbl_notice": [
+    "提醒"
+  ],
+  "val_resign_notice": [
+    "没有收入了，存款和基金还在"
+  ],
+  "text_resign_ok": [
+    "已从「{company}」辞职。发送「#找工作」开启下一段打工生涯"
+  ],
+  "title_market_exp": [
+    "（你的经验：{exp}）"
+  ],
+  "lbl_hiring_count": [
+    "在招公司"
+  ],
+  "lbl_eligible_count": [
+    "你可投递"
+  ],
+  "val_company_count": [
+    "{count} 家"
+  ],
+  "col_company": [
+    "公司"
+  ],
+  "col_salary": [
+    "月薪"
+  ],
+  "col_min_exp": [
+    "门槛"
+  ],
+  "col_risk": [
+    "风险"
+  ],
+  "val_min_exp": [
+    "{exp} 经验"
+  ],
+  "val_risk_pct": [
+    "{risk}%"
+  ],
+  "text_market_head": [
+    "跳槽市场："
+  ],
+  "text_market_item": [
+    "{name}({salary}元/月)"
+  ],
+  "kind_onboard": [
+    "入职"
+  ],
+  "kind_hop": [
+    "跳槽"
+  ],
+  "kind_resign": [
+    "离职"
+  ]
+}

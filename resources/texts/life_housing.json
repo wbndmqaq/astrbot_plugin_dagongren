@@ -1,0 +1,135 @@
+{
+  "err_no_kw": [
+    "没有叫「{kw}」的房子，发送「#租房」查看房源列表"
+  ],
+  "err_owned_only": [
+    "「{name}」是全款买房才能获得的房产，发送「#买房」查看条件"
+  ],
+  "err_already_live": [
+    "你就住在「{name}」，不用重复租"
+  ],
+  "err_deposit_short": [
+    "「{name}」需要押金 {deposit} 元（押一付一），余额不足"
+  ],
+  "err_own_no_rent": [
+    "你已经全款拿下「{name}」了，无需再租房！"
+  ],
+  "err_already_owned": [
+    "你已经有自己的小窝了，还想买第二套？炒房行为不予支持"
+  ],
+  "err_house_downpay": [
+    "首付还差得远！总价 {price} 元，公积金最高抵扣 {offset} 元（当前余额 {fund}），仍需现金 {due} 元，你只有 {cash}"
+  ],
+  "err_commute_invalid": [
+    "通勤方式仅支持：{names}"
+  ],
+  "house_buy_note": [
+    "公积金抵扣 {offset}"
+  ],
+  "titles": {
+    "title_rental_list": "租房中介 · 房源列表",
+    "title_move_house": "乔迁之喜",
+    "title_buy_house": "恭喜！你在这个城市有家了",
+    "title_commute_list": "通勤方案",
+    "title_commute_set": "已切换通勤方式"
+  },
+  "lbl_from_now": [
+    "从此以后"
+  ],
+  "lbl_late_rate": [
+    "迟到率"
+  ],
+  "foot_new_route": [
+    "明天打卡时自动按新路线通勤"
+  ],
+  "ev_house_buy": [
+    "{name} 全款拿下{house}（{due} 元）！"
+  ],
+  "lbl_deposit": [
+    "押金"
+  ],
+  "lbl_daily_rent": [
+    "日租"
+  ],
+  "lbl_daily_recover": [
+    "每日恢复"
+  ],
+  "lbl_house_desc": [
+    "房源描述"
+  ],
+  "lbl_house_price": [
+    "房屋总价"
+  ],
+  "lbl_fund_offset": [
+    "公积金抵扣"
+  ],
+  "lbl_paid": [
+    "实付"
+  ],
+  "lbl_one_way_cost": [
+    "单程花费"
+  ],
+  "lbl_feel": [
+    "体感"
+  ],
+  "val_yuan": [
+    "{amount} 元"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_daily_rent": [
+    "{rent} 元/天（打卡时自动扣）"
+  ],
+  "val_daily_recover": [
+    "健康/精神 +{recover}"
+  ],
+  "val_from_now": [
+    "房租 0 元｜每日恢复 +{recover}｜再也不用看房东脸色"
+  ],
+  "val_house_brief": [
+    "{name}(押金{deposit})"
+  ],
+  "val_commute_cur": [
+    "（当前：{cur}）"
+  ],
+  "val_commute_feel": [
+    "健康{health} 精神{mind}"
+  ],
+  "val_late_rate": [
+    "{pct}%（迟到当日薪资按配置折扣计薪）"
+  ],
+  "lines_house_item": [
+    "{i}. {name}｜日租 {rent} 元（打卡时扣）｜押金 {deposit} 元｜精神恢复 +{recover}"
+  ],
+  "lines_commute_item": [
+    "「{name}」单程 {cost} 元｜健康{health} 精神{mind}｜迟到率 {rate}%"
+  ],
+  "foot_house_owned": [
+    "你已拥有{name}，无需再租房"
+  ],
+  "foot_house_rent": [
+    "{name}仅可通过「#买房」获得；发送「#租房 名称」入住，搬家需支付押金（旧房押金不退）"
+  ],
+  "foot_commute_list": [
+    "发送「#通勤 {names}」切换，每天打卡时自动生效"
+  ],
+  "text_rental_list": [
+    "租房可选：{list}"
+  ],
+  "text_move_house": [
+    "已搬进「{name}」，押金 -{deposit} 元。{desc}"
+  ],
+  "text_buy_house": [
+    "买房成功！实付 {due} 元（公积金抵扣 {offset}）。{line}"
+  ],
+  "text_commute_list": [
+    "通勤可选：{list}"
+  ],
+  "text_commute_set": [
+    "通勤方式已切换为「{mode}」"
+  ],
+  "kind_buy_house": [
+    "买房"
+  ]
+}

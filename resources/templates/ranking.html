@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { display: inline-block; }
+body { font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  background:linear-gradient(150deg,#141a2e 0%,#1b2440 55%,#122a47 100%);
+  width:680px; padding:26px; color:#e8ecf7; display:inline-block; }
+h1 { text-align:center; font-size:27px; color:#ffd86f; letter-spacing:3px; margin-bottom:16px; }
+table { width:100%; border-collapse:separate; border-spacing:0 6px; }
+td { background:rgba(255,255,255,.05); padding:7px 12px; font-size:14.5px; }
+tr td:first-child { border-radius:9px 0 0 9px; }
+tr td:last-child { border-radius:0 9px 9px 0; }
+.rank { width:56px; text-align:center; font-weight:bold; font-size:17px; color:#fc6262; }
+.pinfo { display:flex; align-items:center; gap:11px; }
+.av { width:38px; height:38px; border-radius:50%; object-fit:cover; }
+.avf { width:38px; height:38px; border-radius:50%;
+  background:linear-gradient(135deg,#5b6ea8,#7fd1ff); display:flex; align-items:center;
+  justify-content:center; font-size:16px; font-weight:bold; color:#16213e; }
+.pname { font-weight:bold; }
+.pid { font-size:11px; color:#8a93b5; }
+.score { text-align:right; color:#ffd86f; font-weight:bold; white-space:nowrap; }
+
+</style>
+</head>
+<body>
+  <h1>{{ title or t.ranking_default_title }}</h1>
+  <table>
+    <tbody>
+      {% for r in rows or [] %}
+      {% if r is mapping and r.name %}
+      <tr>
+        <td class="rank">{% if r.rank == 1 %}🥇{% elif r.rank == 2 %}🥈{% elif r.rank == 3 %}🥉{% else %}{{ r.rank or loop.index }}{% endif %}</td>
+        <td>
+          <div style="display:flex;align-items:center;gap:11px">
+            {% if r.avatar %}<img class="av" src="{{ r.avatar }}" alt="" onerror="this.remove()">{% elif r.name %}<div class="avf">{{ r.name[:1] }}</div>{% else %}<div class="avf">?</div>{% endif %}
+            <div><div class="pname">{{ r.name }}</div><div class="pid">{{ r.id or '' }}</div></div>
+          </div>
+        </td>
+        <td class="score">{{ r.score or '' }}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

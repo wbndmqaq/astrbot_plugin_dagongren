@@ -1,0 +1,240 @@
+{
+  "unemployed": [
+    "失业人士不需要开会"
+  ],
+  "meeting_duplicate": [
+    "今天已经开过会了"
+  ],
+  "meeting_cancel": [
+    "会议取消，无事发生"
+  ],
+  "bring_short": [
+    "带饭要 {cost} 元，余额不足"
+  ],
+  "bring_no_target": [
+    "帮不上"
+  ],
+  "bring_self": [
+    "给自己带饭？那叫自己带饭，不叫帮同事带饭"
+  ],
+  "reply_unemployed": [
+    "失业人士没有工作消息要回"
+  ],
+  "reply_duplicate": [
+    "今天已经回过工作消息了，让手指休息一下吧"
+  ],
+  "room_unemployed": [
+    "失业人士不需要抢会议室"
+  ],
+  "room_duplicate": [
+    "今天已经抢过会议室了"
+  ],
+  "room_fallback": [
+    "抢会议室无果"
+  ],
+  "eat_no_target": [
+    "约不了饭"
+  ],
+  "eat_self": [
+    "和自己吃饭？那叫干饭，不叫和同事吃饭"
+  ],
+  "eat_short": [
+    "吃饭预计 {cost} 元，余额不足"
+  ],
+  "boss_unemployed": [
+    "失业人士没有领导可以使唤...啊不，可以服务"
+  ],
+  "boss_cd": [
+    "刚帮领导做完一件事：剩余 {remaining}"
+  ],
+  "summit_short": [
+    "行业峰会门票 {cost} 元，余额不足"
+  ],
+  "summit_cd": [
+    "峰会太频繁也没用：剩余 {remaining}"
+  ],
+  "adopt_have": [
+    "你已经有宠物了（{pet}），一心不能二用"
+  ],
+  "adopt_list": [
+    "可以养：{list}"
+  ],
+  "adopt_short": [
+    "养{pet}需要 {cost} 元（含 initial 费用），余额不足"
+  ],
+  "interact_nopet": [
+    "你还没有宠物，去宠物店领养一只吧"
+  ],
+  "interact_duplicate": [
+    "今天已经陪过宠物了，明天再来"
+  ],
+  "interact_fallback": [
+    "宠物今天很安静"
+  ],
+  "cert_list": [
+    "可考证书：{list}"
+  ],
+  "cert_short": [
+    "考{cert}需要 {cost} 元（报名+教材+培训），余额不足"
+  ],
+  "cert_already": [
+    "你已经考过了{cert}"
+  ],
+  "travel_empty": [
+    "暂时没有可去的旅行目的地"
+  ],
+  "travel_short": [
+    "去{where}需要约 {cost} 元，余额不足"
+  ],
+  "titles": {
+    "title_meeting": "开会",
+    "title_bring_food": "帮带饭成功",
+    "title_reply_msg": "回复工作消息",
+    "title_meeting_room": "抢会议室",
+    "title_eat_with": "和同事吃饭",
+    "title_boss_ok": "帮领导做事",
+    "title_boss_fail": "帮领导做事搞砸了",
+    "title_summit": "行业峰会",
+    "title_adopt_pet": "领养了",
+    "title_pet_interact": "和",
+    "title_pet_interact_tail": "互动",
+    "title_cert_ok": "认证通过！",
+    "title_cert_fail": "考试未通过",
+    "title_travel": "旅行归来"
+  },
+  "lbl_mind": [
+    "精神"
+  ],
+  "lbl_network": [
+    "人脉值"
+  ],
+  "lbl_value": [
+    "身价"
+  ],
+  "foot_travel": [
+    "旅行是最好的充电方式，虽然回来还要面对现实"
+  ],
+  "bring_at_target": [
+    "请@要帮带饭的同事"
+  ],
+  "eat_at_target": [
+    "请@要一起吃饭的同事"
+  ],
+  "lbl_cost": [
+    "花费"
+  ],
+  "lbl_exp": [
+    "经验"
+  ],
+  "lbl_health": [
+    "健康"
+  ],
+  "lbl_your_mind": [
+    "你的精神"
+  ],
+  "lbl_target_mind": [
+    "{name} 精神"
+  ],
+  "lbl_reward": [
+    "奖励"
+  ],
+  "lbl_loss": [
+    "损失"
+  ],
+  "lbl_ticket": [
+    "门票"
+  ],
+  "lbl_fee": [
+    "费用"
+  ],
+  "lbl_mind_bonus": [
+    "精神恢复加成"
+  ],
+  "lbl_send_action": [
+    "发送「#{action}」"
+  ],
+  "lbl_exam_fee": [
+    "考试费"
+  ],
+  "lbl_travel_cost": [
+    "旅行花费"
+  ],
+  "val_plus_yuan": [
+    "+{amount} 元"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_minus_yuan_wasted": [
+    "-{amount} 元（打水漂）"
+  ],
+  "val_gain_cur": [
+    "+{gain}（当前 {cur}）"
+  ],
+  "val_delta_cur": [
+    "{delta}（当前 {cur}）"
+  ],
+  "val_plus_num": [
+    "+{num}"
+  ],
+  "val_value_up_pct": [
+    "+{pct}%（当前 {cur}）"
+  ],
+  "val_default_action": [
+    "互动"
+  ],
+  "val_daily_interact": [
+    "每天互动一次"
+  ],
+  "val_this_trip": [
+    "这趟旅行"
+  ],
+  "text_meeting": [
+    "开会：{text}"
+  ],
+  "text_bring_food": [
+    "帮 {name} 带饭成功！人脉 +2"
+  ],
+  "text_reply_msg": [
+    "回复工作消息完成！经验 +{gain}"
+  ],
+  "text_meeting_room": [
+    "抢会议室：{text}"
+  ],
+  "text_eat_with": [
+    "和 {name} 吃饭，花费 {cost} 元，双方精神都恢复了"
+  ],
+  "text_boss_ok": [
+    "帮领导做事成功！奖励 {reward} 元：{line}"
+  ],
+  "text_boss_fail": [
+    "帮领导做事搞砸了：{line}（损失 {cost} 元）"
+  ],
+  "kind_boss_task": [
+    "帮领导做事"
+  ],
+  "boss_tx_ok_note": [
+    "帮领导跑腿，领导给的小费"
+  ],
+  "boss_tx_fail_note": [
+    "帮领导跑腿搞砸了"
+  ],
+  "text_summit": [
+    "行业峰会收获满满！经验 +{exp}，人脉 +{social}"
+  ],
+  "text_adopt_pet": [
+    "领养了{pet}！花费 {cost} 元。{desc}"
+  ],
+  "text_pet_interact": [
+    "和{pet}互动：{text}"
+  ],
+  "text_cert_ok": [
+    "恭喜通过{cert}认证！身价提升 {pct}%"
+  ],
+  "text_cert_fail": [
+    "{cert}考试失败：{line}"
+  ],
+  "text_travel": [
+    "旅行归来！{text}（花费 {cost} 元）"
+  ]
+}

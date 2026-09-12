@@ -1,0 +1,143 @@
+{
+  "format_error": [
+    "格式错误！请发送：「#发红包 <总金额> <个数>」，例如：「#发红包 1000 5」"
+  ],
+  "min_amount": [
+    "发红包总金额需 >= {min_packet} 元，且每个红包至少 1 元，单次最多 {max_cnt} 个（当前金额 {amount} 元，个数 {count}）"
+  ],
+  "cash_short": [
+    "你的现金不足 {amount} 元，囊中羞涩发不起红包"
+  ],
+  "no_player": [
+    "你的档案不存在，请先发送「#上班」入职"
+  ],
+  "failed": [
+    "发红包失败，请稍后再试"
+  ],
+  "event": [
+    "{nickname} 豪气撒币发送了 {amount} 元拼手气红包（共 {count} 个）！"
+  ],
+  "empty": [
+    "当前群内没有未领完的红包，发送「#发红包 1000 5」自己当老板发一个吧！"
+  ],
+  "already": [
+    "你已经抢过这个红包了，给其他群友留点机会吧！"
+  ],
+  "claimed_all": [
+    "手慢了一步，红包已被抢光！"
+  ],
+  "cooldown": [
+    "彩票站限购，冷却中：{remaining}"
+  ],
+  "scratch_cost_short": [
+    "刮一张「职场刮刮乐」需要 {cost} 元，当前余额不足"
+  ],
+  "titles": {
+    "title_redpacket_send": "🎉 拼手气红包已发出！",
+    "title_redpacket_claim": "🎉 抢到红包！",
+    "title_scratch": "🎰 职场刮刮乐开奖！"
+  },
+  "scratch_not_configured": [
+    "刮刮乐奖项表未配置或已损坏，本次不出票（钱一分没扣）"
+  ],
+  "line_packet_sent": [
+    "{nickname} 豪气塞了 {amount} 元大红包！"
+  ],
+  "line_packet_id": [
+    "红包ID: #{id} · 共 {count} 个，群友快发送「#抢红包」开抢！"
+  ],
+  "line_packet_claim": [
+    "手速惊人！成功抢到来自 {sender} 的红包！"
+  ],
+  "line_scratch": [
+    "刮开图层：【{prize}】！"
+  ],
+  "lbl_packet_total": [
+    "红包总额"
+  ],
+  "lbl_packet_count": [
+    "红包数量"
+  ],
+  "lbl_claim_cmd": [
+    "抢夺指令"
+  ],
+  "lbl_got_amount": [
+    "抢到金额"
+  ],
+  "lbl_my_cash": [
+    "个人现金"
+  ],
+  "lbl_packet_left": [
+    "红包剩余"
+  ],
+  "lbl_prize_amount": [
+    "中奖金额"
+  ],
+  "lbl_scratch_cost": [
+    "刮刮乐花费"
+  ],
+  "val_yuan": [
+    "{amount} 元"
+  ],
+  "val_plus_yuan": [
+    "+{amount} 元"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_zero_yuan": [
+    "0 元"
+  ],
+  "val_count": [
+    "{count} 个"
+  ],
+  "val_claim_cmd": [
+    "抢红包"
+  ],
+  "val_packet_left": [
+    "{count} 个（{amount} 元）"
+  ],
+  "val_lose_default": [
+    "谢谢惠顾"
+  ],
+  "foot_packet_send": [
+    "手快有，手慢无，看谁是群内手气王！"
+  ],
+  "foot_packet_claim": [
+    "恭喜发财，大吉大利！"
+  ],
+  "foot_scratch": [
+    "刮刮乐小赌怡情，大赌伤身，请适度娱乐"
+  ],
+  "text_packet_send": [
+    "🧧 {nickname} 发送了 {amount} 元红包（共{count}个）！发送「#抢红包」开抢！"
+  ],
+  "text_packet_claim": [
+    "🧧 恭喜抢到 {sender} 的红包：+{amount} 元！当前现金 {cash} 元"
+  ],
+  "text_scratch": [
+    "🎫 刮刮乐开奖：【{prize}】获得 {amount} 元！当前现金 {cash} 元"
+  ],
+  "tx_send_note": [
+    "{count}个红包"
+  ],
+  "tx_claim_note": [
+    "来自 {sender}"
+  ],
+  "tx_refund_note": [
+    "红包超时未领完，剩余金额已退回"
+  ],
+  "kind_send_redpacket": [
+    "发红包"
+  ],
+  "kind_scratch": [
+    "刮刮乐"
+  ],
+  "kind_send_redpacket_tx": [
+    "发群红包"
+  ],
+  "kind_claim_redpacket": [
+    "抢群红包"
+  ],
+  "kind_refund": "红包退回"
+}

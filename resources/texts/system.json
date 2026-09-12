@@ -1,0 +1,78 @@
+{
+  "titles": {
+    "title_news": "职场早报 · 今日份的离谱",
+    "title_today_event": "今日职场氛围",
+    "title_last_week": "周榜快照（总资产）"
+  },
+  "not_in_game": "对方还没有加入游戏（让 TA 先发一次「#上班」），{action}",
+  "no_record": "还没有{kind}，先发一次「#上班」建档吧",
+  "text_help_header": [
+    "🏢 打工人·上班族物语"
+  ],
+  "text_help_prefix_note": [
+    "所有指令需带 # 前缀触发（如 #打卡）。"
+  ],
+  "foot_news": [
+    "早报每日更新，全服共享同一份"
+  ],
+  "text_news": [
+    "【职场早报】{headline}"
+  ],
+  "err_unknown_rank": [
+    "未知排行榜"
+  ],
+  "val_atmosphere_fallback_title": [
+    "风平浪静"
+  ],
+  "val_atmosphere_fallback_desc": [
+    "今天办公室风平浪静"
+  ],
+  "line_today_title": [
+    "【{title}】"
+  ],
+  "foot_today_event": [
+    "今日职场氛围播报，次日 00:00 刷新"
+  ],
+  "text_today_event": [
+    "📢 今日职场氛围【{title}】：{desc}"
+  ],
+  "err_no_week_archive": [
+    "还没有任何归档的周榜快照，下周一起看（需开启 weekly_archive_enabled）"
+  ],
+  "val_unit_yuan": [
+    "元"
+  ],
+  "text_last_week": [
+    "{week} 周榜快照\n"
+  ],
+  "val_rank_row": [
+    "{rank}. {name}：{score}"
+  ],
+  "gid_hint": [
+    "该功能只能在群聊中使用"
+  ],
+  "err_hint": [
+    "指令执行异常，已记录日志，请稍后再试"
+  ],
+  "done_placeholder": [
+    "（执行完成）"
+  ],
+  "jobless": [
+    "无业"
+  ],
+  "lost_company_name": [
+    "失联企业"
+  ],
+  "lost_company_tag": [
+    "倒闭"
+  ],
+  "lost_company_desc": [
+    "原公司已解散"
+  ],
+  "fallback_position_title": [
+    "无业游民"
+  ],
+  "fallback_house_name": [
+    "桥洞风水宝地"
+  ]
+}

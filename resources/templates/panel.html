@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { display: inline-block; }
+body { font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  background:linear-gradient(150deg,#141a2e 0%,#1b2440 55%,#122a47 100%);
+  width:700px; padding:26px; color:#e8ecf7; display:inline-block; }
+.head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.head .ico { font-size:34px; }
+.head h1 { font-size:25px; color:{{ accent | default('#ffd86f') }}; letter-spacing:2px; flex:1; }
+.sub { color:#8a93b5; font-size:13px; margin-bottom:12px; line-height:1.5; }
+.card { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09);
+  border-radius:14px; padding:16px 18px; }
+.lines { display:flex; flex-direction:column; gap:9px; margin-bottom: {% if blocks %}14px{% else %}0{% endif %}; }
+.line { background:rgba(255,255,255,.04); border-left:3px solid {{ accent | default('#7fd1ff') }};
+  border-radius:8px; padding:9px 13px; font-size:14.5px; line-height:1.55; color:#dfe4f2; }
+.blocks { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.kv { background:rgba(255,255,255,.04); border-radius:10px; padding:9px 13px; }
+.kv .lab { color:#8a93b5; font-size:12px; }
+.kv .val { color:#eef2ff; font-size:15.5px; font-weight:bold; margin-top:3px; line-height:1.45; word-break:break-all; }
+.foot { margin-top:13px; color:#8a93b5; font-size:12.5px; text-align:center; line-height:1.5; }
+
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="ico">{{ icon | default('📋') }}</div>
+    <h1>{{ title }}</h1>
+  </div>
+  {% if subtitle %}<div class="sub">{{ subtitle }}</div>{% endif %}
+  <div class="card">
+    {% if lines %}
+    <div class="lines">
+      {% for l in lines %}<div class="line">{{ l }}</div>{% endfor %}
+    </div>
+    {% endif %}
+    {% if blocks %}
+    <div class="blocks">
+      {% for b in blocks %}
+      <div class="kv"><div class="lab">{{ b.label }}</div><div class="val">{{ b.value }}</div></div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% if foot %}<div class="foot">{{ foot }}</div>{% endif %}
+</body>
+</html>

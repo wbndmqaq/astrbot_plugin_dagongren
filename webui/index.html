@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>打工人·上班族物语 WebUI</title>
+<link rel="stylesheet" href="/webui/style.css">
+</head>
+<body>
+<div class="bg-aurora"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+<div class="stars" id="starField"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+<!-- role/aria-live：toast 是「已保存 / 失败」的唯一反馈渠道，不加的话读屏用户完全收不到 -->
+<div class="toast-box" id="toastBox" role="status" aria-live="polite" aria-atomic="false"></div>
+
+<!-- 移动端底部导航（<=768px 显示） -->
+<nav class="bottom-nav" id="bottomNav" aria-label="主导航">
+  <button class="bn-btn on" data-p="feed" aria-label="实时动态"><span class="bn-ico">📡</span>动态</button>
+  <button class="bn-btn" data-p="rank" aria-label="排行榜"><span class="bn-ico">🏆</span>排行</button>
+  <button class="bn-btn" data-p="search" aria-label="玩家查询"><span class="bn-ico">🔍</span>查询</button>
+  <button class="bn-btn" data-p="stocks" aria-label="股市管理"><span class="bn-ico">📈</span>股市</button>
+  <button class="bn-btn" data-p="backup" aria-label="数据备份"><span class="bn-ico">🗄️</span>备份</button>
+  <button class="bn-btn" data-p="admin" aria-label="玩家管理"><span class="bn-ico">⚙️</span>管理</button>
+  <button class="bn-btn" data-p="cfg" aria-label="插件配置"><span class="bn-ico">🧩</span>配置</button>
+  <button class="bn-btn" data-p="company" aria-label="公司与文案"><span class="bn-ico">🗂️</span>文案</button>
+  <button class="bn-btn" data-p="players" aria-label="玩家列表"><span class="bn-ico">📋</span>列表</button>
+  <button class="bn-btn" data-p="sessions" aria-label="我的会话"><span class="bn-ico">🪪</span>会话</button>
+</nav>
+
+<div class="modal-mask" id="askMask">
+  <div class="ask-box" role="dialog" aria-modal="true">
+    <div class="ask-ico" id="askIco">⚠️</div>
+    <h3 class="ask-title" id="askTitle">确认操作</h3>
+    <p class="ask-msg" id="askMsg"></p>
+    <div class="ask-btns">
+      <button class="btn btn-ghost" id="askNo">取消</button>
+      <button class="btn btn-red" id="askYes">确定</button>
+    </div>
+  </div>
+</div>
+
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box" id="loginCard">
+    <div style="font-size:42px;margin-bottom:8px">🔐</div>
+    <h2 style="letter-spacing:2px;margin-bottom:4px">面板访问验证</h2>
+    <p style="color:var(--sub);font-size:13px;margin-bottom:18px">请输入管理员密码进入打工人控制台</p>
+    <label for="loginPwd" class="sr-only">访问密码</label>
+    <input type="password" id="loginPwd" placeholder="访问密码" autocomplete="current-password" aria-describedby="loginErr" style="width:100%">
+    <button class="btn" style="width:100%;margin-top:14px" data-act="doLogin">解 锁</button>
+    <p id="loginErr" role="alert" style="color:var(--red);font-size:13px;margin-top:10px;min-height:20px"></p>
+  </div>
+</div>
+
+<div class="login-overlay" id="changePwdOverlay">
+  <div class="login-box" id="changePwdCard" style="max-width:420px">
+    <div style="font-size:42px;margin-bottom:8px">🛡️</div>
+    <h2 style="letter-spacing:2px;margin-bottom:4px">修改管理员密码</h2>
+    <p id="cpForced" style="color:var(--gold);font-size:13px;margin-bottom:18px;display:none">
+      ⚠️ 检测到您仍在使用首次启动的临时密码，请立即修改后再继续使用。
+    </p>
+    <label for="cpOld" class="sr-only">旧密码</label>
+    <input type="password" id="cpOld" placeholder="旧密码" autocomplete="current-password" style="width:100%;margin-bottom:8px">
+    <label for="cpNew" class="sr-only">新密码（至少 8 位）</label>
+    <input type="password" id="cpNew" placeholder="新密码（至少 8 位）" autocomplete="new-password" style="width:100%;margin-bottom:8px">
+    <label for="cpNew2" class="sr-only">再次输入新密码</label>
+    <input type="password" id="cpNew2" placeholder="再次输入新密码" autocomplete="new-password" style="width:100%">
+    <button id="cpSubmit" class="btn" style="width:100%;margin-top:14px" data-act="submitChangePwd">修改密码</button>
+    <p id="cpErr" role="alert" style="color:var(--red);font-size:13px;margin-top:10px;min-height:20px"></p>
+    <p style="color:var(--sub);font-size:12px;margin-top:8px">密码以 Argon2id 哈希存储（m=64MiB, t=3, p=4，比 OWASP 建议的 19MiB/t=2 更保守），令牌走 JWT(HS256) + 服务端会话表（12h TTL），可单独撤销任意会话。</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="hdr">
+    <h1>🏢 打工人 · 上班族物语</h1>
+    <span class="chip"><span class="dot"></span> 在线</span>
+    <span class="chip" id="metaVer">v?</span>
+    <span class="chip" id="metaPort">端口 ?</span>
+    <span class="chip chip-lock" id="lockBadge" style="display:none">🔒 加密</span>
+    <span class="chip" id="liveClock"></span>
+    <span class="chip chip-lock" id="logoutChip" style="display:none;cursor:pointer" data-act="doLogout" title="退出登录">⎋ 退出</span>
+    <span class="chip chip-lock" id="sessionsChip" style="display:none;cursor:pointer" data-act="toggleSessionsPanel" title="查看/撤销活跃会话">🪪 会话</span>
+  </div>
+  <div class="stat-grid" id="statCards"></div>
+  <div class="news-banner"><span id="newsText">加载中…</span></div>
+
+  <nav class="nav" id="mainNav">
+    <button class="nav-btn on" data-p="feed">📡 实时动态</button>
+    <button class="nav-btn" data-p="rank">🏆 排行榜</button>
+    <button class="nav-btn" data-p="search">🔍 玩家查询</button>
+    <button class="nav-btn" data-p="stocks">📈 股市管理</button>
+    <button class="nav-btn" data-p="backup">🗄️ 数据备份</button>
+    <button class="nav-btn" data-p="admin">⚙️ 玩家管理</button>
+    <button class="nav-btn" data-p="cfg">🧩 插件配置</button>
+    <button class="nav-btn" data-p="company">🗂️ 公司与文案</button>
+    <button class="nav-btn" data-p="players">📋 玩家列表</button>
+    <button class="nav-btn" data-p="sessions">🪪 我的会话</button>
+    <div class="nav-ink"></div>
+  </nav>
+
+  <section id="p-feed" class="panel on">
+    <div class="row" style="justify-content:flex-end;margin-bottom:8px">
+      <button class="btn btn-ghost" data-act="clearEvents">🧹 清空动态</button>
+    </div>
+    <div class="feed-list" id="feedList"></div>
+  </section>
+
+  <section id="p-rank" class="panel">
+    <div class="row">
+      <label for="groupSel" class="sr-only">选择群组</label>
+      <select id="groupSel" style="min-width:200px"></select>
+      <button class="btn" data-act="loadRank">刷新榜单</button>
+    </div>
+    <!-- 分类标签由 /api/meta 的 rankings 动态渲染（单一来源 rankings.json）；
+         下面这几个只是接口不可用时的静态兜底 -->
+    <div class="sub-tabs" id="rankTabs">
+      <button class="sub-tab on" data-k="wealth">💰 富豪榜</button>
+      <button class="sub-tab" data-k="exp">🔥 卷王榜</button>
+      <button class="sub-tab" data-k="value">💎 身价榜</button>
+      <button class="sub-tab" data-k="level">👔 职级榜</button>
+    </div>
+    <div class="tbl-wrap"><table><thead><tr><th>#</th><th>玩家</th><th>公司/职位</th><th style="text-align:right">数值</th></tr></thead><tbody id="rankBody"></tbody></table></div>
+  </section>
+
+  <section id="p-search" class="panel">
+    <div class="row">
+      <label for="groupSel2" class="sr-only">选择群组</label>
+      <select id="groupSel2" style="min-width:180px"></select>
+      <label for="kwInput" class="sr-only">用户ID或昵称</label>
+      <input type="text" id="kwInput" placeholder="用户ID或昵称" autocomplete="off" style="min-width:240px">
+      <button class="btn" data-act="doSearch">查询档案</button>
+    </div>
+    <div id="searchResult"></div>
+  </section>
+
+  <section id="p-stocks" class="panel">
+    <div class="row">
+      <label for="stkSearch" class="sr-only">搜索股票代码或名称</label>
+      <input type="text" id="stkSearch" placeholder="🔍 搜索代码/名称" style="min-width:170px">
+      <button class="btn btn-ghost" data-act="saveStkEdits">💾 保存改价</button>
+      <button class="btn btn-ghost" data-act="fluctuateAll">⚡ 全局波动</button>
+      <button class="btn btn-ghost" data-act="randomizeAll">🎲 随机重置</button>
+    </div>
+    <div class="hint-bar">💡 直接改「现价」格子（金框闪烁=待保存），点「保存改价」批量生效；改价即时影响玩家买卖，涨跌% 会体现干预幅度。</div>
+    <div class="tbl-wrap"><table><thead><tr><th>代码</th><th>名称</th><th>现价(元)</th><th>涨跌</th></tr></thead><tbody id="stkBody"></tbody></table></div>
+  </section>
+
+  <section id="p-backup" class="panel">
+    <div class="row">
+      <label for="bkLabel" class="sr-only">备份标签（可选）</label>
+      <input type="text" id="bkLabel" placeholder="备份标签（可选）" autocomplete="off" style="min-width:220px">
+      <button class="btn" data-act="bkCreate">💾 创建备份</button>
+      <button class="btn btn-ghost" data-act="loadBackups">刷新列表</button>
+    </div>
+    <div class="tbl-wrap"><table><thead><tr><th>#</th><th>名称</th><th>大小</th><th>时间</th><th style="text-align:right">操作</th></tr></thead><tbody id="bkBody"></tbody></table></div>
+  </section>
+
+  <section id="p-admin" class="panel">
+    <div class="row">
+      <label for="admGroupSel" class="sr-only">选择群组</label>
+      <select id="admGroupSel" style="min-width:180px"></select>
+      <label for="admUid" class="sr-only">用户ID、昵称或群名片</label>
+      <input type="text" id="admUid" placeholder="用户ID或昵称" autocomplete="off" style="min-width:160px">
+      <button class="btn" data-act="admSearch">查询</button>
+    </div>
+    <div id="admResult"></div>
+  </section>
+
+  <section id="p-cfg" class="panel">
+    <div class="row">
+      <button class="btn" id="cfgSaveBtn" data-act="saveCfg">💾 保存配置</button>
+      <button class="btn btn-ghost" data-act="loadCfg">↻ 重新读取</button>
+      <label for="cfgSearch" class="sr-only">搜索配置项</label>
+      <input type="text" id="cfgSearch" placeholder="🔍 搜索配置项（键名 / 说明）" autocomplete="off" style="min-width:230px">
+      <button class="btn btn-ghost" id="cfgToggleAll" type="button">⇕ 展开全部</button>
+      <span class="chip" id="cfgMeta">共 0 项</span>
+    </div>
+    <div class="hint-bar">⚠️ 监听地址/端口修改后需在 AstrBot 中重载插件才会完全生效；访问密码保存后立即生效（留空 = 保持原值）。配置按玩法域分组，「内部参数」组默认折叠（性能/容量/TTL，一般无需修改）。</div>
+    <div id="cfgForm" class="cfg-grid"></div>
+  </section>
+
+  <section id="p-sessions" class="panel">
+    <div class="row">
+      <h3 style="margin:0">🪪 我的会话</h3>
+      <button class="btn btn-ghost" data-act="loadSessions">↻ 刷新</button>
+      <button class="btn btn-red" data-act="revokeAllOtherSessions">⛔ 撤销其他全部</button>
+    </div>
+    <div class="hint-bar">💡 当前登录的浏览器/设备会话。点击「撤销」可立即下线对应设备；当前设备被撤销会自动跳回登录页。改密会强制下线全部会话。</div>
+    <div id="sessionsList"></div>
+  </section>
+
+  <section id="p-company" class="panel">
+    <div class="hint-bar">💡 先选分类再编辑，全部与公司管理同款表格操作：每条数据一行、格子内直接改。公司保存时按薪资升序自动重排 ID。文案在这里保存会强制热重载、游戏内立即生效；直接在 <code>resources/</code> 目录里手改 JSON 不会自动加载，需要重载插件才生效（模板文件除外：它按 mtime 自动失效）。</div>
+    <div class="tx-files" id="catFiles"></div>
+
+    <div id="coEditor">
+      <div class="row">
+        <label for="coSearch" class="sr-only">搜索公司或行业</label>
+        <input type="text" id="coSearch" placeholder="🔍 搜索公司/行业" style="min-width:180px">
+        <button class="btn" data-act="coAdd">➕ 新增公司</button>
+        <button class="btn" id="coSaveBtn" data-act="saveCompanies">💾 保存全部</button>
+        <span class="chip" id="coCount">共 0 家</span>
+      </div>
+      <div class="tbl-wrap"><table><thead><tr><th>ID</th><th>公司名</th><th>行业</th><th>月薪</th><th>强度</th><th>门槛</th><th>风险</th><th>简介</th><th style="text-align:right">操作</th></tr></thead><tbody id="companyBody"></tbody></table></div>
+    </div>
+
+    <div id="txEditor" style="display:none">
+      <div class="row">
+        <button class="btn btn-ghost" data-act="addTxRow">➕ 新增数据</button>
+        <button class="btn" id="txSaveBtn" data-act="saveTx">💾 保存全部</button>
+        <span class="chip" id="txCount">共 0 组</span>
+      </div>
+      <div class="tx-files" id="txKeys"></div>
+      <div class="hint-bar" id="txPh" style="display:none;margin-bottom:8px"></div>
+      <div class="tbl-wrap"><table><thead><tr id="txHead"><th>#</th></tr></thead><tbody id="txBody"></tbody></table></div>
+    </div>
+  </section>
+
+  <section id="p-players" class="panel">
+    <div class="row">
+      <label for="playerGroupSel" class="sr-only">选择群组</label>
+      <select id="playerGroupSel" style="min-width:180px"></select>
+      <button class="btn" data-act="loadPlayerList" data-arg="1">浏览玩家</button>
+    </div>
+    <div id="playerListInfo" class="muted" style="margin-bottom:8px;font-size:13px"></div>
+    <div class="tbl-wrap"><table><thead><tr><th>昵称</th><th>公司/职位</th><th>月薪</th><th>总资产</th><th>健康</th><th>精神</th></tr></thead><tbody id="playerListBody"></tbody></table></div>
+    <div style="text-align:center;margin-top:10px">
+      <button class="btn btn-ghost" id="prevBtn" data-act="prevPage" disabled>上一页</button>
+      <span id="pageInfo" class="muted" style="margin:0 12px"></span>
+      <button class="btn btn-ghost" id="nextBtn" data-act="nextPage">下一页</button>
+    </div>
+  </section>
+
+  <footer class="footer-note" id="footerVer"></footer>
+</div>
+<script src="/webui/app.js"></script>
+</body>
+</html>

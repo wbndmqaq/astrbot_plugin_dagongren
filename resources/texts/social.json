@@ -1,0 +1,193 @@
+{
+  "no_players": [
+    "本群还没有人入职任何公司，快发送「#找工作」当第一个上班族"
+  ],
+  "self_duel": [
+    "自己跟自己对线？精神状态堪忧啊朋友"
+  ],
+  "no_target": [
+    "没法对线"
+  ],
+  "duel_cd": [
+    "对线上头伤身，冷却中：剩余 {remaining}"
+  ],
+  "duel_fee_short": [
+    "对线需要 {fee} 元场地费，余额不足"
+  ],
+  "rank_no_job": [
+    "连工作都没有还想去卷？先「#找工作」"
+  ],
+  "rank_cd": [
+    "大赛间隔中，让选手缓缓：剩余 {remaining}"
+  ],
+  "titles": {
+    "title_duel_shield": "对线失利 · 护盾生效！",
+    "title_rank_show": "卷王大赛 · 我的战绩",
+    "title_rank_join": "卷王大赛",
+    "title_rank_win": "胜利！",
+    "title_rank_lose": "惜败..."
+  },
+  "lbl_bonus": [
+    "奖金"
+  ],
+  "lbl_net_income": [
+    "净收益"
+  ],
+  "lbl_record": [
+    "你的战绩"
+  ],
+  "val_salary_month": [
+    "{amount} 元/月"
+  ],
+  "text_market": [
+    "同事名录："
+  ],
+  "lbl_shield_status": [
+    "护盾状态"
+  ],
+  "val_shield_used": [
+    "已消耗 1 层"
+  ],
+  "lbl_fee_value": [
+    "场地费/身价"
+  ],
+  "val_fee_exempt": [
+    "100% 豁免"
+  ],
+  "lbl_record_note": [
+    "战绩记录"
+  ],
+  "val_record_skip": [
+    "不计入负场"
+  ],
+  "text_duel_shield": [
+    "对线失利！但你的【防甩锅护盾】生效：{line}"
+  ],
+  "lbl_fee": [
+    "场地费"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_plus_yuan": [
+    "+{amount} 元"
+  ],
+  "val_yuan": [
+    "{amount} 元"
+  ],
+  "val_bonus_win": [
+    "+{amount} 元（含退还报名费）"
+  ],
+  "val_bonus_lose": [
+    "颗粒无收"
+  ],
+  "lbl_value_of": [
+    "{name} 身价"
+  ],
+  "val_value_up": [
+    "+{delta} -> {after}"
+  ],
+  "val_value_down": [
+    "-{delta} -> {after}"
+  ],
+  "val_record": [
+    "{wins}胜 {losses}负"
+  ],
+  "ev_duel": [
+    "{winner} 在PPT对线中击败 {loser}（{net} 元）"
+  ],
+  "text_duel": [
+    "对线结束：{winner} 获胜！{line}\n你的净收益 {net} 元"
+  ],
+  "no_record_rank": [
+    "参赛记录"
+  ],
+  "line_rank_stats": [
+    "你的段位：{tier}｜积分：{score}｜场次：{matches}"
+  ],
+  "line_rank_tip": [
+    "对手池里全是真实同事原型，赢的是积分与奖金，输的只是面子"
+  ],
+  "foot_rank_show": [
+    "段位线：{tiers}。发送「参加卷王大赛」亲自出战"
+  ],
+  "opponent_fallback_name": "神秘选手",
+  "val_rank_event_fallback": [
+    "常规赛"
+  ],
+  "val_rank_event_fallback_desc": [
+    "正常发挥的一场比赛"
+  ],
+  "line_rank_event": [
+    "当前事件：{name}（{desc}）"
+  ],
+  "line_rank_vs": [
+    "你 VS 「{name}」—— {effect}"
+  ],
+  "lbl_result": [
+    "结果"
+  ],
+  "val_result_win": [
+    "胜利"
+  ],
+  "val_result_lose": [
+    "失败"
+  ],
+  "lbl_score_change": [
+    "积分变化"
+  ],
+  "val_score_change": [
+    "{diff}（当前 {score}）"
+  ],
+  "lbl_tier": [
+    "当前段位"
+  ],
+  "lbl_appearance_fee": [
+    "出场费奖励"
+  ],
+  "ev_rank": [
+    "{name} 对阵「{opponent}」{result}，积分{diff} -> {score}"
+  ],
+  "ev_rank_win": [
+    "获胜"
+  ],
+  "ev_rank_lose": [
+    "落败"
+  ],
+  "val_win_short": [
+    "胜"
+  ],
+  "val_lose_short": [
+    "负"
+  ],
+  "text_rank_join": [
+    "卷王大赛：你 VS {opponent} {result}，积分{diff}至 {score}，奖励 {reward} 元"
+  ],
+  "val_rank_fallback_name": [
+    "富豪榜（总资产）"
+  ],
+  "val_unit_yuan": [
+    "元"
+  ],
+  "val_exp_points": [
+    "{exp} 点"
+  ],
+  "val_rank_row": [
+    "{rank}. {name}：{score}"
+  ],
+  "err_duel_usage": [
+    "格式：对线 @群友（或附QQ号）"
+  ],
+  "kind_duel": [
+    "对线"
+  ],
+  "duel_tx_note": [
+    "对线 VS {name}"
+  ],
+  "kind_rank_match": [
+    "卷王大赛"
+  ],
+  "rank_tx_note": [
+    "卷王大赛奖金（VS {opponent}）"
+  ]
+}

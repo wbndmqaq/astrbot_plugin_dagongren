@@ -1,0 +1,74 @@
+{
+  "err_unemployed": [
+    "失业人士没有年终考评，先找工作吧"
+  ],
+  "err_done": [
+    "{year} 年的年终考评已经做过了，明年再战"
+  ],
+  "review_note": [
+    "考评{grade}"
+  ],
+  "titles": {
+    "title_review": "年终考评"
+  },
+  "val_grade_fallback_name": [
+    "绩效不达标"
+  ],
+  "ev_review": [
+    "{nickname} 年终考评 {grade}（{grade_name}），年终奖 {bonus} 元"
+  ],
+  "val_none": [
+    "无"
+  ],
+  "val_company": [
+    "公司：{name}"
+  ],
+  "lbl_score": [
+    "综合评分"
+  ],
+  "lbl_bonus": [
+    "年终奖"
+  ],
+  "val_bonus": [
+    "+{amount} 元（{multi}倍月薪）"
+  ],
+  "lbl_raise": [
+    "调薪"
+  ],
+  "val_raise": [
+    "+{pct}%"
+  ],
+  "val_raise_none": [
+    "无调薪"
+  ],
+  "lbl_skills": [
+    "已掌握技能"
+  ],
+  "lbl_social": [
+    "人脉值"
+  ],
+  "lbl_streak": [
+    "连续出勤"
+  ],
+  "val_days": [
+    "{days} 天"
+  ],
+  "val_grade_level": [
+    "{grade} 级"
+  ],
+  "foot_review": [
+    "考评影响年终奖倍数和调薪幅度，明年继续努力"
+  ],
+  "text_review": [
+    "年终考评 {grade} 级（{grade_name}）！\n年终奖 +{bonus} 元"
+  ],
+  "text_review_raise": [
+    "，调薪 +{pct}%"
+  ],
+  "kind_year_bonus": [
+    "年终奖"
+  ],
+  "kind_annual_review": [
+    "年终考评"
+  ]
+}

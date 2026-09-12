@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { display: inline-block; }
+body { font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  background:linear-gradient(150deg,#141a2e 0%,#1b2440 55%,#122a47 100%);
+  width:700px; padding:26px; color:#e8ecf7; display:inline-block; }
+.profile { display:flex; align-items:center; gap:15px;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.09);
+  border-radius:14px; padding:16px 20px; margin-bottom:13px; }
+.avatar { width:62px; height:62px; border-radius:50%; object-fit:cover; border:2px solid #ffd86f; }
+.avf { width:62px; height:62px; border-radius:50%;
+  background:linear-gradient(135deg,#fc6262,#ffd86f); display:flex; align-items:center;
+  justify-content:center; font-size:27px; font-weight:bold; color:#1a1a2e; }
+.pinfo h1 { font-size:23px; color:#ffd86f; }
+.pinfo .sub { color:#8a93b5; font-size:12.5px; margin-top:4px; line-height:1.6; }
+.sec { display:flex; gap:9px; margin-bottom:13px; flex-wrap:wrap; }
+.stat { flex:1; min-width:120px; background:rgba(255,255,255,.05); border-radius:11px; padding:10px 14px; text-align:center; }
+.stat .num { font-size:19px; font-weight:bold; color:#7fd1ff; }
+.stat.gold .num { color:#ffd86f; } .stat.green .num { color:#6fe08c; }
+.stat .lab { font-size:11.5px; color:#8a93b5; margin-top:2px; }
+.card { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09);
+  border-radius:13px; padding:14px 17px; margin-bottom:11px; }
+.card h2 { font-size:16px; color:#ffd86f; margin-bottom:9px;
+  border-left:4px solid #fc6262; padding-left:9px; }
+.kvgrid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
+.kv { background:rgba(255,255,255,.04); border-radius:9px; padding:7px 11px; font-size:13.5px; color:#c9cede; }
+.kv b { display:block; color:#eef2ff; margin-top:2px; }
+.barwrap { margin:5px 0 3px; }
+.barlab { display:flex; justify-content:space-between; font-size:13px; color:#c9cede; margin-bottom:4px; }
+.bar { height:9px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden; }
+.bar i { display:block; height:100%; border-radius:999px; }
+
+</style>
+</head>
+<body>
+  <div class="profile">
+    {% if me and me.avatar %}<img class="avatar" src="{{ me.avatar }}" alt="" onerror="this.remove()">{% elif me and me.name %}<div class="avf">{{ me.name[:1] }}</div>{% else %}<div class="avf">?</div>{% endif %}
+    <div class="pinfo">
+      <h1>{{ me.name if me and me.name else t.resume_fallback_name }} {{ t.resume_heading }}</h1>
+      <div class="sub">{{ t.resume_id_label }}{{ me.id if me and me.id else '-' }}</div>
+      <div class="sub">{% if company %}{{ company.name }}{{ t.lparen }}{{ company.tag }}{{ t.rparen }}{% else %}{{ t.resume_unemployed }}{% endif %} {{ t.sep }} {{ position or t.resume_fallback_position }} {{ t.sep }} {{ t.monthly_salary }} {{ salary or 0 }} {{ t.yuan }}</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="stat gold"><div class="num">{{ total }}</div><div class="lab">{{ t.resume_total_asset }}</div></div>
+    <div class="stat"><div class="num">{{ exp }}</div><div class="lab">{{ t.resume_experience_label }}</div></div>
+    <div class="stat green"><div class="num">{{ streak }}</div><div class="lab">{{ t.resume_streak_label }}</div></div>
+  </div>
+
+  <div class="card">
+    <h2>{{ t.resume_health_card_title }}</h2>
+    <div class="barwrap">
+      <div class="barlab"><span>❤️ {{ t.resume_health_label }}</span><span>{{ health }} / 100</span></div>
+      <div class="bar"><i style="width:{{ health }}%;background:linear-gradient(90deg,#6fe08c,#2fbf71)"></i></div>
+    </div>
+    <div class="barwrap">
+      <div class="barlab"><span>🧠 {{ t.resume_mind_label }}</span><span>{{ mind }} / 100</span></div>
+      <div class="bar"><i style="width:{{ mind }}%;background:linear-gradient(90deg,#7fd1ff,#5b8fd6)"></i></div>
+    </div>
+  </div>
+
+  {% if next_title %}
+  <div class="card">
+    <h2>{{ t.resume_promotion_title }} {{ t.arrow }} {{ next_title }}</h2>
+    <div class="barwrap">
+      <div class="barlab"><span>{{ t.resume_exp_short }} {{ exp }} / {{ next_need }}</span><span>{{ progress }}%</span></div>
+      <div class="bar"><i style="width:{{ progress }}%;background:linear-gradient(90deg,#ffd86f,#ffb86f)"></i></div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="card">
+    <h2 style="color:#ffd86f;border-left:4px solid #fc6262;padding-left:9px;margin-bottom:9px;font-size:16px;">{{ t.resume_assets_title }}</h2>
+    <div class="kvgrid">
+      <div class="kv">{{ t.resume_asset_cash }}<b>{{ cash or 0 }} {{ t.yuan }}</b></div>
+      <div class="kv">{{ t.resume_asset_deposit }}<b>{{ deposit or 0 }} {{ t.yuan }}</b></div>
+      <div class="kv">{{ t.resume_asset_fund }}<b>{{ fund or 0 }} {{ t.yuan }}</b></div>
+      <div class="kv">{{ t.resume_asset_house }}<b>{{ t.fallback_house_name }}</b></div>
+      <div class="kv">{{ t.resume_asset_rent }}<b>{{ house.rent if house and house.rent is defined else 0 }} {{ t.yuan }}</b></div>
+      <div class="kv">{{ t.resume_asset_value }}<b>{{ value or 0 }} {{ t.yuan }}</b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>{{ t.resume_relations_title }}</h2>
+    <div class="kvgrid">
+      <div class="kv">{{ t.resume_commute_label }}<b>{{ commute }}</b></div>
+      <div class="kv">{{ t.resume_fund_savings_label }}<b>{{ fund_savings }} {{ t.yuan }}</b></div>
+      <div class="kv">{{ t.resume_comp_leave_label }}<b>{{ comp_leave }} {{ t.resume_comp_leave_unit }}</b></div>
+      <div class="kv">{{ t.resume_rank_label }}<b>{{ rank }}</b></div>
+      <div class="kv">{{ t.resume_duel_label }}<b>{{ duel }}</b></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+{
+  "market_title": [
+    "股市大盘 · 涨跌幅TOP10"
+  ],
+  "market_sum_up": [
+    "上涨"
+  ],
+  "market_sum_down": [
+    "下跌"
+  ],
+  "market_sum_flat": [
+    "平盘"
+  ],
+  "market_sum_cap": [
+    "总市值"
+  ],
+  "market_col_name": [
+    "股票"
+  ],
+  "market_col_price": [
+    "现价(元)"
+  ],
+  "market_col_chg": [
+    "涨跌"
+  ],
+  "val_yuan": [
+    "{amount} 元"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_stock_count": [
+    "{n} 支"
+  ],
+  "val_shares": [
+    "{shares} 份"
+  ],
+  "val_sell_shares": [
+    "{shares} 份（{ratio}%）"
+  ],
+  "cell_stock": [
+    "{name}({code})"
+  ],
+  "cell_chg_up": [
+    "+{chg}%"
+  ],
+  "cell_chg_down": [
+    "{chg}%"
+  ],
+  "cell_position": [
+    "{i}. {name}({code})"
+  ],
+  "lines_liquidate_item": [
+    "  {name}：到账 {income} 元（盈亏 {profit}）"
+  ],
+  "text_my_item": [
+    "{name}({value}元)"
+  ],
+  "market_text_up": [
+    "📈 股市大盘\n上涨 {up} | 下跌 {down}"
+  ],
+  "market_text_up_stock": [
+    "🔴 {name} {chg:+}%"
+  ],
+  "market_text_down": [
+    "🟢 {name} {chg:+}%"
+  ],
+  "buy_fmt_err": [
+    "格式：买股票 <代码或名称> <金额>\n例如：买股票 sh600037 5000"
+  ],
+  "buy_amt_err": [
+    "买入金额需为 {min} ~ 999999999999 之间的整数"
+  ],
+  "cash_short": [
+    "现金不足（当前 {cash} 元）"
+  ],
+  "too_many": [
+    "持仓只数已达上限（{n} 只），先「#卖出 <代码>」腾出仓位"
+  ],
+  "no_stock": [
+    "没有找到「{key}」这支股票，发送「#股市」查看行情列表"
+  ],
+  "buy_title": [
+    "买入成功 · {name}"
+  ],
+  "buy_code": [
+    "代码"
+  ],
+  "buy_price": [
+    "现价"
+  ],
+  "buy_price_val": [
+    "{price} 元（今日 {chg:+}%）"
+  ],
+  "buy_amount": [
+    "买入金额"
+  ],
+  "buy_fee": [
+    "手续费"
+  ],
+  "buy_shares": [
+    "获得份额"
+  ],
+  "buy_cash_left": [
+    "剩余现金"
+  ],
+  "buy_foot": [
+    "发送「#持仓」查看盈亏；股价每日自动波动，绿了别哭红了别飘"
+  ],
+  "buy_text": [
+    "买入 {name} 成功！花费 {amount} 元，获得 {shares} 份"
+  ],
+  "sell_fmt_err": [
+    "格式：卖股票 <代码或名称> [比例%]\n例如：卖股票 sh600037 或 卖出 华晨通信 50"
+  ],
+  "sell_ratio_err": [
+    "卖出比例需在 1~100 之间"
+  ],
+  "sell_no_pos": [
+    "你没有持有「{key}」的仓位"
+  ],
+  "sell_fail": [
+    "卖出失败：份额不足或已清仓"
+  ],
+  "sell_title_profit": [
+    "止盈完成 · {name}"
+  ],
+  "sell_title_loss": [
+    "割肉完成 · {name}"
+  ],
+  "sell_shares": [
+    "卖出份额"
+  ],
+  "sell_income": [
+    "到账金额"
+  ],
+  "sell_income_val": [
+    "+{income} 元（含手续费-{fee}）"
+  ],
+  "sell_profit": [
+    "本次盈亏"
+  ],
+  "sell_cash_left": [
+    "剩余现金"
+  ],
+  "sell_text": [
+    "卖出 {name}：到账 {income} 元（盈亏 {profit:+} 元）"
+  ],
+  "no_pos": [
+    "你还没有任何持仓，「#买股票 <代码> <金额>」开始投资之旅"
+  ],
+  "my_title": [
+    "我的股票持仓"
+  ],
+  "my_sum_count": [
+    "持仓支数"
+  ],
+  "my_sum_value": [
+    "持仓市值"
+  ],
+  "my_col_stock": [
+    "股票"
+  ],
+  "my_col_shares": [
+    "份额"
+  ],
+  "my_col_value": [
+    "市值"
+  ],
+  "my_text": [
+    "持仓："
+  ],
+  "liquidate_title": [
+    "一键清仓完成"
+  ],
+  "liquidate_sold": [
+    "卖出持仓"
+  ],
+  "liquidate_income": [
+    "合计到账"
+  ],
+  "liquidate_income_val": [
+    "+{income} 元（含手续费）"
+  ],
+  "liquidate_profit": [
+    "合计盈亏"
+  ],
+  "liquidate_foot": [
+    "轻仓一身轻，落袋为安"
+  ],
+  "liquidate_text": [
+    "一键清仓完成：卖出 {sold} 支，合计到账 {income} 元（盈亏 {profit:+}）"
+  ],
+  "tx_buy": [
+    "买入股票"
+  ],
+  "tx_buy_line": [
+    "买入 {name}（含手续费 {fee} 元）"
+  ],
+  "tx_sell": [
+    "卖出股票"
+  ],
+  "tx_sell_line": [
+    "{name} 盈亏{profit:+}"
+  ],
+  "tx_liquidate": [
+    "一键清仓 {n} 支，合计盈亏{profit:+}"
+  ]
+}

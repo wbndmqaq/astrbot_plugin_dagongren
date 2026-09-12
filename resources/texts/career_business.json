@@ -1,0 +1,120 @@
+{
+  "name_required": [
+    "请输入公司名称，例如：「#创建公司 赛博科技」或「#创业 星芒游戏」"
+  ],
+  "name_too_long": [
+    "公司名称过长（最多{max_len}个字）"
+  ],
+  "already_boss": [
+    "你已经创立了公司「{name}」，当老板要有定力！发送「#公司分红」领取利润"
+  ],
+  "already_boss_no_name": [
+    "你已经创立了公司，当老板要有定力！发送「#公司分红」领取利润"
+  ],
+  "low_qualification": [
+    "创业门槛极高！需要职级达到 VP/合伙人，或职场身价超过 {min_val} 元，打铁还需自身硬！"
+  ],
+  "cash_short": [
+    "注册公司需要 {cost} 元启动验资资金，当前现金不足"
+  ],
+  "tx_register": [
+    "创立公司 {name}"
+  ],
+  "event_founded": [
+    "{name} 豪掷千金创立了「{comp_name}」，正式晋升为资本家/大老板！"
+  ],
+  "success_line1": [
+    "恭喜 {name} 晋升为大老板！「{comp_name}」正式开门营业！"
+  ],
+  "success_line2": [
+    "群内员工每次打卡都将为公司带来利润，发送「#公司分红」即可提取企业营收分红！"
+  ],
+  "success_text": [
+    "👑 恭喜创业成功！你创立了「{comp_name}」，身价暴涨 {value} 元！"
+  ],
+  "not_boss": [
+    "你还不是老板，发送「#创建公司 公司名」开启创业当老板！"
+  ],
+  "zero_balance": [
+    "公司「{name}」金库暂无可分红资金，员工努力搬砖中..."
+  ],
+  "tx_dividend": [
+    "来自 {company}"
+  ],
+  "dividend_line": [
+    "公司运营良好，本次分红 {dividend} 元已存入个人现金！"
+  ],
+  "dividend_text": [
+    "💰 公司分红成功！已提现 {dividend} 元至个人现金！"
+  ],
+  "titles": {
+    "title_founded": "🎉 创业成功 · 公司成立！",
+    "title_dividend": "企业分红到账"
+  },
+  "resign_first": [
+    "你现在还在「{name}」上班。先发送「#辞职」办完离职手续，再来创业"
+  ],
+  "custom_company_tag": [
+    "自建企业"
+  ],
+  "lbl_company_name": [
+    "公司名称"
+  ],
+  "lbl_register_cost": [
+    "注册资金"
+  ],
+  "val_register_cost": [
+    "-{cost} 元"
+  ],
+  "lbl_your_salary": [
+    "你的月薪"
+  ],
+  "val_salary": [
+    "{salary} 元"
+  ],
+  "lbl_value_boost": [
+    "身价暴涨"
+  ],
+  "val_value_boost": [
+    "+{bonus}（当前 {value}）"
+  ],
+  "lbl_treasury": [
+    "企业金库"
+  ],
+  "val_treasury": [
+    "{balance} 元"
+  ],
+  "foot_founded": [
+    "老板指令：发送「#公司分红」提现；群友可「#找工作 公司名」投递入职"
+  ],
+  "lbl_dividend_amount": [
+    "分红金额"
+  ],
+  "val_dividend_amount": [
+    "+{dividend} 元"
+  ],
+  "lbl_current_cash": [
+    "当前现金"
+  ],
+  "val_current_cash": [
+    "{cash} 元"
+  ],
+  "lbl_treasury_left": [
+    "金库剩余"
+  ],
+  "val_treasury_zero": [
+    "0.00 元"
+  ],
+  "foot_dividend": [
+    "资本家的快乐就是这么简单朴素"
+  ],
+  "kind_register_fund": [
+    "创业注册资金"
+  ],
+  "kind_startup": [
+    "创业"
+  ],
+  "kind_dividend": [
+    "企业分红"
+  ]
+}

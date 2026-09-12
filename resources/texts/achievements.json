@@ -1,0 +1,47 @@
+{
+  "_comment": "职场成就。metric 为判定口径（attend_streak/net_worth/duel_wins/lvl/has_pet/house_owned），threshold 为达成阈值——阈值在这里，desc 里的数字才不会和行为脱节。",
+  "items": [
+    {
+      "id": "work_10",
+      "name": "全勤劳模",
+      "desc": "连续出勤达到10天",
+      "metric": "attend_streak",
+      "threshold": 10
+    },
+    {
+      "id": "wealth_100k",
+      "name": "富甲一方",
+      "desc": "总资产达到10万元",
+      "metric": "net_worth",
+      "threshold": 100000
+    },
+    {
+      "id": "duel_king",
+      "name": "PPT战神",
+      "desc": "对线撕逼胜利达到10次",
+      "metric": "duel_wins",
+      "threshold": 10
+    },
+    {
+      "id": "emperor",
+      "name": "打工皇帝",
+      "desc": "职级达到合伙人·打工皇帝",
+      "metric": "lvl",
+      "threshold": 11
+    },
+    {
+      "id": "pet_lover",
+      "name": "铲屎大官人",
+      "desc": "成功领养一只宠物",
+      "metric": "has_pet",
+      "threshold": 1
+    },
+    {
+      "id": "homeowner",
+      "name": "有房一族",
+      "desc": "全款买下自购小窝",
+      "metric": "house_owned",
+      "threshold": 1
+    }
+  ]
+}

@@ -1,0 +1,1784 @@
+{
+  "use_image": {
+    "description": "启用 HTML 图片渲染",
+    "hint": "使用独立 Playwright 渲染器（需安装依赖并执行 python -m playwright install chromium），失败自动回退纯文本",
+    "type": "bool",
+    "default": true
+  },
+  "render_scale": {
+    "description": "图片渲染清晰度倍率",
+    "hint": "device_scale_factor，2 为高清；过大增加体积",
+    "type": "float",
+    "default": 2.0,
+    "min": 1.0,
+    "max": 4.0
+  },
+  "webui_enabled": {
+    "description": "启用独立 WebUI 面板",
+    "type": "bool",
+    "default": true
+  },
+  "webui_host": {
+    "description": "WebUI 监听地址（推荐 127.0.0.1 本地访问更安全；局域网访问改 0.0.0.0 并务必设置 webui_password）",
+    "hint": "0.0.0.0=全部网卡。绑定 0.0.0.0 时只放行「内网/回环 IP 且端口匹配」的 Host，域名 Host 一律拒绝（防 DNS rebinding）；仅本机查看请用 127.0.0.1",
+    "type": "string",
+    "default": "127.0.0.1"
+  },
+  "webui_port": {
+    "description": "WebUI 独立端口",
+    "hint": "与其他服务冲突时请修改；启动失败会自动跳过并打印日志",
+    "type": "int",
+    "default": 17817,
+    "min": 1,
+    "max": 65535
+  },
+  "cooldown_exempt_users": {
+    "description": "免冷却用户 ID 列表",
+    "type": "list",
+    "default": []
+  },
+  "start_cash": {
+    "description": "新玩家初始现金",
+    "type": "int",
+    "default": 800,
+    "min": 0,
+    "max": 1000000000
+  },
+  "social_insurance_rate": {
+    "description": "五险一金比例（占日薪）",
+    "hint": "打卡时扣除并存入个人公积金账户，买房时可抵扣房款",
+    "type": "float",
+    "default": 0.1,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "house_price": {
+    "description": "自购小窝总价",
+    "hint": "买房指令的目标价格，公积金最高可抵扣总价的30%",
+    "type": "int",
+    "default": 100000,
+    "min": 0,
+    "max": 1000000000000
+  },
+  "slack_cooldown_minutes": {
+    "description": "摸鱼冷却（分钟）",
+    "type": "float",
+    "default": 60.0,
+    "min": 0.0,
+    "max": 10080.0
+  },
+  "overtime_cooldown_hours": {
+    "description": "加班冷却（小时）",
+    "type": "float",
+    "default": 3.0,
+    "min": 0.0,
+    "max": 720.0
+  },
+  "meal_cooldown_minutes": {
+    "description": "吃饭冷却（分钟）",
+    "type": "float",
+    "default": 30.0,
+    "min": 0.0,
+    "max": 10080.0
+  },
+  "gym_cooldown_hours": {
+    "description": "健身冷却（小时）",
+    "type": "float",
+    "default": 2.0,
+    "min": 0.0,
+    "max": 720.0
+  },
+  "stall_cooldown_hours": {
+    "description": "摆摊副业冷却（小时）",
+    "type": "float",
+    "default": 6.0,
+    "min": 0.0,
+    "max": 720.0
+  },
+  "layoff_scale": {
+    "description": "裁员概率倍率",
+    "hint": "乘以公司自身风险值，2.0 = 裁员概率翻倍，0 = 关闭裁员",
+    "type": "float",
+    "default": 1.0,
+    "min": 0.0,
+    "max": 100.0
+  },
+  "hospital_threshold": {
+    "description": "住院风险健康阈值",
+    "hint": "加班后健康低于该值时按概率住院并支付医疗费",
+    "type": "int",
+    "default": 15,
+    "min": 0,
+    "max": 100
+  },
+  "hospital_cost_max": {
+    "description": "住院医疗费上限",
+    "hint": "住院一次的最高医疗费用",
+    "type": "float",
+    "default": 3000.0,
+    "min": 0.0,
+    "max": 1000000.0
+  },
+  "hospital_cost_min": {
+    "description": "住院医疗费下限",
+    "hint": "住院一次的最低医疗费用",
+    "type": "float",
+    "default": 200.0,
+    "min": 0.0,
+    "max": 1000000.0
+  },
+  "hospital_cost_rate": {
+    "description": "住院医疗费比例",
+    "hint": "按当前现金的此比例计算医疗费，受上下限约束",
+    "type": "float",
+    "default": 0.25,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "layoff_safe_event_rate": {
+    "description": "裁员安全事件触发概率",
+    "hint": "打卡时触发裁员安全提示的随机概率",
+    "type": "float",
+    "default": 0.05,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "promote_base_rate": {
+    "description": "晋升基础成功率",
+    "type": "float",
+    "default": 0.85,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "promote_decay": {
+    "description": "晋升成功率逐级递减",
+    "type": "float",
+    "default": 0.06,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "train_cooldown_hours": {
+    "description": "进修冷却（小时）",
+    "type": "float",
+    "default": 2.0,
+    "hint": "自费进修班的间隔时间",
+    "min": 0.0,
+    "max": 720.0
+  },
+  "train_success_rate": {
+    "description": "进修成功率",
+    "type": "float",
+    "default": 0.7,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "train_cost_rate": {
+    "description": "进修费用系数",
+    "type": "float",
+    "default": 0.1,
+    "hint": "学费 = 身价 × 系数 × 5，最低200元",
+    "min": 0.0,
+    "max": 100.0
+  },
+  "train_value_increase_rate": {
+    "description": "进修成功身价提升比例",
+    "type": "float",
+    "default": 0.2,
+    "min": 0.0,
+    "max": 100.0
+  },
+  "duel_cooldown_hours": {
+    "description": "对线冷却（小时）",
+    "type": "float",
+    "default": 2.0,
+    "min": 0.0,
+    "max": 720.0
+  },
+  "duel_entry_fee": {
+    "description": "对线报名费",
+    "type": "int",
+    "default": 50,
+    "min": 0,
+    "max": 1000000000
+  },
+  "duel_reward_rate": {
+    "description": "对线获胜奖励（占报名费比例）",
+    "type": "float",
+    "default": 0.2,
+    "min": 0.0,
+    "max": 100.0
+  },
+  "duel_value_bonus_rate": {
+    "description": "对线获胜身价提升比例",
+    "type": "float",
+    "default": 0.1,
+    "min": 0.0,
+    "max": 100.0
+  },
+  "rank_cooldown_minutes": {
+    "description": "卷王大赛冷却（分钟）",
+    "type": "float",
+    "default": 60.0,
+    "min": 0.0,
+    "max": 10080.0
+  },
+  "transfer_fee_rate": {
+    "description": "转账手续费率",
+    "type": "float",
+    "default": 0.1,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "transfer_min_amount": {
+    "description": "最低转账金额",
+    "type": "int",
+    "default": 100,
+    "min": 0,
+    "max": 1000000000
+  },
+  "bank_upgrade_price_multi": {
+    "description": "银行升级价格倍数",
+    "type": "float",
+    "default": 1.2,
+    "min": 1.0,
+    "max": 100.0
+  },
+  "bank_limit_increase_multi": {
+    "description": "银行限额增长倍数",
+    "type": "float",
+    "default": 1.25,
+    "min": 1.0,
+    "max": 100.0
+  },
+  "bank_interest_rate_hourly": {
+    "description": "银行每小时利率",
+    "type": "float",
+    "default": 0.01,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "bank_max_interest_hours": {
+    "description": "最大计息时长（小时）",
+    "type": "int",
+    "default": 24,
+    "min": 1,
+    "max": 720
+  },
+  "fund_fee_rate": {
+    "description": "基金买卖手续费率",
+    "type": "float",
+    "default": 0.005,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "stock_fee_rate": {
+    "description": "买卖股票的手续费率",
+    "type": "float",
+    "default": 0.005,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "rent_auto_deduct": {
+    "description": "打卡时自动扣房租",
+    "hint": "关闭后不扣房租，住房精神恢复减半",
+    "type": "bool",
+    "default": true
+  },
+  "weekly_archive_enabled": {
+    "description": "每周自动归档排行榜",
+    "hint": "每周首次触发时把上一周各群财富榜快照写入数据库",
+    "type": "bool",
+    "default": true
+  },
+  "annual_leave_days": {
+    "description": "每年年假天数",
+    "hint": "跨年时自动重置为该值",
+    "type": "int",
+    "default": 3,
+    "min": 0,
+    "max": 365
+  },
+  "push_hour": {
+    "description": "每日推送时间（小时）",
+    "hint": "24 小时制；到点后向开启「推送」的群发送职场早报与股市摘要",
+    "type": "int",
+    "default": 8,
+    "min": 0,
+    "max": 23
+  },
+  "create_company_cost": {
+    "description": "创业注册验资资金",
+    "hint": "玩家自建公司所需要的现金门槛（元）",
+    "type": "float",
+    "default": 30000.0,
+    "min": 0,
+    "max": 1000000000000
+  },
+  "create_company_min_value": {
+    "description": "创业所需最低身价",
+    "hint": "玩家自建公司所需要的职场身价门槛（元）",
+    "type": "float",
+    "default": 50000.0,
+    "min": 0,
+    "max": 1000000000000
+  },
+  "scratch_lottery_cost": {
+    "description": "刮刮乐单张售价",
+    "hint": "下班刮刮乐彩票单张购买花费（元）",
+    "type": "float",
+    "default": 20.0,
+    "min": 0.0,
+    "max": 1000000000
+  },
+  "redpacket_min_amount": {
+    "description": "群红包最低总金额",
+    "hint": "群聊塞红包允许的最低起始总金额（元）",
+    "type": "float",
+    "default": 10.0,
+    "min": 0.0,
+    "max": 1000000000000
+  },
+  "webui_password": {
+    "invisible": true,
+    "description": "WebUI 访问密码，**留空则启动时自动生成临时密码**（Argon2id 哈希存储，启动日志会打印）",
+    "hint": "明文提交后立即哈希存储（Argon2id m=64MiB, t=3, p=4，比 OWASP 建议的 19MiB/t=2 更保守），配置表单里是掩码输入框（仅用于提交新口令，不回显存储值），留空保持原值不变。旧 PBKDF2 哈希不再识别，会触发 bootstrap 重新生成临时密码。",
+    "type": "string",
+    "default": ""
+  },
+  "webui_jwt_secret": {
+    "invisible": true,
+    "description": "JWT(HS256) 签名密钥，至少 32 字节（64 个十六进制字符）；首次启动自动生成，请勿手动修改；改动后所有已签发 JWT 立即失效",
+    "type": "string",
+    "default": ""
+  },
+  "webui_trusted_proxies": {
+    "description": "可信反向代理地址列表（决定是否采信 X-Forwarded-For / X-Forwarded-Proto）",
+    "hint": "对端是回环地址时已默认视为同机反向代理（采信 XFF 的最后一段与 X-Forwarded-Proto），本项用于把【非回环】的反代地址也列入可信。非可信来源的这两个头一律忽略。此外还有一道与来源无关的全站登录失败闸门兜底。",
+    "type": "list",
+    "default": []
+  },
+  "lottery_ticket_price": {
+    "description": "彩票单张价格（元）",
+    "type": "float",
+    "hint": "购票款 100% 进入当期奖池，无人中奖自动滚存",
+    "default": 100.0,
+    "min": 0.0,
+    "max": 1000000000
+  },
+  "lottery_max_tickets": {
+    "description": "彩票每期每人限购张数",
+    "type": "int",
+    "default": 5,
+    "min": 1,
+    "max": 1000
+  },
+  "lottery_draw_hour": {
+    "description": "彩票每日开奖时间（0~23 点）",
+    "type": "int",
+    "default": 21,
+    "min": 0,
+    "max": 23
+  },
+  "scratch_cooldown_minutes": {
+    "description": "刮刮乐冷却（分钟）",
+    "hint": "core/extra.py 的 scratch_lottery 使用；默认 30 分钟",
+    "type": "float",
+    "default": 30.0,
+    "min": 0.0,
+    "max": 1440.0
+  },
+  "backup_max_keep": {
+    "description": "备份保留数量上限",
+    "hint": "超出后自动删除最旧的快照，避免备份目录无限增长",
+    "type": "int",
+    "default": 20,
+    "min": 1,
+    "max": 500
+  },
+  "annual_leave_health_gain": {
+    "type": "float",
+    "default": 15.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "年假健康恢复量"
+  },
+  "annual_leave_mind_gain": {
+    "type": "float",
+    "default": 25.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "年假精神恢复量"
+  },
+  "archive_top_n": {
+    "type": "int",
+    "default": 10,
+    "min": 1,
+    "max": 100,
+    "description": "每周归档快照 Top 数量"
+  },
+  "attend_streak_bonus_days": {
+    "type": "int",
+    "default": 20,
+    "min": 0,
+    "max": 30,
+    "description": "全勤奖金上限天数"
+  },
+  "attend_streak_bonus_rate": {
+    "type": "float",
+    "default": 0.005,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "全勤奖金每天的加成"
+  },
+  "bank_initial_limit": {
+    "type": "float",
+    "default": 5000.0,
+    "min": 0.0,
+    "max": 1000000000000.0,
+    "description": "新人银行初始存储上限（元）"
+  },
+  "bank_initial_upgrade_price": {
+    "type": "float",
+    "default": 200.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "新人首次升级信用价格（元）"
+  },
+  "boss_task_cooldown_hours": {
+    "type": "float",
+    "default": 12.0,
+    "min": 0.0,
+    "max": 720.0,
+    "description": "帮领导做事冷却（小时）"
+  },
+  "boss_task_penalty_max": {
+    "type": "int",
+    "default": 100,
+    "min": 0,
+    "max": 100000,
+    "description": "帮领导失败损失上限（元）"
+  },
+  "boss_task_penalty_min": {
+    "type": "int",
+    "default": 30,
+    "min": 0,
+    "max": 100000,
+    "description": "帮领导失败损失下限（元）"
+  },
+  "boss_task_reward_max": {
+    "type": "int",
+    "default": 200,
+    "min": 0,
+    "max": 100000,
+    "description": "帮领导成功奖励上限（元）"
+  },
+  "boss_task_reward_min": {
+    "type": "int",
+    "default": 50,
+    "min": 0,
+    "max": 100000,
+    "description": "帮领导成功奖励下限（元）"
+  },
+  "boss_task_success_rate": {
+    "type": "float",
+    "default": 0.65,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "帮领导做事成功率"
+  },
+  "bring_food_cost": {
+    "type": "float",
+    "default": 15.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "帮带饭花费（元）"
+  },
+  "card_cache_max": {
+    "invisible": true,
+    "type": "int",
+    "default": 2000,
+    "min": 16,
+    "max": 100000,
+    "description": "群名片缓存最大条目数"
+  },
+  "card_cache_ttl_minutes": {
+    "invisible": true,
+    "type": "int",
+    "default": 10,
+    "min": 1,
+    "max": 1440,
+    "description": "群名片缓存 TTL（分钟）"
+  },
+  "cert_pass_rate": {
+    "type": "float",
+    "default": 0.55,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "考证通过率"
+  },
+  "cert_value_bonus_rate": {
+    "type": "float",
+    "default": 0.1,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "考证成功身价加成"
+  },
+  "checkin_exp_max": {
+    "type": "int",
+    "default": 5,
+    "min": 0,
+    "max": 100,
+    "description": "打卡经验最大值"
+  },
+  "checkin_exp_min": {
+    "type": "int",
+    "default": 2,
+    "min": 0,
+    "max": 100,
+    "description": "打卡经验最小值"
+  },
+  "checkin_perf_max": {
+    "type": "float",
+    "default": 1.25,
+    "min": 0.1,
+    "max": 3.0,
+    "description": "打卡绩效系数最大值"
+  },
+  "checkin_perf_min": {
+    "type": "float",
+    "default": 0.85,
+    "min": 0.1,
+    "max": 2.0,
+    "description": "打卡绩效系数最小值"
+  },
+  "checkup_cost": {
+    "type": "float",
+    "default": 200.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "年度体检花费（元）"
+  },
+  "checkup_ok_rate": {
+    "type": "float",
+    "default": 0.55,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "年度体检合格概率"
+  },
+  "company_name_max_len": {
+    "type": "int",
+    "default": 15,
+    "min": 1,
+    "max": 60,
+    "description": "公司名最大字符数"
+  },
+  "create_company_min_level": {
+    "type": "int",
+    "default": 10,
+    "min": 1,
+    "max": 50,
+    "description": "创业最低职级要求"
+  },
+  "create_company_value_bonus": {
+    "type": "float",
+    "default": 20000.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "创业身价加成"
+  },
+  "credit_upgrade_max_batch": {
+    "type": "int",
+    "default": 99,
+    "min": 1,
+    "max": 999,
+    "description": "「一键升级信用」单次最大连升次数"
+  },
+  "custom_company_base_salary": {
+    "type": "float",
+    "default": 6000.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "自建公司基础月薪（元）"
+  },
+  "custom_company_init_balance": {
+    "type": "float",
+    "default": 10000.0,
+    "min": 0.0,
+    "max": 1000000000000.0,
+    "description": "自建公司初始企业金库（元）"
+  },
+  "custom_company_profit_rate": {
+    "type": "float",
+    "default": 0.15,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "员工打卡给自建金库的抽成比例"
+  },
+  "db_busy_timeout_ms": {
+    "invisible": true,
+    "type": "int",
+    "default": 15000,
+    "min": 1000,
+    "max": 60000,
+    "description": "SQLite 忙等超时（毫秒）"
+  },
+  "duel_max_advantage": {
+    "type": "float",
+    "default": 0.3,
+    "min": 0.0,
+    "max": 0.5,
+    "description": "身价差能给出的最大胜率优势"
+  },
+  "duel_value_penalty_rate": {
+    "type": "float",
+    "default": 0.05,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "对线败方身价惩罚率"
+  },
+  "duel_value_weight": {
+    "type": "float",
+    "default": 0.5,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "身价差换算胜率的权重"
+  },
+  "duel_base_win_rate": {
+    "type": "float",
+    "default": 0.5,
+    "min": 0.1,
+    "max": 0.9,
+    "description": "对线基础胜率（身价相同时的胜率）"
+  },
+  "eat_with_costs": {
+    "type": "list",
+    "default": [
+      50,
+      80,
+      120
+    ],
+    "description": "和同事吃饭花费档位（元）"
+  },
+  "events_max_rows": {
+    "invisible": true,
+    "type": "int",
+    "default": 800,
+    "min": 100,
+    "max": 100000,
+    "description": "事件流保留行数上限"
+  },
+  "fund_daily_limit_pct": {
+    "type": "float",
+    "default": 12.0,
+    "min": 0.0,
+    "max": 50.0,
+    "description": "基金日涨跌停幅度（%）"
+  },
+  "fund_drift": {
+    "type": "float",
+    "default": 0.2,
+    "min": -1.0,
+    "max": 1.0,
+    "description": "基金日涨跌幅漂移"
+  },
+  "fund_volatility": {
+    "type": "float",
+    "default": 4.5,
+    "min": 0.0,
+    "max": 10.0,
+    "description": "基金日涨跌幅波动率"
+  },
+  "group_name_cache_ttl_minutes": {
+    "invisible": true,
+    "type": "int",
+    "default": 30,
+    "min": 1,
+    "max": 1440,
+    "description": "群名缓存 TTL（分钟）"
+  },
+  "gym_cost": {
+    "type": "float",
+    "default": 30.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "健身单次花费（元）"
+  },
+  "gym_health_max": {
+    "type": "int",
+    "default": 15,
+    "min": 0,
+    "max": 100,
+    "description": "健身获得健康上限"
+  },
+  "gym_health_min": {
+    "type": "int",
+    "default": 8,
+    "min": 0,
+    "max": 100,
+    "description": "健身获得健康下限"
+  },
+  "hop_cooldown_hours": {
+    "type": "float",
+    "default": 1.0,
+    "min": 0.0,
+    "max": 720.0,
+    "description": "跳槽冷却（小时）"
+  },
+  "hospital_rate": {
+    "type": "float",
+    "default": 0.35,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "加班过度住院概率"
+  },
+  "house_fund_offset_max_rate": {
+    "type": "float",
+    "default": 0.3,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "公积金可抵扣房款最大比例"
+  },
+  "job_apply_auto_rate": {
+    "type": "float",
+    "default": 0.92,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "不指定公司投递成功率"
+  },
+  "job_apply_targeted_rate": {
+    "type": "float",
+    "default": 0.85,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "指定公司投递成功率"
+  },
+  "job_best_offer_rate": {
+    "type": "float",
+    "default": 0.7,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "自动挑选时拿最高薪公司的概率"
+  },
+  "job_cooldown_minutes": {
+    "type": "float",
+    "default": 10.0,
+    "min": 0.0,
+    "max": 10080.0,
+    "description": "求职冷却（分钟）"
+  },
+  "job_hop_success_rate": {
+    "type": "float",
+    "default": 0.75,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "跳槽成功率"
+  },
+  "late_pay_penalty_rate": {
+    "type": "float",
+    "default": 0.2,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "迟到当日薪资折扣"
+  },
+  "layoff_severance_rate": {
+    "type": "float",
+    "default": 0.3,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "裁员补偿 = 月薪 × 此系数"
+  },
+  "leave_health_gain": {
+    "type": "float",
+    "default": 8.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "请假健康恢复量"
+  },
+  "leave_mind_gain": {
+    "type": "float",
+    "default": 15.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "请假精神恢复量"
+  },
+  "lend_fail_rate": {
+    "type": "float",
+    "default": 0.3,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "借钱有去无回概率"
+  },
+  "market_list_max": {
+    "type": "int",
+    "default": 60,
+    "min": 1,
+    "max": 200,
+    "description": "同事录最大展示人数"
+  },
+  "max_session_cache": {
+    "invisible": true,
+    "type": "int",
+    "default": 2000,
+    "min": 16,
+    "max": 100000,
+    "description": "会话映射（umos）最大条目数"
+  },
+  "max_text_length": {
+    "invisible": true,
+    "type": "int",
+    "default": 1500,
+    "min": 100,
+    "max": 10000,
+    "description": "纯文本回复最大长度"
+  },
+  "monthly_workdays": {
+    "type": "int",
+    "default": 22,
+    "min": 1,
+    "max": 31,
+    "description": "月薪折日薪的工作日数"
+  },
+  "nap_caught_rate": {
+    "type": "float",
+    "default": 0.15,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "午休被抓概率"
+  },
+  "negotiate_base_rate": {
+    "type": "float",
+    "default": 0.25,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "谈薪基础成功率"
+  },
+  "negotiate_cooldown_days": {
+    "type": "float",
+    "default": 7.0,
+    "min": 0.0,
+    "max": 365.0,
+    "description": "谈薪冷却（天）"
+  },
+  "negotiate_max_rate": {
+    "type": "float",
+    "default": 0.75,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "谈薪最大成功率"
+  },
+  "negotiate_raise_max_rate": {
+    "type": "float",
+    "default": 0.15,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "谈薪成功调薪幅度上限"
+  },
+  "negotiate_raise_min_rate": {
+    "type": "float",
+    "default": 0.05,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "谈薪成功调薪幅度下限"
+  },
+  "overtime_comp_leave_rate": {
+    "type": "float",
+    "default": 0.2,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "加班获得调休券概率"
+  },
+  "overtime_meal_cooldown_hours": {
+    "type": "float",
+    "default": 24.0,
+    "min": 0.0,
+    "max": 720.0,
+    "description": "加班餐补冷却（小时）"
+  },
+  "overtime_meal_start_hour": {
+    "type": "int",
+    "default": 18,
+    "min": 0,
+    "max": 23,
+    "description": "加班餐补可领起始小时"
+  },
+  "overtime_meal_subsidy_max": {
+    "type": "float",
+    "default": 30.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "加班餐补上限（元）"
+  },
+  "overtime_pay_max_rate": {
+    "type": "float",
+    "default": 1.1,
+    "min": 0.0,
+    "max": 5.0,
+    "description": "加班费倍率上限"
+  },
+  "overtime_pay_min_rate": {
+    "type": "float",
+    "default": 0.5,
+    "min": 0.0,
+    "max": 5.0,
+    "description": "加班费倍率下限"
+  },
+  "party_first_rate": {
+    "type": "float",
+    "default": 0.07,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "年会抽奖一等奖概率"
+  },
+  "party_grand_rate": {
+    "type": "float",
+    "default": 0.03,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "年会抽奖大奖概率"
+  },
+  "party_second_rate": {
+    "type": "float",
+    "default": 0.15,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "年会抽奖二等奖概率"
+  },
+  "party_third_rate": {
+    "type": "float",
+    "default": 0.25,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "年会抽奖三等奖概率"
+  },
+  "promote_fail_refund_rate": {
+    "type": "float",
+    "default": 0.5,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "晋升失败退还打点费比例"
+  },
+  "promote_max_rate": {
+    "type": "float",
+    "default": 0.95,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "晋升最大成功率"
+  },
+  "push_check_interval_minutes": {
+    "invisible": true,
+    "type": "int",
+    "default": 10,
+    "min": 1,
+    "max": 60,
+    "description": "主循环巡检周期（分钟）"
+  },
+  "rank_base_win_rate": {
+    "type": "float",
+    "default": 0.5,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "卷王大赛基础胜率"
+  },
+  "rank_elo_k": {
+    "type": "int",
+    "default": 32,
+    "min": 1,
+    "max": 128,
+    "description": "卷王大赛 Elo K 系数"
+  },
+  "rank_reward_rate": {
+    "type": "float",
+    "default": 0.1,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "卷王大赛 Elo 换算报酬系数"
+  },
+  "ranking_top_n": {
+    "type": "int",
+    "default": 10,
+    "min": 1,
+    "max": 100,
+    "description": "群内榜单展示人数"
+  },
+  "redpacket_max_count": {
+    "type": "int",
+    "default": 50,
+    "min": 1,
+    "max": 200,
+    "description": "群红包一次最大个数"
+  },
+  "redpacket_retention_days": {
+    "type": "int",
+    "default": 7,
+    "min": 0,
+    "max": 365,
+    "description": "已领完红包保留天数"
+  },
+  "render_max_concurrency": {
+    "invisible": true,
+    "type": "int",
+    "default": 3,
+    "min": 1,
+    "max": 16,
+    "description": "截图并发上限"
+  },
+  "render_timeout_ms": {
+    "invisible": true,
+    "type": "int",
+    "default": 15000,
+    "min": 1000,
+    "max": 120000,
+    "description": "截图网络空闲超时（毫秒）"
+  },
+  "render_viewport_width": {
+    "invisible": true,
+    "type": "int",
+    "default": 780,
+    "min": 320,
+    "max": 4096,
+    "description": "截图视口宽度（像素）"
+  },
+  "report_bonus_rate": {
+    "type": "float",
+    "default": 0.3,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "周报奖金 = 日薪 × 此系数"
+  },
+  "report_cooldown_days": {
+    "type": "float",
+    "default": 7.0,
+    "min": 0.0,
+    "max": 365.0,
+    "description": "写周报冷却（天）"
+  },
+  "report_fail_rate": {
+    "type": "float",
+    "default": 0.12,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "周报敷衍被打回概率"
+  },
+  "report_s_threshold": {
+    "type": "float",
+    "default": 0.85,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "周报 S 级随机阈值"
+  },
+  "resign_mind_cooldown_hours": {
+    "type": "float",
+    "default": 24.0,
+    "min": 0.0,
+    "max": 720.0,
+    "description": "辞职回精神（+10）的冷却（小时），0 表示不限次"
+  },
+  "scratch_rtp": {
+    "type": "float",
+    "default": 0.925,
+    "min": 0.0,
+    "max": 2.0,
+    "description": "刮刮乐目标返奖率"
+  },
+  "screenshot_max_keep": {
+    "invisible": true,
+    "type": "int",
+    "default": 60,
+    "min": 1,
+    "max": 1000,
+    "description": "截图保留张数"
+  },
+  "side_hustle_bonus_per_level": {
+    "type": "float",
+    "default": 0.2,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "副业每级对摆摊的加成"
+  },
+  "side_hustle_max_level": {
+    "type": "int",
+    "default": 5,
+    "min": 1,
+    "max": 20,
+    "description": "副业等级上限"
+  },
+  "side_hustle_upgrade_cost_base": {
+    "type": "float",
+    "default": 2000.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "副业每级升级费用基数"
+  },
+  "shopping_budgets": {
+    "type": "list",
+    "default": [
+      99,
+      299,
+      999
+    ],
+    "description": "购物价格档位（元），随机命中一档"
+  },
+  "shopping_weights": {
+    "type": "list",
+    "default": [
+      60,
+      30,
+      10
+    ],
+    "description": "购物价格档位的命中权重（与 shopping_budgets 一一对应）"
+  },
+  "shopping_cooldown_hours": {
+    "type": "float",
+    "default": 6.0,
+    "min": 0.0,
+    "max": 168.0,
+    "description": "购物冷却（小时）"
+  },
+  "shopping_refund_rate": {
+    "type": "float",
+    "default": 0.15,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "购物退货概率（0~1）"
+  },
+  "shopping_shipping_rate": {
+    "type": "float",
+    "default": 0.1,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "购物运费概率（0~1）"
+  },
+  "shopping_deal_rate": {
+    "type": "float",
+    "default": 0.3,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "购物薅羊毛（砍价/优惠）概率（0~1）"
+  },
+  "shopping_refund_mind": {
+    "type": "int",
+    "default": 5,
+    "min": 0,
+    "max": 100,
+    "description": "退货失败时精神惩罚值"
+  },
+  "teambuild_cooldown_days": {
+    "type": "float",
+    "default": 7.0,
+    "min": 0.0,
+    "max": 90.0,
+    "description": "团建冷却（天）"
+  },
+  "coffee_pack_health_bonus": {
+    "type": "float",
+    "default": 30.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "咖啡道具恢复健康值"
+  },
+  "coffee_pack_mind_bonus": {
+    "type": "float",
+    "default": 30.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "咖啡道具恢复精神值"
+  },
+  "lottery_jackpot_pct": {
+    "type": "float",
+    "default": 0.6,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "彩票一等奖奖金占奖池比例（0~1）"
+  },
+  "lottery_second_pct": {
+    "type": "float",
+    "default": 0.25,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "彩票二等奖奖金占奖池比例（0~1）"
+  },
+  "lottery_third_pct": {
+    "type": "float",
+    "default": 0.15,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "彩票三等奖奖金占奖池比例（0~1）"
+  },
+  "review_score_rand_min": {
+    "type": "float",
+    "default": 0.8,
+    "min": 0.0,
+    "max": 2.0,
+    "description": "绩效评分随机波动下限（乘数）"
+  },
+  "review_score_rand_range": {
+    "type": "float",
+    "default": 0.4,
+    "min": 0.0,
+    "max": 2.0,
+    "description": "绩效评分随机波动范围（乘数幅度）"
+  },
+  "report_s_bonus_multi": {
+    "type": "float",
+    "default": 2.0,
+    "min": 0.0,
+    "max": 10.0,
+    "description": "周报S级奖金倍数"
+  },
+  "skill_cooldown_days": {
+    "type": "float",
+    "default": 7.0,
+    "min": 0.0,
+    "max": 365.0,
+    "description": "学技能冷却（天）"
+  },
+  "skill_cost": {
+    "type": "float",
+    "default": 800.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "学技能学费（元）"
+  },
+  "skill_exp_gain": {
+    "type": "int",
+    "default": 15,
+    "min": 0,
+    "max": 1000,
+    "description": "学技能获得经验基础值"
+  },
+  "skill_overtime_bonus_rate": {
+    "type": "float",
+    "default": 0.02,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "加班收入每掌握一门技能的加成"
+  },
+  "skill_promote_bonus_rate": {
+    "type": "float",
+    "default": 0.03,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "每门技能对晋升率的加成"
+  },
+  "skill_success_rate": {
+    "type": "float",
+    "default": 0.75,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "学技能成功率"
+  },
+  "slack_caught_rate": {
+    "type": "float",
+    "default": 0.15,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "摸鱼被 HR 抓到概率"
+  },
+  "slack_fine_min": {
+    "type": "float",
+    "default": 10.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "摸鱼被罚款下限（元）"
+  },
+  "slack_fine_rate": {
+    "type": "float",
+    "default": 0.5,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "摸鱼罚款 = 半日薪倍率"
+  },
+  "slack_mind_max": {
+    "type": "int",
+    "default": 15,
+    "min": 0,
+    "max": 100,
+    "description": "摸鱼成功精神恢复最大值"
+  },
+  "slack_mind_min": {
+    "type": "int",
+    "default": 8,
+    "min": 0,
+    "max": 100,
+    "description": "摸鱼成功精神恢复最小值"
+  },
+  "social_cooldown_hours": {
+    "type": "float",
+    "default": 4.0,
+    "min": 0.0,
+    "max": 720.0,
+    "description": "职场社交冷却（小时）"
+  },
+  "social_cost": {
+    "type": "float",
+    "default": 20.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "职场社交请奶茶花费（元）"
+  },
+  "social_pts_max": {
+    "type": "int",
+    "default": 8,
+    "min": 0,
+    "max": 100,
+    "description": "职场社交人脉值上限"
+  },
+  "social_pts_min": {
+    "type": "int",
+    "default": 3,
+    "min": 0,
+    "max": 100,
+    "description": "职场社交人脉值下限"
+  },
+  "social_success_rate": {
+    "type": "float",
+    "default": 0.65,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "职场社交成功率"
+  },
+  "social_target_reward": {
+    "type": "float",
+    "default": 10.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "社交成功时给对方的现金奖励"
+  },
+  "stall_exp_bonus_per_100": {
+    "type": "float",
+    "default": 5.0,
+    "min": 0.0,
+    "max": 1000.0,
+    "description": "摆摊收入每 100 点经验的加成"
+  },
+  "stall_fail_rate": {
+    "type": "float",
+    "default": 0.2,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "摆摊失败概率"
+  },
+  "stall_income_max": {
+    "type": "int",
+    "default": 60,
+    "min": 0,
+    "max": 100000,
+    "description": "摆摊收入上限（元）"
+  },
+  "stall_income_min": {
+    "type": "int",
+    "default": 10,
+    "min": 0,
+    "max": 100000,
+    "description": "摆摊收入下限（元）"
+  },
+  "start_health": {
+    "type": "int",
+    "default": 80,
+    "min": 1,
+    "max": 100,
+    "description": "新玩家初始健康"
+  },
+  "start_mind": {
+    "type": "int",
+    "default": 80,
+    "min": 1,
+    "max": 100,
+    "description": "新玩家初始精神"
+  },
+  "start_rank_score": {
+    "type": "int",
+    "default": 1000,
+    "min": 0,
+    "max": 1000000000,
+    "description": "新玩家初始段位分"
+  },
+  "start_value": {
+    "type": "float",
+    "default": 100.0,
+    "min": 0.0,
+    "max": 1000000000000.0,
+    "description": "新玩家初始身价"
+  },
+  "stock_daily_limit_pct": {
+    "type": "float",
+    "default": 9.8,
+    "min": 0.0,
+    "max": 50.0,
+    "description": "股价日涨跌停幅度（%）"
+  },
+  "stock_drift": {
+    "type": "float",
+    "default": 0.15,
+    "min": -1.0,
+    "max": 1.0,
+    "description": "股价日涨跌幅漂移"
+  },
+  "stock_max_positions": {
+    "type": "int",
+    "default": 50,
+    "min": 1,
+    "max": 500,
+    "description": "单玩家股票持仓最大只数"
+  },
+  "stock_min_buy_amount": {
+    "type": "int",
+    "default": 1,
+    "min": 1,
+    "max": 1000000000,
+    "description": "股票单笔最小买入金额（元）"
+  },
+  "stock_min_price": {
+    "type": "float",
+    "default": 0.5,
+    "min": 0.01,
+    "max": 100.0,
+    "description": "股价地板价（元）"
+  },
+  "stock_reset_price_max": {
+    "type": "float",
+    "default": 180.0,
+    "min": 0.01,
+    "max": 1000.0,
+    "description": "管理端「重置股价」上限（元）"
+  },
+  "stock_reset_price_min": {
+    "type": "float",
+    "default": 6.0,
+    "min": 0.01,
+    "max": 1000.0,
+    "description": "管理端「重置股价」下限（元）"
+  },
+  "stock_volatility": {
+    "type": "float",
+    "default": 3.2,
+    "min": 0.0,
+    "max": 10.0,
+    "description": "股价日涨跌幅波动率"
+  },
+  "summit_cooldown_days": {
+    "type": "float",
+    "default": 14.0,
+    "min": 0.0,
+    "max": 365.0,
+    "description": "行业峰会冷却（天）"
+  },
+  "summit_cost": {
+    "type": "float",
+    "default": 500.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "行业峰会门票（元）"
+  },
+  "summit_exp_max": {
+    "type": "int",
+    "default": 25,
+    "min": 0,
+    "max": 1000,
+    "description": "行业峰会经验上限"
+  },
+  "summit_exp_min": {
+    "type": "int",
+    "default": 10,
+    "min": 0,
+    "max": 1000,
+    "description": "行业峰会经验下限"
+  },
+  "train_cost_min": {
+    "type": "float",
+    "default": 200.0,
+    "min": 0.0,
+    "max": 1000000000.0,
+    "description": "进修花费下限（元）"
+  },
+  "train_cost_multiplier": {
+    "type": "float",
+    "default": 5.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "进修费用 = 身价 × 进修费率 × 此倍率"
+  },
+  "transactions_max_rows": {
+    "invisible": true,
+    "type": "int",
+    "default": 50000,
+    "min": 1000,
+    "max": 1000000,
+    "description": "流水表保留行数上限"
+  },
+  "lottery_draws_max_rows": {
+    "invisible": true,
+    "type": "int",
+    "default": 400,
+    "min": 1,
+    "max": 100000,
+    "description": "开奖记录保留条数（每天一期，400 ≈ 13 个月；超出的旧期次会被清理）"
+  },
+  "weekly_leave_limit": {
+    "type": "int",
+    "default": 2,
+    "min": 0,
+    "max": 7,
+    "description": "每周请假次数上限"
+  },
+  "work_intensity_health_factor": {
+    "type": "float",
+    "default": 0.4,
+    "min": 0.0,
+    "max": 5.0,
+    "description": "每日强度→健康损耗系数"
+  },
+  "work_intensity_mind_factor": {
+    "type": "float",
+    "default": 0.25,
+    "min": 0.0,
+    "max": 5.0,
+    "description": "每日强度→精神损耗系数"
+  },
+  "year_bonus_bad_multi": {
+    "type": "float",
+    "default": 0.3,
+    "min": 0.0,
+    "max": 10.0,
+    "description": "年终奖吊车尾倍数"
+  },
+  "year_bonus_good_multi": {
+    "type": "float",
+    "default": 1.5,
+    "min": 0.0,
+    "max": 10.0,
+    "description": "年终奖普通奖倍数"
+  },
+  "year_bonus_good_rate": {
+    "type": "float",
+    "default": 0.25,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "年终奖普通奖概率"
+  },
+  "year_bonus_jackpot_multi": {
+    "type": "float",
+    "default": 3.0,
+    "min": 0.0,
+    "max": 10.0,
+    "description": "年终奖翻倍倍数"
+  },
+  "year_bonus_jackpot_rate": {
+    "type": "float",
+    "default": 0.05,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "年终奖翻倍概率"
+  },
+  "year_bonus_level_factor": {
+    "type": "float",
+    "default": 0.3,
+    "min": 0.0,
+    "max": 5.0,
+    "description": "年终奖：每级职级加成系数"
+  },
+  "year_bonus_streak_factor": {
+    "type": "float",
+    "default": 0.02,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "年终奖：每日全勤加成系数"
+  },
+  "review_weight_exp": {
+    "type": "float",
+    "default": 2.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "考评：经验权重"
+  },
+  "review_weight_streak": {
+    "type": "float",
+    "default": 5.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "考评：全勤权重"
+  },
+  "review_weight_skill": {
+    "type": "float",
+    "default": 20.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "考评：技能权重"
+  },
+  "review_weight_social": {
+    "type": "float",
+    "default": 3.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "考评：人脉权重"
+  },
+  "review_weight_level": {
+    "type": "float",
+    "default": 50.0,
+    "min": 0.0,
+    "max": 1000.0,
+    "description": "考评：职级权重"
+  },
+  "review_grade_s_threshold": {
+    "type": "float",
+    "default": 800.0,
+    "min": 0.0,
+    "max": 100000.0,
+    "description": "考评 S 级分数线"
+  },
+  "review_grade_a_threshold": {
+    "type": "float",
+    "default": 500.0,
+    "min": 0.0,
+    "max": 100000.0,
+    "description": "考评 A 级分数线"
+  },
+  "review_grade_b_threshold": {
+    "type": "float",
+    "default": 300.0,
+    "min": 0.0,
+    "max": 100000.0,
+    "description": "考评 B 级分数线"
+  },
+  "review_grade_c_threshold": {
+    "type": "float",
+    "default": 150.0,
+    "min": 0.0,
+    "max": 100000.0,
+    "description": "考评 C 级分数线"
+  },
+  "review_bonus_multi_s": {
+    "type": "float",
+    "default": 3.0,
+    "min": 0.0,
+    "max": 20.0,
+    "description": "考评 S 级年终奖倍数"
+  },
+  "review_bonus_multi_a": {
+    "type": "float",
+    "default": 2.0,
+    "min": 0.0,
+    "max": 20.0,
+    "description": "考评 A 级年终奖倍数"
+  },
+  "review_bonus_multi_b": {
+    "type": "float",
+    "default": 1.0,
+    "min": 0.0,
+    "max": 20.0,
+    "description": "考评 B 级年终奖倍数"
+  },
+  "review_bonus_multi_c": {
+    "type": "float",
+    "default": 0.3,
+    "min": 0.0,
+    "max": 20.0,
+    "description": "考评 C 级年终奖倍数"
+  },
+  "review_bonus_multi_d": {
+    "type": "float",
+    "default": 0.0,
+    "min": 0.0,
+    "max": 20.0,
+    "description": "考评 D 级年终奖倍数"
+  },
+  "review_raise_s": {
+    "type": "float",
+    "default": 0.15,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "考评 S 级调薪幅度"
+  },
+  "review_raise_a": {
+    "type": "float",
+    "default": 0.1,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "考评 A 级调薪幅度"
+  },
+  "review_raise_b": {
+    "type": "float",
+    "default": 0.05,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "考评 B 级调薪幅度"
+  },
+  "review_raise_c": {
+    "type": "float",
+    "default": 0.0,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "考评 C 级调薪幅度"
+  },
+  "overtime_daily_limit": {
+    "type": "int",
+    "default": 4,
+    "min": 1,
+    "max": 100,
+    "description": "每日加班次数上限（只靠冷却挡不住：咖啡续命包能缩短冷却，买够就能反复刷加班费）"
+  },
+  "coffee_pack_cd_cut_hours": {
+    "type": "float",
+    "default": 1.5,
+    "min": 0.0,
+    "max": 24.0,
+    "description": "咖啡续命包缩短加班冷却的小时数（不再清零，配合 overtime_daily_limit 封死刷钱）"
+  },
+  "report_fail_fine": {
+    "type": "float",
+    "default": 50.0,
+    "min": 0.0,
+    "max": 1000000.0,
+    "description": "周报被打回的罚款金额"
+  },
+  "report_fail_mind": {
+    "type": "float",
+    "default": 5.0,
+    "min": 0.0,
+    "max": 100.0,
+    "description": "周报被打回的精神惩罚值"
+  },
+  "report_a_threshold": {
+    "type": "float",
+    "default": 0.5,
+    "min": 0.0,
+    "max": 1.0,
+    "description": "周报 A 级随机阈值（低于此值为 B 级，需小于 report_s_threshold）"
+  },
+  "shopping_deal_mind": {
+    "type": "int",
+    "default": 18,
+    "min": 0,
+    "max": 100,
+    "description": "购物薅到满减券时的精神收益"
+  },
+  "shopping_mind_min": {
+    "type": "int",
+    "default": 8,
+    "min": 0,
+    "max": 100,
+    "description": "普通购物精神收益下限"
+  },
+  "shopping_mind_max": {
+    "type": "int",
+    "default": 16,
+    "min": 0,
+    "max": 100,
+    "description": "普通购物精神收益上限"
+  },
+  "archive_retention_weeks": {
+    "invisible": true,
+    "type": "int",
+    "default": 52,
+    "min": 1,
+    "max": 520,
+    "description": "周榜快照保留周数（超出的旧快照由每日清理任务删除，此前 archives 表无上限增长）"
+  },
+  "_webui_must_change_password": {
+    "description": "内部状态：首次启动是否强制改密（插件自动维护，无需手动设置）",
+    "type": "bool",
+    "default": false,
+    "invisible": true
+  }
+
+}

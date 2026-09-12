@@ -1,0 +1,118 @@
+{
+  "already_drawn": [
+    "本期（{today}）已开奖（{number}），想买请等明天开新一期"
+  ],
+  "limit_reached": [
+    "本期（今日）限购 {limit} 注，你已经买满了，明天再来"
+  ],
+  "red_invalid": [
+    "红球需为 1~{red_max} 中互不相同的 {red_pick} 个号码，例如：「#买彩票 3 7 12 5」"
+  ],
+  "blue_invalid": [
+    "蓝球需为 1~{blue_max} 的号码，例如：「#买彩票 3 7 12 5」（末位为蓝球）"
+  ],
+  "format_error": [
+    "格式：机选「#买彩票 3」（{limit} 注内），或自选一注「#买彩票 3 7 12 5」（前 {red_pick} 位红球 1~{red_max}，末位蓝球 1~{blue_max}）"
+  ],
+  "cash_short": [
+    "买 {count} 注需要 {total} 元（单价 {price}），现金不足"
+  ],
+  "sold_out": [
+    "本期（今日）限购 {limit} 注，刚才已卖满，一分钱都没扣，明天再来"
+  ],
+  "no_tickets": [
+    "本期你还没有彩票，发送「#买彩票 3 7 12 5」自选一注冲刺一夜暴富"
+  ],
+  "no_draw": [
+    "还没有开过奖，发送「#买彩票」成为第一期彩民"
+  ],
+  "event_bought": [
+    "{name} 花 {total} 元买了 {count} 注双色球，冲击一夜暴富梦！"
+  ],
+  "buy_text": [
+    "🎰 双色球{pick_note}出票 {count} 注：\n{lines}\n花费 {total} 元，本期奖池已累积 {pool} 元"
+  ],
+  "my_tickets_text": [
+    "🎟️ 本期号码：{numbers}"
+  ],
+  "result_text": [
+    "🎊 双色球开奖（{date}）：{number}（共 {count} 注参与）\n{lines}\n派奖 {paid} 元，滚存 {carry} 元"
+  ],
+  "val_yuan": [
+    "{amount} 元"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_held": [
+    "{held}/{limit} 注"
+  ],
+  "val_tickets": [
+    "{n} 注"
+  ],
+  "val_price_per_ticket": [
+    "{amount} 元/注"
+  ],
+  "val_tier_pct": [
+    "{name} {pct}%"
+  ],
+  "titles": {
+    "title_buy_ticket": "双色球出票成功",
+    "title_buy_ticket_count": " · {count} 注（{pick_note}）",
+    "title_my_tickets": "我的双色球 · 本期",
+    "title_lottery_result": "双色球开奖",
+    "title_lottery_pool": "一夜暴富梦 · 双色球奖池"
+  },
+  "labels": {
+    "cost": "花费",
+    "held": "本期持有",
+    "hold": "持有",
+    "pool": "当前奖池",
+    "prize_tier": "奖级",
+    "draw_time": "开奖时间",
+    "sold": "本期售出",
+    "price": "票价",
+    "play": "玩法",
+    "paid_total": "派奖合计",
+    "carry_over": "滚存下期",
+    "pool_period": "本期奖池"
+  },
+  "pick_auto": "机选",
+  "pick_manual": "自选",
+  "rule_sep": " · ",
+  "fmt_draw": "红球 {red} + 蓝球 {blue}",
+  "line_num": "红 {red} + 蓝 {blue}",
+  "tier_rule": "{name} {rule}",
+  "play_text": "红球 1~{red_max} 选 {red_pick} + 蓝球 1~{blue_max} 选 1",
+  "draw_time_tpl": "每天 {hour}:00 自动开奖",
+  "pool_text": "🏦 双色球本期奖池 {pool} 元（{tickets} 注），每天 {hour}:00 开奖。{play}",
+  "foot_buy_ticket": "每晚自动开奖：{rules}，无人中滚存下期",
+  "foot_lottery_pool": "彩票收入全部进入奖池，无人中奖自动滚存，头奖越滚越大",
+  "draw_line": "开奖号码：{number}（共 {count} 注参与）",
+  "tier_more": "等 {n} 人",
+  "tier_none": "{tier}：无人命中，滚存奖池",
+  "tier_hit": "{tier}：{names}{more}",
+  "tier_winner": "{name}（+{amount}）",
+  "bc_header": "🎰 一夜暴富梦双色球开奖啦！",
+  "bc_header_late": "🎰 双色球补开奖（{date} 期，机器人当时不在线）",
+  "bc_tier_hit": "🎉 {tier}：{names}{more}",
+  "bc_tier_miss": "{tier}：无人命中，滚存下期",
+  "bc_tier_winner": "{name}(+{amount})",
+  "bc_tier_more": " 等 {n} 人",
+  "bc_footer": "本期派奖 {paid} 元，滚存 {carry} 元 —— 头奖越滚越大！",
+  "tx_buy_note": [
+    "{count} 注 · 期号 {date}"
+  ],
+  "kind_buy_lottery": [
+    "买彩票"
+  ],
+  "kind_buy_lottery_tx": [
+    "购买彩票"
+  ],
+  "fallback_tier_name_jackpot": "一等奖",
+  "fallback_tier_rule_jackpot": "3红+蓝",
+  "fallback_tier_name_second": "二等奖",
+  "fallback_tier_rule_second": "3红",
+  "fallback_tier_name_third": "三等奖",
+  "fallback_tier_rule_third": "2红+蓝"
+}

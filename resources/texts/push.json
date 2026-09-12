@@ -1,0 +1,48 @@
+{
+  "titles": {
+    "title_push_toggle": "推送",
+    "title_push_status": "推送状态"
+  },
+  "state_on": [
+    "已开启"
+  ],
+  "state_off": [
+    "已关闭"
+  ],
+  "body_on": [
+    "开启后，每天早上会向本群推送职场早报与股市摘要。"
+  ],
+  "body_off": [
+    "本群将不再接收每日早报推送。"
+  ],
+  "text_toggle": [
+    "本群推送{state}。{body}"
+  ],
+  "line_status": [
+    "推送内容：每日职场早报 + 股市摘要"
+  ],
+  "lbl_self": [
+    "本群推送"
+  ],
+  "val_on": [
+    "已开启"
+  ],
+  "val_off": [
+    "未开启"
+  ],
+  "lbl_groups": [
+    "全服开启群数"
+  ],
+  "lbl_switch": [
+    "切换方式"
+  ],
+  "val_switch": [
+    "发送「#推送」"
+  ],
+  "text_status": [
+    "本群推送{state}（全服 {n} 群开启）"
+  ],
+  "val_groups": [
+    "{n} 群"
+  ]
+}

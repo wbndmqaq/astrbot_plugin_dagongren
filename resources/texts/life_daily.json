@@ -1,0 +1,185 @@
+{
+  "err_no_meals": [
+    "饭堂数据（meals.json）为空，请联系管理员检查插件资源文件"
+  ],
+  "err_eat_mode": [
+    "吃法不对！可选：{modes}"
+  ],
+  "err_eat_cd": [
+    "刚吃过就又饿？冷却中：{remaining}"
+  ],
+  "err_eat_cost": [
+    "吃「{mode}」需要 {cost} 元，余额不足（要不试试喝西北风？）"
+  ],
+  "err_gym_cd": [
+    "肌肉还在酸痛，休息一下：剩余 {remaining}"
+  ],
+  "err_gym_cost": [
+    "健身需要 {cost} 元（年卡摊销），余额不足"
+  ],
+  "err_nap_unemployed": [
+    "失业人士想睡多久睡多久，不需要午休指令"
+  ],
+  "err_nap_cd": [
+    "一天只能午休一次，下午靠咖啡续命吧"
+  ],
+  "err_stall_cd": [
+    "摊位还热乎着呢，冷却中：{remaining}"
+  ],
+  "err_shopping_cd": [
+    "钱包还在流泪，冷静一下：剩余 {remaining}"
+  ],
+  "err_shopping_short": [
+    "余额不足，本次购物预算 {budget} 元，你只有 {cash} 元，先去赚钱吧"
+  ],
+  "err_teambuild_unemployed": [
+    "失业人士没有团建，只有自由的空气"
+  ],
+  "err_teambuild_cd": [
+    "刚被团建完，缓一缓：剩余 {remaining}"
+  ],
+  "shopping_deal_note": [
+    "省了 {saved} 元"
+  ],
+  "titles": {
+    "title_eat": "干饭",
+    "title_gym_ok": "健身完成",
+    "title_nap_caught": "午休翻车",
+    "title_nap_ok": "午休完毕",
+    "title_stall_fail": "出师不利",
+    "title_stall_ok": "副业创收",
+    "title_shop_refund": "退货小能手",
+    "title_shop_deal": "薅羊毛成功",
+    "title_shop_normal": "剁手快乐",
+    "title_teambuild": "团建"
+  },
+  "lbl_remind": [
+    "提醒"
+  ],
+  "lbl_personal_cost": [
+    "个人花费"
+  ],
+  "foot_teambuild": [
+    "团建占用的是周末，但老板觉得这是福利"
+  ],
+  "teambuild_default_type": [
+    "团建"
+  ],
+  "teambuild_cancel_type": [
+    "临时取消"
+  ],
+  "teambuild_cancel_text": [
+    "团建取消"
+  ],
+  "teambuild_paid": [
+    "-{paid} 元"
+  ],
+  "teambuild_gain": [
+    "+{gain} 元"
+  ],
+  "teambuild_free": [
+    "公司报销，0 元"
+  ],
+  "lbl_cost": [
+    "花费"
+  ],
+  "lbl_health": [
+    "健康"
+  ],
+  "lbl_mind": [
+    "精神"
+  ],
+  "lbl_cash": [
+    "现金"
+  ],
+  "lbl_cash_balance": [
+    "现金余额"
+  ],
+  "lbl_exp": [
+    "经验"
+  ],
+  "lbl_side_income": [
+    "外快"
+  ],
+  "lbl_side_income_got": [
+    "外快到账"
+  ],
+  "val_yuan": [
+    "{amount} 元"
+  ],
+  "val_plus_yuan": [
+    "+{amount} 元"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_zero_yuan": [
+    "0 元"
+  ],
+  "val_gain_cur": [
+    "+{gain}（当前 {cur}）"
+  ],
+  "val_gain_cur_100": [
+    "+{gain}（当前 {cur} / 100）"
+  ],
+  "val_status_100": [
+    "{cur} / 100"
+  ],
+  "val_nap_mind_down": [
+    "-2（当前 {cur}）"
+  ],
+  "val_nap_health_up": [
+    "+1"
+  ],
+  "val_remind_spend": [
+    "下单一时爽，吃土月底见"
+  ],
+  "val_remind_refund": [
+    "下次继续"
+  ],
+  "val_eat_mode_item": [
+    "「#吃饭 {mode}」"
+  ],
+  "line_side_lvl_note": [
+    "（副业 Lv.{lvl} 加成 ×{mult}）"
+  ],
+  "text_eat": [
+    "吃完{mode}：{line}（-{cost}元，健康+{health}，精神+{mind}）"
+  ],
+  "text_gym": [
+    "健身完成！健康 +{gain}（当前 {cur}）：{line}"
+  ],
+  "text_nap": [
+    "{title}：{line}"
+  ],
+  "text_stall_fail": [
+    "摆摊失败：{line}"
+  ],
+  "text_stall_ok": [
+    "摆摊赚了 {income} 元{note}：{line}"
+  ],
+  "text_shopping": [
+    "{title}：{note}"
+  ],
+  "text_teambuild": [
+    "团建「{type}」：{text}"
+  ],
+  "kind_shopping_refund": [
+    "购物退款"
+  ],
+  "kind_shopping": [
+    "购物"
+  ],
+  "kind_teambuild_pay": [
+    "团建垫付"
+  ],
+  "kind_teambuild_gain": [
+    "团建进账"
+  ],
+  "kind_stall": [
+    "摆摊副业"
+  ],
+  "stall_tx_note": [
+    "夜市摆摊收入"
+  ]
+}

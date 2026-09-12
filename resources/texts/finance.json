@@ -1,0 +1,265 @@
+{
+  "deposit_invalid": [
+    "请输入正确的存款金额，例如「#存款 500」"
+  ],
+  "deposit_cash_short": [
+    "现金余额不足（当前 {cash} 元{settled_note}）"
+  ],
+  "deposit_limit": [
+    "超过存储上限！当前上限 {limit} 元，还可存入 {space} 元，「#升级信用」可提升额度"
+  ],
+  "deposit_all_zero": [
+    "你的现金是 0 元，让我存个寂寞"
+  ],
+  "deposit_all_limit": [
+    "超过存储上限！当前上限 {limit} 元，还可存入 {space} 元（已先为你结息 +{settled} 元）"
+  ],
+  "withdraw_invalid": [
+    "请输入正确的取款金额，例如「#取款 500」"
+  ],
+  "withdraw_short": [
+    "存款余额不足（当前存款 {deposit} 元）"
+  ],
+  "upgrade_short": [
+    "升级需要 {price} 元，当前现金 {cash} 元不足"
+  ],
+  "interest_nodeposit": [
+    "当前没有存款，没有利息可领（每小时结算一次哦）"
+  ],
+  "interest_none": [
+    "当前没有可领取的利息（每小时结算一次，存款才有利息哦）"
+  ],
+  "transfer_self": [
+    "不能给自己转账，左手倒右手没有意义"
+  ],
+  "transfer_invalid": [
+    "请输入正确的转账金额，例如「#转账 500 @群友」"
+  ],
+  "transfer_min": [
+    "转账金额不能低于 {min} 元"
+  ],
+  "transfer_short": [
+    "余额不足：需要 {total} 元（本金 {principal} + 手续费 {fee}）"
+  ],
+  "fund_buy_invalid": [
+    "请输入正确的买入金额，例如「#买基金 1000」"
+  ],
+  "fund_buy_short": [
+    "买入需要 {total} 元（含手续费 {fee}），现金不足。温馨提示：基金有风险，梭哈需谨慎"
+  ],
+  "fund_sell_nohold": [
+    "你还没有持仓，拿什么卖？「#买基金」先上车"
+  ],
+  "fund_sell_badratio": [
+    "赎回比例格式不对，可用：「#卖出基金」「#卖出基金 全部」「#卖出基金 50」「#卖出基金 50%」"
+  ],
+  "fund_sell_too_small": [
+    "赎回比例 {ratio}% 太小了，按当前持仓算不足 0.01 元，请调大比例或直接「#卖出基金 全部」"
+  ],
+  "settled_note": [
+    "，已先为你结息 +{settled} 元"
+  ],
+  "no_target": [
+    "无法转账"
+  ],
+  "transfer_need_target": [
+    "请@收款人，如：转账 500 @群友"
+  ],
+  "lbl_deposit": [
+    "存入"
+  ],
+  "lbl_deposit_balance": [
+    "存款余额"
+  ],
+  "lbl_cash_balance": [
+    "现金余额"
+  ],
+  "lbl_rate_note": [
+    "利率说明"
+  ],
+  "lbl_withdraw": [
+    "取出"
+  ],
+  "lbl_credit_level": [
+    "信用等级"
+  ],
+  "lbl_limit": [
+    "存储上限"
+  ],
+  "lbl_upgrade_fee": [
+    "下次升级费"
+  ],
+  "lbl_cash": [
+    "现金"
+  ],
+  "lbl_deposit_short": [
+    "存款"
+  ],
+  "lbl_fund_hold": [
+    "基金持仓"
+  ],
+  "lbl_total_asset": [
+    "总资产"
+  ],
+  "lbl_interest_wait": [
+    "可领利息"
+  ],
+  "lbl_rate": [
+    "利率"
+  ],
+  "lbl_receiver": [
+    "收款人"
+  ],
+  "lbl_amount": [
+    "金额"
+  ],
+  "lbl_fee": [
+    "手续费"
+  ],
+  "lbl_remaining_cash": [
+    "剩余现金"
+  ],
+  "lbl_buy_amount": [
+    "买入金额"
+  ],
+  "lbl_current_hold": [
+    "当前持仓"
+  ],
+  "lbl_sell_shares": [
+    "赎回份额"
+  ],
+  "lbl_actual_income": [
+    "实际到账"
+  ],
+  "lbl_remaining_hold": [
+    "剩余持仓"
+  ],
+  "lbl_this_stat": [
+    "本次统计"
+  ],
+  "lbl_this_interest": [
+    "本次利息"
+  ],
+  "foot_remind_interest": [
+    "记得每天「#领取利息」"
+  ],
+  "foot_interest_first": [
+    "一小时后即可领取第一笔利息，记得每天来拿"
+  ],
+  "foot_fund_risk": [
+    "基金每日自动结算涨跌，绿了别哭，红了别飘"
+  ],
+  "cash_moon": [
+    "0 元（月光族实锤）"
+  ],
+  "val_yuan": [
+    "{amount} 元"
+  ],
+  "val_plus_yuan": [
+    "+{amount} 元"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_level": [
+    "Lv.{level}"
+  ],
+  "val_credit_level": [
+    "Lv.{level}（上限 {limit} 元）"
+  ],
+  "val_rate_note": [
+    "每小时 {rate}%，最多计息 {hours} 小时/天"
+  ],
+  "val_rate": [
+    "每小时 {rate}%（单日最多计 {hours} 小时）"
+  ],
+  "val_upgrade_stat": [
+    "升级 {times} 次，共花 {spent} 元"
+  ],
+  "val_sell_ratio": [
+    "{ratio}%（{amount} 元）"
+  ],
+  "line_deposit_settled": [
+    "存入前已自动结息 +{settled} 元"
+  ],
+  "line_settled_only": [
+    "利息 +{settled} 元已入现金，但没有更多现金可存"
+  ],
+  "line_deposit_all_settled": [
+    "含自动结息 +{settled} 元（已一并存入）"
+  ],
+  "line_withdraw_settled": [
+    "取出前已自动结息 +{settled} 元"
+  ],
+  "line_fund_change": [
+    "今日净值波动：{emoji} {change}%"
+  ],
+  "subtitle_fund_change": [
+    "今日基金{emoji} {change}%"
+  ],
+  "text_deposit_ok": [
+    "存款成功！存入 {amount} 元，存款余额 {deposit} 元"
+  ],
+  "text_auto_interest": [
+    "自动结息 +{settled} 元，当前现金 {cash} 元"
+  ],
+  "text_deposit_all": [
+    "全部存入成功！存款余额 {deposit} 元"
+  ],
+  "text_withdraw_ok": [
+    "取款成功！取出 {amount} 元"
+  ],
+  "text_upgrade_ok": [
+    "{title}！Lv.{level}，上限 {limit} 元"
+  ],
+  "text_bank_info": [
+    "银行信息：现金{cash} 存款{deposit} 基金{fund} 可领利息{interest}"
+  ],
+  "text_interest_start": [
+    "利息已开始按小时累计，一小时后回来领取吧"
+  ],
+  "text_interest_got": [
+    "领取利息 +{interest} 元"
+  ],
+  "text_transfer_ok": [
+    "已向 {name} 转账 {amount} 元（手续费 {fee}），剩余 {cash} 元"
+  ],
+  "text_fund_buy": [
+    "买入基金 {amount} 元（手续费 {fee}），当前持仓 {hold}"
+  ],
+  "text_fund_sell": [
+    "赎回 {amount} 元，到账 {income} 元，剩余持仓 {hold}"
+  ],
+  "tx_transfer_out": [
+    "转给 {name}（含手续费 {fee}）"
+  ],
+  "tx_transfer_in": [
+    "来自 {name}"
+  ],
+  "titles": {
+    "title_deposit_ok": "存款成功",
+    "title_auto_interest": "已自动结息",
+    "title_deposit_all": "一键存款成功",
+    "title_withdraw_ok": "取款成功",
+    "title_credit_upgrade_all": "一键升级信用成功",
+    "title_credit_upgrade": "升级信用成功",
+    "title_bank_info": "上班族银行 · 账户信息",
+    "title_interest_start": "利息已开始累计",
+    "title_interest_got": "利息到账",
+    "title_transfer_ok": "转账成功",
+    "title_fund_buy_ok": "申购成功 · 祝你好运",
+    "title_fund_sell_ok": "基金赎回成功"
+  },
+  "kind_transfer_out": [
+    "转账(出)"
+  ],
+  "kind_transfer_in": [
+    "转账(入)"
+  ],
+  "kind_interest": [
+    "存款利息"
+  ],
+  "tx_interest_note": [
+    "银行按小时结息"
+  ]
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { display: inline-block; }
+body { font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  background:linear-gradient(150deg,#141a2e 0%,#1b2440 55%,#122a47 100%);
+  width:720px; padding:26px; color:#e8ecf7; display:inline-block; }
+.head { text-align:center; margin-bottom:14px; }
+.head .ico { font-size:30px; }
+.head h1 { font-size:24px; color:{{ accent | default('#ffd86f') }}; letter-spacing:2px; margin-top:4px; }
+.summary { display:flex; gap:9px; justify-content:center; flex-wrap:wrap; margin-bottom:15px; }
+.stat { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.09);
+  border-radius:11px; padding:8px 17px; text-align:center; }
+.stat .num { font-size:17px; font-weight:bold; color:#7fd1ff; }
+.stat .lab { color:#8a93b5; font-size:11.5px; margin-top:2px; }
+.tblbox { background:rgba(255,255,255,.04); border-radius:13px; overflow:hidden;
+  border:1px solid rgba(255,255,255,.08); }
+table { width:100%; border-collapse:collapse; }
+td { padding:9px 13px; font-size:14px; border-bottom:1px solid rgba(255,255,255,.06);
+  vertical-align:top; line-height:1.45; }
+tr:last-child td { border-bottom:none; }
+tr.fail td:nth-child(2) { color:#ff9c9c; }
+tr.ok td:nth-child(3) { color:#6fe08c; font-weight:bold; white-space:nowrap; }
+th { background:rgba(255,216,111,.10); color:#ffd86f; padding:9px 13px;
+  font-size:13.5px; text-align:left; }
+
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="ico">{{ icon | default('📊') }}</div>
+    <h1>{{ title or t.table_default_title }}</h1>
+  </div>
+  {% if summary and summary is iterable and summary is not string %}
+  <div class="summary">
+    {% for s in summary %}
+    {% if s is mapping %}
+    <div class="stat"><div class="num">{{ s.value }}</div><div class="lab">{{ s.label }}</div></div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+  <div class="tblbox">
+    <table>
+      {% if cols %}<thead style="display:table-header-group"><tr>{% for c in cols %}<th>{{ c }}</th>{% endfor %}</tr></thead>{% endif %}
+      <tbody>
+        {% for r in rows or [] %}
+        {% if r is mapping and r.cells %}
+        <tr class="{% if r.fail %}fail{% else %}ok{% endif %}">
+          {% for c in r.cells %}<td>{{ c }}</td>{% endfor %}
+        </tr>
+        {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

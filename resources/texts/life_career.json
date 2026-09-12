@@ -1,0 +1,115 @@
+{
+  "err_train_cost": [
+    "报名进修班需要 {cost} 元（按当前身价浮动），余额不足"
+  ],
+  "err_train_cd": [
+    "刚结业一门课，先消化消化：剩余 {remaining}"
+  ],
+  "train_success_note": [
+    "能力提升"
+  ],
+  "train_fail_note": [
+    "未通过考核"
+  ],
+  "titles": {
+    "title_train_ok": "进修结业 · 能力提升",
+    "title_train_fail": "进修未果",
+    "title_payslip": "我的工资条 · 收支流水"
+  },
+  "no_record_resume": [
+    "简历"
+  ],
+  "no_record_payslip": [
+    "工资条"
+  ],
+  "val_jobless": [
+    "失业中"
+  ],
+  "val_duel_record": [
+    "{wins}胜 {losses}负"
+  ],
+  "val_rank_score": [
+    "{tier}（{score}分）"
+  ],
+  "text_resume": [
+    "📋 我的简历\n公司：{company}｜职位：{position}｜月薪：{salary} 元\n经验：{exp}｜健康：{health}｜精神：{mind}\n住房：{house}\n现金：{cash}｜存款：{deposit}｜基金：{fund}\n总资产：{total} 元\n身价：{value}｜通勤：{commute}｜公积金：{fund_savings}\n对线战绩：{wins}胜{losses}负｜卷王段位：{tier}"
+  ],
+  "col_time": [
+    "时间"
+  ],
+  "col_item": [
+    "项目"
+  ],
+  "col_amount": [
+    "金额"
+  ],
+  "col_note": [
+    "备注"
+  ],
+  "cell_no_tx": [
+    "暂无流水"
+  ],
+  "cell_no_tx_hint": [
+    "先去打卡赚钱吧"
+  ],
+  "lbl_total_earned": [
+    "累计总收入"
+  ],
+  "lbl_fund_balance": [
+    "公积金余额"
+  ],
+  "lbl_cash_deposit": [
+    "现金 / 存款"
+  ],
+  "lbl_salary_std": [
+    "月薪标准"
+  ],
+  "lbl_tuition": [
+    "学费"
+  ],
+  "lbl_value": [
+    "职场身价"
+  ],
+  "lbl_exp": [
+    "经验"
+  ],
+  "val_yuan": [
+    "{amount} 元"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_cash_deposit": [
+    "{cash} / {deposit}"
+  ],
+  "val_no_job": [
+    "无业中"
+  ],
+  "val_value_up": [
+    "+{increase} -> {value}"
+  ],
+  "val_gain_cur": [
+    "+{gain}（当前 {cur}）"
+  ],
+  "val_tuition_wasted": [
+    "-{cost} 元（打水漂）"
+  ],
+  "val_exp_little": [
+    "+少量（好歹听了几节）"
+  ],
+  "foot_payslip": [
+    "调休券 {comp_leave} 张｜通勤方式 {commute}"
+  ],
+  "text_payslip": [
+    "工资条：累计收入 {total} 元；公积金 {fund}"
+  ],
+  "text_train_ok": [
+    "进修成功！身价 +{increase} 至 {value}，学费 {cost} 元"
+  ],
+  "text_train_fail": [
+    "进修失败：{line}（学费 {cost} 元）"
+  ],
+  "kind_training_fee": [
+    "进修学费"
+  ]
+}

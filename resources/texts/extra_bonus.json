@@ -1,0 +1,125 @@
+{
+  "year_bonus_unemployed": [
+    "失业人士没有年终奖，先找工作吧"
+  ],
+  "year_bonus_already": [
+    "今年的年终奖已经领过了，明年再战"
+  ],
+  "year_bonus_tiers_unavailable": [
+    "年终奖档位表（resources/data/yearbonus.json）不可用，请联系管理员"
+  ],
+  "year_bonus_tx_note": [
+    "职级{lvl} 出勤{streak}天"
+  ],
+  "year_bonus_event": [
+    "{nickname} 领取年终奖 {amount} 元"
+  ],
+  "skills_not_configured": [
+    "技能列表尚未配置，请联系管理员在 resources/data/skills.json 中补充"
+  ],
+  "skills_available": [
+    "可学技能：{skills}"
+  ],
+  "skill_already_learned": [
+    "你已经学会了「{skill}」，不用重复学习"
+  ],
+  "skill_cost_short": [
+    "学费 {cost} 元，余额不足"
+  ],
+  "skill_cooldown": [
+    "刚学完一门课，脑子装不下了：剩余 {remaining}"
+  ],
+  "no_record_skill": [
+    "档案"
+  ],
+  "titles": {
+    "title_skill_ok": "学会",
+    "title_skill_fail": "学习失败",
+    "title_my_skills": "我的技能",
+    "title_year_bonus": "年终奖到账"
+  },
+  "lbl_year_bonus": [
+    "年终奖"
+  ],
+  "lbl_level": [
+    "职级"
+  ],
+  "lbl_streak": [
+    "连续出勤"
+  ],
+  "lbl_cash_balance": [
+    "现金余额"
+  ],
+  "lbl_tuition": [
+    "学费"
+  ],
+  "lbl_skills_owned": [
+    "已掌握技能"
+  ],
+  "lbl_exp": [
+    "经验"
+  ],
+  "lbl_owned": [
+    "已掌握"
+  ],
+  "lbl_learnable": [
+    "可学技能"
+  ],
+  "lbl_cooldown": [
+    "冷却"
+  ],
+  "val_plus_yuan": [
+    "+{amount} 元"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_yuan": [
+    "{amount} 元"
+  ],
+  "val_level": [
+    "L{lvl}"
+  ],
+  "val_days": [
+    "{days} 天"
+  ],
+  "val_none": [
+    "无"
+  ],
+  "val_empty": [
+    "暂无"
+  ],
+  "val_exp_gain": [
+    "+{gain}（当前 {cur}）"
+  ],
+  "val_tuition_wasted": [
+    "-{amount} 元（打水漂）"
+  ],
+  "val_tuition_each": [
+    "{cost} 元/门"
+  ],
+  "foot_year_bonus": [
+    "每年限领一次，好好表现明年拿更多"
+  ],
+  "foot_skill": [
+    "技能越多，加班收益和晋升成功率越高"
+  ],
+  "text_year_bonus": [
+    "{title}！年终奖 +{amount} 元。{line}"
+  ],
+  "text_skill_ok": [
+    "学会「{skill}」！{line}"
+  ],
+  "text_skill_fail": [
+    "学习失败：{line}"
+  ],
+  "text_my_skills": [
+    "已掌握技能：{owned}｜可学：{learnable}"
+  ],
+  "kind_year_bonus": [
+    "年终奖"
+  ],
+  "kind_skill_tuition": [
+    "技能学费"
+  ]
+}

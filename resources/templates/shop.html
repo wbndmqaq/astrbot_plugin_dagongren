@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { display: inline-block; }
+body { font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  background:linear-gradient(150deg,#141a2e 0%,#1b2440 55%,#122a47 100%);
+  width:700px; padding:26px; color:#e8ecf7; display:inline-block; }
+h1 { text-align:center; font-size:26px; color:#ffd86f; letter-spacing:3px; margin-bottom:4px; }
+.sub { text-align:center; color:#8a93b5; font-size:13px; margin-bottom:15px; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.item { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09);
+  border-radius:12px; padding:12px 14px; display:flex; gap:11px; align-items:center; }
+.no { width:30px; height:30px; border-radius:50%; flex-shrink:0;
+  background:linear-gradient(135deg,#ffd86f,#fc6262); color:#141a2e;
+  display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:14px; }
+.info { flex:1; min-width:0; }
+.info .nm { font-size:15px; font-weight:bold; }
+.info .eff { font-size:12.5px; color:#6fe08c; margin-top:2px; }
+.info .desc { font-size:12px; color:#8a93b5; margin-top:3px; line-height:1.45; }
+.price { color:#ffd86f; font-weight:bold; white-space:nowrap; font-size:16px; }
+
+</style>
+</head>
+<body>
+  <h1>🛒 {{ t.shop_title }}</h1>
+  <div class="sub">{{ t.shop_buy_hint }}</div>
+  <div class="grid">
+    {% for it in items %}
+    <div class="item">
+      <div class="no">{{ it.id }}</div>
+      <div class="info">
+        <div class="nm">{{ it.name }}</div>
+        <div class="eff">{{ it.effect }}</div>
+        <div class="desc">{{ it.desc }}</div>
+      </div>
+      <div class="price">{{ it.price }}{{ t.yuan }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

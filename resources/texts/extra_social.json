@@ -1,0 +1,129 @@
+{
+  "self_social": [
+    "和自己社交？先学会和自己相处吧"
+  ],
+  "not_in_game_social": [
+    "社交不起来"
+  ],
+  "cooldown": [
+    "社交频率太高会显得刻意：剩余 {remaining}"
+  ],
+  "cost_short": [
+    "请喝奶茶要 {cost} 元，余额不足"
+  ],
+  "event": [
+    "{nickname} 和 {target} 搞好了关系（人脉+{gain}）"
+  ],
+  "side_maxed": [
+    "副业已经满级了（工作室级别），不能再升了"
+  ],
+  "side_upgrade_short": [
+    "升级副业需要 {cost} 元（当前 Lv.{lvl}→Lv.{next}），余额不足"
+  ],
+  "annual_unemployed": [
+    "失业人士没有年假一说"
+  ],
+  "annual_used": [
+    "今年的年假已经用完了，明年职级越高年假越多"
+  ],
+  "gossip_few": [
+    "群里的打工人太少了，八卦都编不出来"
+  ],
+  "gossip_empty": [
+    "今天办公室风平浪静，没有任何八卦。"
+  ],
+  "titles": {
+    "title_social_ok": "社交成功",
+    "title_social_fail": "社交翻车",
+    "title_side_up": "副业升级",
+    "title_annual_leave": "年假开始！",
+    "title_gossip": "职场八卦速递"
+  },
+  "lbl_tea_money": [
+    "奶茶钱"
+  ],
+  "lbl_social_pts": [
+    "人脉值"
+  ],
+  "lbl_mind": [
+    "精神"
+  ],
+  "lbl_health": [
+    "健康"
+  ],
+  "lbl_upgrade_cost": [
+    "升级费用"
+  ],
+  "lbl_cur_level": [
+    "当前等级"
+  ],
+  "lbl_stall_bonus": [
+    "摆摊收益加成"
+  ],
+  "lbl_annual_left": [
+    "剩余年假"
+  ],
+  "lbl_note": [
+    "注意"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_target_reward": [
+    "（TA 也赚了 {amount}）"
+  ],
+  "val_gain_cur": [
+    "+{gain}（当前 {cur}）"
+  ],
+  "val_mind_down": [
+    "-3（当前 {cur}）"
+  ],
+  "val_side_title_fallback": [
+    "副业 Lv.{lvl}"
+  ],
+  "val_level_name": [
+    "Lv.{lvl} {name}"
+  ],
+  "val_pct_plus": [
+    "+{pct}%"
+  ],
+  "val_days": [
+    "{days} 天"
+  ],
+  "val_annual_note": [
+    "年假会中断连续出勤"
+  ],
+  "foot_social": [
+    "人脉值越高，职场社交事件触发率越高"
+  ],
+  "foot_gossip": [
+    "八卦纯属娱乐，请勿对号入座"
+  ],
+  "text_social_ok": [
+    "和 {name} 社交成功！人脉 +{gain}"
+  ],
+  "text_social_fail": [
+    "社交翻车：{line}"
+  ],
+  "text_side_up": [
+    "副业升级到 Lv.{lvl}！摆摊收益将提升"
+  ],
+  "text_annual": [
+    "年假开始！剩余 {days} 天。{line}"
+  ],
+  "text_gossip": [
+    "【职场八卦】{gossip}"
+  ],
+  "err_social_usage": [
+    "请@要社交的群友"
+  ],
+  "kind_social": [
+    "社交"
+  ],
+  "kind_social_reward": [
+    "社交打赏"
+  ],
+  "tx_social_reward_note": [
+    "{name} 请你喝了杯咖啡"
+  ]
+}

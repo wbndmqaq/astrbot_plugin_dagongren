@@ -1,0 +1,109 @@
+{
+  "err_no_kw": [
+    "想买什么？例如：「#购买 红牛」或「#购买 3」，发送「#商店」查看货架"
+  ],
+  "err_multi_match": [
+    "「{kw}」匹配到多个道具：{names}，请发更精确的名称"
+  ],
+  "err_not_in_shop": [
+    "店里没有「{kw}」这个东西，发送「#商店」看看货架吧"
+  ],
+  "err_balance_short": [
+    "{name}售价 {price} 元，余额不足"
+  ],
+  "err_bag_empty": [
+    "你的背包空空如也，发送「#商店」去采购些职场道具卡吧！"
+  ],
+  "err_use_none": [
+    "请指定要使用的道具名，例如：「#使用 咖啡续命包」，发送「#我的背包」查看持有道具"
+  ],
+  "err_use_not_have": [
+    "背包里没有可用道具「{name}」，发送「#我的背包」确认"
+  ],
+  "use_fallback": [
+    "已使用「{name}」。"
+  ],
+  "titles": {
+    "title_shop_buy": "已购入",
+    "title_my_bag": "的职场道具包",
+    "title_use_item": "使用道具"
+  },
+  "unknown_item": [
+    "未知道具"
+  ],
+  "lbl_cost": [
+    "花费"
+  ],
+  "lbl_effect": [
+    "效果"
+  ],
+  "lbl_health": [
+    "健康"
+  ],
+  "lbl_mind": [
+    "精神"
+  ],
+  "lbl_item_state": [
+    "道具状态"
+  ],
+  "lbl_item_left": [
+    "剩余数量"
+  ],
+  "lbl_health_mind": [
+    "健康/精神"
+  ],
+  "val_card_tag": [
+    "【功能道具卡】"
+  ],
+  "val_card_stored": [
+    "已放入背包（发送「#我的背包」或「#使用 道具名」）"
+  ],
+  "val_health_delta": [
+    "健康{delta}"
+  ],
+  "val_mind_delta": [
+    "精神{delta}"
+  ],
+  "val_none": [
+    "无"
+  ],
+  "val_no_news": [
+    "暂无"
+  ],
+  "val_minus_yuan": [
+    "-{amount} 元"
+  ],
+  "val_status_100": [
+    "{cur} / 100"
+  ],
+  "val_consumed_one": [
+    "已消耗 1 件"
+  ],
+  "val_count_pieces": [
+    "{count} 件"
+  ],
+  "val_health_mind": [
+    "{health} / {mind}"
+  ],
+  "val_shop_item": [
+    "{id}.{name} {price}元({effect})"
+  ],
+  "lines_bag_item": [
+    "{name} x{cnt} ({desc})"
+  ],
+  "foot_my_bag": [
+    "使用方法：发送「#使用 道具名」即可消耗并生效"
+  ],
+  "text_shop": [
+    "商店：{list}"
+  ],
+  "text_shop_buy": [
+    "购买 {name} 成功（-{price} 元）：{desc}"
+  ],
+  "text_my_bag": [
+    "🎒 我的背包：\n{list}"
+  ],
+  "text_use_item": [
+    "使用「{name}」成功：{lines}"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "set_title_usage": [
+    "请输入要佩戴的称号名称，例如：「#佩戴称号 全勤劳模」，发送「#我的成就」查看已解锁称号"
+  ],
+  "title_not_found": [
+    "未找到称号「{name}」，发送「#我的成就」查看列表"
+  ],
+  "title_locked": [
+    "称号【{name}】尚未解锁：{desc}"
+  ],
+  "titles": {
+    "title_achievements": "的职场成就",
+    "title_title_set": "称号佩戴成功",
+    "title_title_unset": "已卸下称号"
+  },
+  "val_unlocked": [
+    "✅ [已解锁]"
+  ],
+  "val_locked": [
+    "🔒 [未达成]"
+  ],
+  "val_equipped": [
+    " 🎖️(已佩戴)"
+  ],
+  "line_achievement": [
+    "{status} 【{name}】{equipped}：{desc}"
+  ],
+  "val_no_title": [
+    "暂无佩戴"
+  ],
+  "lbl_cur_title": [
+    "当前称号"
+  ],
+  "lbl_progress": [
+    "解锁进度"
+  ],
+  "val_progress": [
+    "{unlocked} / {total}"
+  ],
+  "foot_achievements": [
+    "发送「#佩戴称号 称号名」或「#卸下称号」佩戴展示"
+  ],
+  "text_achievements": [
+    "🎖️ 我的成就 ({unlocked}/{total})，当前称号：{title}\n"
+  ],
+  "line_title_set": [
+    "已成功佩戴专属职场头衔：【{name}】！将在个人名片与对决中展示。"
+  ],
+  "lbl_cur_headline": [
+    "当前头衔"
+  ],
+  "val_cur_headline": [
+    "🎖️ {name}"
+  ],
+  "lbl_ach_desc": [
+    "成就描述"
+  ],
+  "text_title_set": [
+    "✨ 成功佩戴称号【{name}】！"
+  ],
+  "line_title_unset": [
+    "已恢复默认低调打工人身份。"
+  ],
+  "text_title_unset": [
+    "🍃 已卸下称号头衔，回归低调打工生活。"
+  ]
+}

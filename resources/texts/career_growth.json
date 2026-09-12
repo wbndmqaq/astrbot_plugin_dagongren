@@ -1,0 +1,193 @@
+{
+  "err_unemployed_promote": [
+    "失业状态无法晋升，先找工作吧"
+  ],
+  "err_top": [
+    "你已经是最高的「{top_title}」，再升就要收购公司了"
+  ],
+  "err_need_exp": [
+    "晋升到「{title}」需要 {need} 点经验，当前 {exp}，多上班多加班攒经验吧"
+  ],
+  "err_pay_short": [
+    "请部门喝奶茶（晋升打点费）需要 {cost} 元，余额不足"
+  ],
+  "event_promote": [
+    "{name} 晋升为「{title}」，月薪 {salary}"
+  ],
+  "text_promote_ok": [
+    "晋升成功！现在是「{title}」，月薪 {salary} 元"
+  ],
+  "text_promote_fail": [
+    "晋升失败（成功率 {rate}%）：{line}"
+  ],
+  "err_unemployed_negotiate": [
+    "和谁谈？先找到一份工作再说"
+  ],
+  "err_negotiate_cd": [
+    "刚谈崩没多久，别急着再进办公室：剩余 {remaining}"
+  ],
+  "event_negotiate_ok": [
+    "{name} 谈薪成功，月薪 {old} -> {new}"
+  ],
+  "text_negotiate_ok": [
+    "加薪成功！月薪 {old} -> {new} 元"
+  ],
+  "text_negotiate_fail": [
+    "加薪失败（成功率{rate}%）：{line}"
+  ],
+  "unemployed_line1": [
+    "插件里有 {n_comp} 家公司在招人：从快餐店到宇宙大厂。"
+  ],
+  "unemployed_line2": [
+    "经验越高，能面进门槛越高的公司，月薪也越高。"
+  ],
+  "unemployed_text": [
+    "你目前失业中。发送「#找工作」开始求职（{n_comp} 家公司可选，门槛看经验）"
+  ],
+  "comp_desc": [
+    "公司简介：{desc}"
+  ],
+  "comp_perk": [
+    "今日员工福利：{perk}"
+  ],
+  "today_checked": [
+    "今天已打卡 ✓"
+  ],
+  "today_not_checked": [
+    "今天还没打卡，日薪约 {pay} 元"
+  ],
+  "checked_mark": [
+    "今日已打卡"
+  ],
+  "not_checked_mark": [
+    "今日未打卡"
+  ],
+  "text_employed": [
+    "当前雇主：{comp}（{pos}，月薪 {salary} 元）｜{check_status}"
+  ],
+  "titles": {
+    "title_promote_ok": "恭喜晋升",
+    "title_promote_fail": "晋升失败",
+    "title_negotiate_ok": "加薪谈判成功！",
+    "title_negotiate_fail": "谈判失败",
+    "title_unemployed": "你目前处于失业状态",
+    "title_my_company": "我的公司"
+  },
+  "fallback_top_position": [
+    "最高职级"
+  ],
+  "lbl_bribe_cost": [
+    "打点费"
+  ],
+  "val_bribe_cost": [
+    "-{cost} 元"
+  ],
+  "lbl_new_salary": [
+    "新月薪"
+  ],
+  "val_new_salary": [
+    "{salary} 元"
+  ],
+  "lbl_next_promote": [
+    "下次晋升"
+  ],
+  "val_next_promote_need": [
+    "需 {need} 经验"
+  ],
+  "val_next_promote_peak": [
+    "已是巅峰"
+  ],
+  "lbl_success_rate": [
+    "本次成功率"
+  ],
+  "val_success_rate": [
+    "{rate}%"
+  ],
+  "lbl_bribe_refund": [
+    "打点费（退 {rate}%）"
+  ],
+  "lbl_mind": [
+    "精神"
+  ],
+  "val_mind_100": [
+    "{mind} / 100"
+  ],
+  "lbl_salary_change": [
+    "月薪变化"
+  ],
+  "val_salary_change": [
+    "{old} -> {new}（+{gain}）"
+  ],
+  "val_mind_up6": [
+    "+6（当前 {mind}）"
+  ],
+  "foot_negotiate_ok": [
+    "在「{comp}」的底气又足了一分"
+  ],
+  "val_mind_down8": [
+    "-8（当前 {mind}）"
+  ],
+  "lbl_advice": [
+    "建议"
+  ],
+  "val_negotiate_advice": [
+    "多攒经验多加班，下次带着成绩单再去"
+  ],
+  "foot_unemployed": [
+    "发送「#找工作」投递简历；发送「#我的简历」查看自身条件"
+  ],
+  "perk_none": [
+    "暂无"
+  ],
+  "lbl_company": [
+    "公司"
+  ],
+  "val_company": [
+    "{name}（{tag}）"
+  ],
+  "lbl_your_position": [
+    "你的职位"
+  ],
+  "val_your_position": [
+    "{title}｜月薪 {salary} 元"
+  ],
+  "lbl_intensity": [
+    "工作强度"
+  ],
+  "val_intensity": [
+    "每日健康 -{hp}"
+  ],
+  "lbl_layoff_risk": [
+    "裁员风险"
+  ],
+  "val_layoff_risk": [
+    "{risk}%/天"
+  ],
+  "lbl_attend_streak": [
+    "连续出勤"
+  ],
+  "val_attend_streak_bonus": [
+    "{days} 天（有全勤加成）"
+  ],
+  "lbl_commute": [
+    "通勤"
+  ],
+  "val_commute_detail": [
+    "{mode} 单程 {cost} 元｜迟到率 {late}%"
+  ],
+  "lbl_promote_target": [
+    "晋升目标"
+  ],
+  "val_promote_target": [
+    "{title}（需 {need} 经验 + {cost} 打点费）"
+  ],
+  "foot_my_company": [
+    "日常：上班 / 加班 / 摸鱼 / 写周报 · 进阶：晋升 / 谈薪 / 跳槽 / 辞职"
+  ],
+  "kind_promote": [
+    "晋升"
+  ],
+  "kind_raise": [
+    "加薪"
+  ]
+}

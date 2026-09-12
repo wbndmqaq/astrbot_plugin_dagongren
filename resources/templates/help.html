@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box }
+html { display: inline-block; }
+body {
+  font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  background:linear-gradient(150deg,#141a2e 0%,#1b2440 55%,#122a47 100%);
+  width:720px; padding:26px; color:#e8ecf7;
+  display:inline-block;
+}
+.header { text-align:center; margin-bottom:18px }
+.header h1 {
+  font-size:32px; letter-spacing:4px;
+  background:linear-gradient(90deg,#ffd86f,#fc6262);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.header .s { color:#8a93b5; font-size:12.5px; margin-top:6px; line-height:1.7 }
+.card {
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:14px; padding:15px 18px; margin-bottom:11px;
+}
+.card h2 {
+  font-size:17.5px; color:#ffd86f; margin-bottom:9px;
+  border-left:4px solid #fc6262; padding-left:10px;
+}
+table { width:100%; border-collapse:collapse }
+td { padding:5px 4px; font-size:14.5px; vertical-align:top; line-height:1.55 }
+td.cmd { color:#7fd1ff; white-space:nowrap; font-weight:bold; width:44% }
+td.desc { color:#c9cede }
+.footer {
+  text-align:center; color:#8a93b5; font-size:12.5px;
+  margin-top:8px; line-height:1.8;
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>🏢 {{ t.help_title }}</h1>
+  </div>
+
+{% for section in sections %}
+  <div class="card">
+    <h2>{{ section.icon }} {{ section.title }}</h2>
+    <table>
+      {% for cmd in section.commands %}
+      <tr><td class="cmd">{{ cmd.usage }}</td><td class="desc">{{ cmd.desc }}</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endfor %}
+
+  <div class="footer">
+    {{ t.help_total_prefix }} {{ total_cmds }} {{ t.help_total_mid }} {{ t.sep }} {{ company_count }} {{ t.help_company_suffix }}{% if webui_port %} {{ t.sep }} WebUI {{ t.help_port_label }} {{ webui_port }}{% endif %}<br>
+    {{ plugin_version }} {{ t.sep }} AstrBot {{ astrbot_version }}
+  </div>
+</body>
+</html>

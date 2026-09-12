@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { display: inline-block; }
+body { font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  background:linear-gradient(150deg,#1c1220 0%,#2a1830 50%,#141a2e 100%);
+  width:700px; padding:26px; color:#e8ecf7; display:inline-block; }
+.vs { display:flex; align-items:center; justify-content:center; gap:20px; margin-bottom:16px; }
+.fighter { text-align:center; background:rgba(255,255,255,.06); border-radius:14px;
+  padding:14px 22px; min-width:170px; border:1px solid rgba(255,255,255,.09); }
+.fighter .avwrap { width:64px; height:64px; margin:0 auto 8px; }
+.fighter img { width:64px; height:64px; border-radius:50%; object-fit:cover; border:2px solid #ffd86f; }
+.avf { width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,#fc6262,#ffd86f);
+  display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:bold; color:#1a1a2e; }
+.fighter .nm { font-weight:bold; font-size:16px; word-break:break-all; }
+.vstag { font-size:30px; color:#fc6262; font-weight:900; letter-spacing:3px; }
+.process { display:flex; flex-direction:column; gap:8px; margin-bottom:15px; }
+.round { background:rgba(255,255,255,.05); border-left:3px solid #7fd1ff;
+  border-radius:8px; padding:9px 13px; font-size:14.5px; line-height:1.5; }
+.result { background:{% if win %}rgba(111,224,140,.10){% else %}rgba(252,98,98,.10){% endif %};
+  border:1px solid {% if win %}rgba(111,224,140,.35){% else %}rgba(252,98,98,.35){% endif %};
+  border-radius:12px; padding:12px 16px; margin-bottom:13px; }
+.result h2 { font-size:19px; color:{% if win %}#6fe08c{% else %}#fc6262{% endif %}; }
+.result p { font-size:14px; color:#dfe4f2; margin-top:4px; line-height:1.5; }
+.blocks { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
+.kv { background:rgba(255,255,255,.04); border-radius:9px; padding:7px 11px; }
+.kv .lab { color:#8a93b5; font-size:11.5px; }
+.kv .val { color:#eef2ff; font-size:14.5px; font-weight:bold; margin-top:2px; word-break:break-all; }
+
+</style>
+</head>
+<body>
+  <div class="vs">
+    <div class="fighter">
+      <div class="avwrap">{% if a and a.avatar %}<img src="{{ a.avatar }}" alt="" onerror="this.remove()">{% elif a and a.name %}<div class="avf">{{ a.name[:1] }}</div>{% else %}<div class="avf">?</div>{% endif %}</div>
+      <div class="nm">{{ a.name if a and a.name else t.duel_fallback_a }}</div>
+    </div>
+    <div class="vstag">VS</div>
+    <div class="fighter">
+      <div class="avwrap">{% if b and b.avatar %}<img src="{{ b.avatar }}" alt="" onerror="this.remove()">{% elif b and b.name %}<div class="avf">{{ b.name[:1] }}</div>{% else %}<div class="avf">?</div>{% endif %}</div>
+      <div class="nm">{{ b.name if b and b.name else t.duel_fallback_b }}</div>
+    </div>
+  </div>
+
+  <div class="process">
+    {% for l in process or [] %}<div class="round">{{ t.duel_round_prefix }}{{ loop.index }}{{ t.duel_round_suffix }}{{ l }}</div>{% endfor %}
+  </div>
+
+  <div class="result">
+    <h2>{% if win %}🏆 {{ winner or t.duel_win_fallback }} {{ t.duel_win_suffix }}{% else %}💔 {{ winner or t.duel_lose_fallback }} {{ t.duel_lose_suffix }}{% endif %}</h2>
+    <p>{{ result_line or '' }}</p>
+  </div>
+
+  <div class="blocks">
+    {% for b in blocks or [] %}
+    <div class="kv"><div class="lab">{{ b.label }}</div><div class="val">{{ b.value }}</div></div>
+    {% endfor %}
+  </div>
+</body>
+</html>
