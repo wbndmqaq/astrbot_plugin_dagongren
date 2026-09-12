@@ -16,8 +16,6 @@ AstrBot 大型群聊职场生存模拟插件。以「上班族的现实」为主
 - 🌐 独立端口 **WebUI** 面板（**aiohttp** 实现，支持密码登录与全量管理，桌面/手机自适应）
 - 🔌 适配 **OneBot v11** 与 **QQ 官方机器人**（仅用文本/图片/@ 组件）
 - ⚡ 全链路异步：所有 SQLite / 文件 / 密码哈希调用一律 `asyncio.to_thread`，事件循环不被阻塞
-- 🧪 自带 pytest：`python -m pytest tests/`（513 项）覆盖纯函数、存储层事务、资源 / 配置一致性与历史缺陷回归。
-  pytest 只在开发时需要，**不在** `requirements.txt` 里，请自行 `pip install pytest`
 
 ### 📦 环境要求
 
