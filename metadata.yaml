@@ -1,16 +1,5 @@
-name: astrbot_plugin_shangbanzu
-desc: |
-  打工人·上班族物语 —— 大型群聊职场生存模拟游戏。
-
-  以「上班族的现实」为主题：入职公司、每日打卡领工资（通勤+五险一金+迟到判定）、
-  摸鱼被抓、加班住院还能攒调休券、被裁员拿补偿、写周报评绩效、
-  和领导谈加薪、挤地铁通勤、交房租、吃外卖、买基金绿到发光、
-  买股票追涨杀跌、团建购物两不误、攒够公积金全款买房安家；
-  玩家之间方案评审式对线撕逼，亲自出战卷王大赛冲击「传奇卷王」段位。
-
-  提示：95 条指令全部走 @filter.regex 正则（为了支持「#」前缀免唤醒与同名别名），
-  因此不会出现在 AstrBot 的「指令管理」面板里，也无法在面板中单独停用/改名/配权限；
-  冲突只能靠改 resources/data 与 handlers 里的正则自行避让。
+name: astrbot_plugin_dagongren
+desc: 打工人·上班族物语 —— 大型群聊职场生存模拟游戏。
 version: 1.0.0
 author: wbndmqaq
 social_link: https://github.com/wbndmqaq
