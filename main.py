@@ -52,7 +52,7 @@ from .handlers import ALL_ROUTES, install
 from .webui.server import WebUIServer
 
 PLUGIN_NAME = "astrbot_plugin_shangbanzu"
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 
 class Shangbanzu(Star):
