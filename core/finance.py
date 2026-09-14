@@ -57,6 +57,19 @@ def _credit_interest(p, gained: float):
     p["last_interest"] = logic.now_ts()
 
 
+async def _record_interest_tx(db, gid, uid, settled: float):
+    """自动结息入账写流水（金额 0 时不记）。
+
+    存/取款成功路径上会无条件调用本函数（此时 settled 可能为 0），因此内部
+    要自行跳过 0，调用方不必重复判断。文案与 #收利息 手动领息同源，保证
+    #工资条 的「累计总收入」与「收支流水」两个口径一致。
+    """
+    if settled > 0:
+        await asyncio.to_thread(
+            db.add_transaction, gid, uid, _t("kind_interest"), settled, _t("tx_interest_note")
+        )
+
+
 def _accrue_interest(p, cfg=None) -> float:
     """结清「按旧余额算到现在」的利息并重置计息起点，返回入账金额。
 
@@ -90,6 +103,7 @@ async def deposit(db, gid, uid, amount, cfg, nickname=""):
     if amt > float(p["cash"]):
         if settled > 0:  # 结息已发生，即使存不成也要落库
             await asyncio.to_thread(db.save_player, p)
+            await _record_interest_tx(db, gid, uid, settled)
         settled_note = _t("settled_note", {"settled": _fmt(settled)}) if settled > 0 else ""
         return R(
             err=_t("deposit_cash_short", {"cash": _fmt(p["cash"]), "settled_note": settled_note})
@@ -98,10 +112,12 @@ async def deposit(db, gid, uid, amount, cfg, nickname=""):
     if amt > space:
         if settled > 0:
             await asyncio.to_thread(db.save_player, p)
+            await _record_interest_tx(db, gid, uid, settled)
         return R(err=_t("deposit_limit", {"limit": _fmt(p["bank_limit"]), "space": _fmt(space)}))
     p["cash"] = round(float(p["cash"]) - amt, 2)
     p["deposit"] = round(float(p["deposit"]) + amt, 2)
     await asyncio.to_thread(db.save_player, p)
+    await _record_interest_tx(db, gid, uid, settled)
     return R(
         tmpl="panel",
         data={
@@ -148,6 +164,7 @@ async def deposit_all(db, gid, uid, cfg, nickname=""):
         # 只结了息、没有可存的现金：结息结果仍要落库
         if settled > 0:
             await asyncio.to_thread(db.save_player, p)
+            await _record_interest_tx(db, gid, uid, settled)
             return R(
                 tmpl="panel",
                 data={
@@ -176,6 +193,7 @@ async def deposit_all(db, gid, uid, cfg, nickname=""):
     if amt > space:
         if settled > 0:  # 结息已发生，必须落库，不能因为存不下就丢掉
             await asyncio.to_thread(db.save_player, p)
+            await _record_interest_tx(db, gid, uid, settled)
         return R(
             err=_t(
                 "deposit_all_limit",
@@ -185,6 +203,7 @@ async def deposit_all(db, gid, uid, cfg, nickname=""):
     p["cash"] = 0.0
     p["deposit"] = round(float(p["deposit"]) + amt, 2)
     await asyncio.to_thread(db.save_player, p)
+    await _record_interest_tx(db, gid, uid, settled)
     return R(
         tmpl="panel",
         data={
@@ -218,6 +237,7 @@ async def withdraw(db, gid, uid, amount, cfg, nickname=""):
     p["cash"] = round(float(p["cash"]) + amt, 2)
     p["deposit"] = round(float(p["deposit"]) - amt, 2)
     await asyncio.to_thread(db.save_player, p)
+    await _record_interest_tx(db, gid, uid, settled)
     return R(
         tmpl="panel",
         data={

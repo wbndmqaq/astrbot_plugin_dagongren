@@ -1,0 +1,14 @@
+{
+  "certs": [
+    { "name": "PMP", "cost": 3000, "exp": 30 },
+    { "name": "CPA", "cost": 5000, "exp": 30 },
+    { "name": "法考", "cost": 4000, "exp": 30 },
+    { "name": "CFA", "cost": 6000, "exp": 30 },
+    { "name": "软考高级", "cost": 2000, "exp": 25 },
+    { "name": "注册会计师", "cost": 5500, "exp": 35 },
+    { "name": "精算师", "cost": 8000, "exp": 40 },
+    { "name": "一级建造师", "cost": 3500, "exp": 28 },
+    { "name": "心理咨询师", "cost": 2500, "exp": 22 },
+    { "name": "数据分析师", "cost": 4500, "exp": 32 }
+  ]
+}

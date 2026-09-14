@@ -45,9 +45,6 @@ class GameCtx:
         except Exception:  # noqa: BLE001, S110 - 同上
             pass
 
-    def avatar(self, uid) -> str:
-        return logic.avatar_of(uid, self.app_id)
-
     def c(self, key, default=None):
         return logic.cfg_get(self.config, key, default)
 
@@ -65,28 +62,6 @@ class GameCtx:
     def log_error(where: str, exc: BaseException):
         """路由兜底异常：带堆栈落日志，用户侧只看到一句友好提示。"""
         logger.error(f"[上班族物语] 指令 {where} 执行异常：{exc}", exc_info=True)
-
-    def nick(self, event, uid=None):
-        """同步版本：仅从内存缓存/消息事件取昵称，绝不落 DB（避免阻塞事件循环）。
-
-        需要读数据库的调用方请改用 await self.anick(event, uid)。
-        """
-        uid = str(uid) if uid else str(event.get_sender_id())
-        gid = event.get_group_id()
-        if gid:
-            hit = self._card_cache.get((str(gid), uid))
-            if hit and hit[1]:
-                return hit[1]
-        name = ""
-        if uid == str(event.get_sender_id()):
-            name = event.get_sender_name() or ""
-        if not name:
-            for comp in event.get_messages():
-                if isinstance(comp, Comp.At) and str(comp.qq) == uid:
-                    name = getattr(comp, "name", "") or ""
-                    if name:
-                        break
-        return name or f"用户{uid}"
 
     async def anick(self, event, uid=None):
         """异步版本：内存缓存 → 线程化 DB（昵称/群名片）→ 事件提取兜底。"""
@@ -111,7 +86,7 @@ class GameCtx:
                     name = getattr(comp, "name", "") or ""
                     if name:
                         break
-        return name or f"用户{uid}"
+        return name or logic.unknown_user(uid)
 
     @staticmethod
     def ats(event) -> list[str]:
@@ -169,13 +144,6 @@ class GameCtx:
             s = s.replace(w, " ")
         parts = s.replace("#", " ").replace("＃", " ").split()
         return parts[0] if parts else ""
-
-    def target(self, event, words: tuple[str, ...]):
-        ats = self.ats(event)
-        if ats:
-            return ats[0]
-        nums = self.nums(event, words)
-        return nums[0] if nums else ""
 
     async def render(self, template, data):
         return await self.star._render(template, data)

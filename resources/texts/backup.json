@@ -9,7 +9,7 @@
   "lbl_name": ["备份名称"],
   "lbl_size": ["大小"],
   "lbl_location": ["位置"],
-  "val_backup_location": ["data/plugin_data/astrbot_plugin_shangbanzu/backups/"],
+  "val_backup_location": ["data/plugin_data/astrbot_plugin_dagongren/backups/"],
   "lbl_restore_way": ["恢复方式"],
   "restore_way_val": ["恢复备份 {name}"],
   "foot_create": ["备份为 SQLite 在线快照，可在运行时安全创建；仅保留最新 {max_keep} 个"],

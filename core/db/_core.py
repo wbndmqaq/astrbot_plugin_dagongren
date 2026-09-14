@@ -10,8 +10,10 @@ from ._const import (
     DEFAULTS,
     DELTA_FLOAT_COLUMNS,
     DELTA_INT_COLUMNS,
+    LEGACY_JSON_COLUMNS,
     MIN_REAL_TIMESTAMP,
     MONEY_GUARD_COLUMNS,
+    PLAYER_COLUMN_DDL,
     SCHEMA,
     SCHEMA_CONSTRAINTS,
     SCHEMA_INDEXES,
@@ -57,9 +59,9 @@ class _CoreMixin:
             with _write_lock:
                 conn.executescript(SCHEMA)
                 conn.commit()
-            # 索引与唯一约束都在建表之后单独执行：它们引用 players 的 value /
-            # rank_score 等列，塞进 SCHEMA 那段建表脚本里一旦失败会中止整个
-            # executescript（一条索引出错连建表都保不住）。
+            self._migrate(conn)
+            # 索引必须在补列之后建：idx_players_value 等引用的是 _migrate 才补上的
+            # 列，先建会在老库上 "no such column"。
             with _write_lock:
                 try:
                     conn.executescript(SCHEMA_INDEXES)
@@ -85,6 +87,98 @@ class _CoreMixin:
                         )
         finally:
             conn.close()
+
+    def _migrate(self, conn: sqlite3.Connection):
+        """把已有库补齐到当前 schema。
+
+        SCHEMA 里全是 CREATE TABLE IF NOT EXISTS，所以【新表】会自动建好，但
+        players 表一旦存在就再也不会被改动——给玩家加一个字段后，老库的每一次
+        save_player 都会 "no such column"，而症状只是「指令执行异常」，完全指不到
+        schema。所以这里显式对比列集并补 ALTER TABLE ADD COLUMN。
+
+        幂等：每次都重新读 PRAGMA table_info，已存在的列不会被再加一次。
+        """
+        # init() 里的 executescript 建表失败会直接抛出，所以这里 players 表一定存在
+        have = {r["name"] for r in conn.execute("PRAGMA table_info(players)")}
+        missing = [c for c in COLUMNS if c not in have]
+        if missing:
+            added = []
+            with _write_lock:
+                for col in missing:
+                    ddl = PLAYER_COLUMN_DDL.get(col)
+                    if not ddl:  # _const 的导入期断言已挡住，这里只是双保险
+                        logger.error(
+                            f"[上班族物语] 列 {col} 在 COLUMNS 里但 SCHEMA 没定义，无法迁移"
+                        )
+                        continue
+                    conn.execute(f"ALTER TABLE players ADD COLUMN {col} {ddl}")
+                    added.append(col)
+                conn.commit()
+            if added:  # 只报真正加上的，别把跳过的也算进去
+                logger.info(
+                    f"[上班族物语] 数据库已升级：players 表补齐 {len(added)} 个字段"
+                    f"（{', '.join(added)}）"
+                )
+        # v1 的 players.items/skills/cds JSON 列 → v2 的三张子表。
+        # 判据是「老列还在且内容非空」；搬完把那些行的老列清成空串，所以第二次
+        # init 就匹配不到了（幂等）。注意 _save_children 是全量替换，因此这条
+        # 路径只适用于「子表还没有数据」的 v1→v2 首次升级。
+        legacy = [c for c in LEGACY_JSON_COLUMNS if c in have]
+        if legacy:
+            self._migrate_legacy_json(conn, legacy)
+
+    def _migrate_legacy_json(self, conn: sqlite3.Connection, legacy: list[str]):
+        """把 v1 的 JSON 列内容搬进 player_items / player_skills / player_cds。"""
+        cols = ",".join(legacy)
+        # 空串 / '{}' / '[]' 都算「没有内容」，搬完的行会被清成空串因此不会重复搬
+        empty = "('', '{}', '[]')"
+        where = " OR ".join(f"COALESCE({c},'') NOT IN {empty}" for c in legacy)
+        moved = 0
+        skipped = 0
+        migrated_keys: list[tuple[str, str]] = []
+        with _write_lock:
+            rows = conn.execute(
+                f"SELECT gid, uid, {cols} FROM players WHERE {where}",  # noqa: S608 - 列名来自本地常量白名单
+            ).fetchall()
+            for row in rows:
+                gid, uid = str(row["gid"]), str(row["uid"])
+                items = self._parse_items(row["items"]) if "items" in legacy else None
+                cds = self._parse_items(row["cds"]) if "cds" in legacy else None
+                skills = self._parse_skills(row["skills"]) if "skills" in legacy else None
+                if not (items or cds or skills):
+                    skipped += 1  # 老列有内容但解析不出东西：坏 JSON
+                    continue
+                self._save_children(conn, gid, uid, items, cds, skills)
+                moved += 1
+                migrated_keys.append((gid, uid))
+            # 只清【真的搬过】的行：解析失败的行保留原始串，运维还有手工抢救的
+            # 余地（一并清掉就只剩一句 warning 了）
+            if migrated_keys:
+                sets = ",".join(f"{c}=''" for c in legacy)
+                conn.executemany(
+                    f"UPDATE players SET {sets} WHERE gid=? AND uid=?",  # noqa: S608 - 列名来自本地常量白名单
+                    migrated_keys,
+                )
+            conn.commit()
+        if moved:
+            logger.info(f"[上班族物语] 数据库已升级：{moved} 名玩家的背包/技能/冷却已迁入子表")
+        if skipped:
+            logger.warning(
+                f"[上班族物语] {skipped} 名玩家的旧 JSON 列无法解析，"
+                "已保留原始内容未迁移（可在 WebUI 导出后手工处理）"
+            )
+
+    def _parse_skills(self, skills) -> list:
+        """把技能列的表示（JSON 字符串 / list / None）归一成 list。"""
+        if isinstance(skills, list):
+            return skills
+        if isinstance(skills, str):
+            try:
+                v = json.loads(skills)
+                return v if isinstance(v, list) else []
+            except json.JSONDecodeError:
+                return []
+        return []
 
     def _conn(self) -> sqlite3.Connection:
         timeout_s = self.busy_timeout / 1000.0

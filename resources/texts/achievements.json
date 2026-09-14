@@ -1,5 +1,5 @@
 {
-  "_comment": "职场成就。metric 为判定口径（attend_streak/net_worth/duel_wins/lvl/has_pet/house_owned），threshold 为达成阈值——阈值在这里，desc 里的数字才不会和行为脱节。",
+  "_comment": "职场成就。metric 为判定口径（attend_streak/net_worth/duel_wins/lvl/has_pet/house_owned/exp/rank_score/social_pts/side_lvl/ot_count/total_earned/value/workstation），threshold 为达成阈值——阈值在这里，desc 里的数字才不会和行为脱节。",
   "items": [
     {
       "id": "work_10",
@@ -42,6 +42,69 @@
       "desc": "全款买下自购小窝",
       "metric": "house_owned",
       "threshold": 1
+    },
+    {
+      "id": "ot_50",
+      "name": "加班狂魔",
+      "desc": "累计加班达到50次",
+      "metric": "ot_count",
+      "threshold": 50
+    },
+    {
+      "id": "exp_500",
+      "name": "经验老道",
+      "desc": "职场经验达到500点",
+      "metric": "exp",
+      "threshold": 500
+    },
+    {
+      "id": "social_100",
+      "name": "社交蝴蝶",
+      "desc": "人脉值达到100",
+      "metric": "social_pts",
+      "threshold": 100
+    },
+    {
+      "id": "side_5",
+      "name": "副业大亨",
+      "desc": "副业等级达到满级5",
+      "metric": "side_lvl",
+      "threshold": 5
+    },
+    {
+      "id": "rank_legend",
+      "name": "传奇卷王",
+      "desc": "卷王段位积分达到2200",
+      "metric": "rank_score",
+      "threshold": 2200
+    },
+    {
+      "id": "earned_500k",
+      "name": "理财达人",
+      "desc": "累计总收入达到50万元",
+      "metric": "total_earned",
+      "threshold": 500000
+    },
+    {
+      "id": "value_50k",
+      "name": "身价暴涨",
+      "desc": "职场身价达到5万元",
+      "metric": "value",
+      "threshold": 50000
+    },
+    {
+      "id": "ws_max",
+      "name": "工位之王",
+      "desc": "工位升级到顶级配置",
+      "metric": "workstation",
+      "threshold": 4
+    },
+    {
+      "id": "work_30",
+      "name": "铁人三项",
+      "desc": "连续出勤达到30天",
+      "metric": "attend_streak",
+      "threshold": 30
     }
   ]
 }

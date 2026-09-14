@@ -9,7 +9,7 @@ from pathlib import Path
 try:  # 允许脱离 AstrBot 的脚本单独导入本模块
     from astrbot.api import logger
 except ImportError:  # pragma: no cover
-    logger = logging.getLogger("shangbanzu.gamedata")
+    logger = logging.getLogger("dagongren.gamedata")
 
 # 自建公司的 players.company 取值 = CUSTOM_BASE + custom_companies.id
 # （编码约定属于存储层，这里只做转发，保证全局单一来源）
@@ -132,8 +132,16 @@ def custom_company(db, cid: int) -> dict | None:
         "intensity": 5.0,
         "risk": 0.01,
         "min_exp": 0,
-        "desc": f"群友自建公司，老板：{cc.get('boss_uid')}",
-        "perks": ["自建福利", "企业分红池"],
+        # 显示文案走 texts（{boss} 占位就地替换），不再硬编码第二份。
+        # 用 replace 而不是 logic.fill：gamedata 是比 logic 更底层的加载层，
+        # 不为一条展示文案引入反向依赖。
+        "desc": s(
+            "career_business", "custom_company_desc", "群友自建公司，老板：{boss}"
+        ).replace("{boss}", str(cc.get("boss_uid") or "")),
+        "perks": [
+            s("career_business", "custom_company_perk_1", "自建福利"),
+            s("career_business", "custom_company_perk_2", "企业分红池"),
+        ],
         "is_custom": True,
         "custom_id": custom_id,
         "boss_uid": str(cc.get("boss_uid") or ""),

@@ -252,7 +252,7 @@ async function loadMeta(){try{var m=await jget("/api/meta");
   document.getElementById("metaVer").textContent=m.version||"—";
   document.getElementById("metaPort").textContent="端口 "+(m.port||17817);
   var fv=document.getElementById("footerVer");
-  if(fv)fv.textContent="astrbot_plugin_shangbanzu "+(m.version||"—");
+  if(fv)fv.textContent="astrbot_plugin_dagongren "+(m.version||"—");
   var lock=document.getElementById("lockBadge");
   if(lock)lock.style.display=m.auth_required?"inline-flex":"none";
   /* 文案库分类清单：登录前 /api/meta 只回最低限度（不带 version/port/清单），
@@ -446,7 +446,10 @@ document.addEventListener("DOMContentLoaded",function(){
   });
 });
 async function saveStkEdits(btn){
-  var codes=Object.keys(stkEdits).filter(function(c){return parseFloat(stkEdits[c])>0});
+  /* 全部脏格子都提交（不过滤非法值）：以前 filter(parseFloat>0) 会把填了
+     NaN/0/负数的格子静默从提交里删掉，运维以为保存了实际没保存。交给后端
+     逐项校验并回 kind="price" 的失败清单，前端如实提示。 */
+  var codes=Object.keys(stkEdits);
   if(!codes.length)return toast("没有改动的价格","warn");
   if(btn){btn.disabled=true;btn.textContent="保存中…"}
   try{
@@ -1330,9 +1333,11 @@ async function loadPlayerList(page){
     if(next)next.disabled=plPage>=plTotal;
     var b=document.getElementById("playerListBody");if(!b)return;
     b.innerHTML=(r.players&&r.players.length)?r.players.map(function(p){
+      /* 数值列同样过 esc()：纵深防御，本文件自己的规则是「后端玩家数据
+         拼 innerHTML 前必须 esc」，这四个字段此前是仅有的漏网之鱼 */
       return '<tr><td>'+esc(p.nickname)+'</td><td>'+esc(p.company)+' · '+esc(p.position)+'</td>'
-        +'<td>'+p.salary+' 元</td><td>'+p.total+' 元</td>'
-        +'<td>'+p.health+'</td><td>'+p.mind+'</td></tr>';
+        +'<td>'+esc(p.salary)+' 元</td><td>'+esc(p.total)+' 元</td>'
+        +'<td>'+esc(p.health)+'</td><td>'+esc(p.mind)+'</td></tr>';
     }).join(""):'<tr><td colspan="6" class="empty-state">无数据</td></tr>';
   }catch(e){
     /* 翻页失败必须出声：此前是空 catch，点「下一页」没反应，看起来像卡住 */

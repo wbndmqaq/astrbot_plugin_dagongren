@@ -51,21 +51,22 @@ from .core.web_auth import hash_password, random_jwt_secret, random_password
 from .handlers import ALL_ROUTES, install
 from .webui.server import WebUIServer
 
-PLUGIN_NAME = "astrbot_plugin_shangbanzu"
-VERSION = "1.0.1"
+PLUGIN_NAME = "astrbot_plugin_dagongren"
+VERSION = "1.0.2"
+METADATA_NAME = "astrbot_plugin_dagongren"
 
 
 class Shangbanzu(Star):
     """🏢 打工人·上班族物语 —— 大型群聊职场生存模拟。
 
     所有指令需带 # 前缀触发（如「#打卡」）；发送「#帮助」查看全部指令。
-    数据与截图存放于 data/plugin_data/astrbot_plugin_shangbanzu/，更新/重装不丢失。
+    数据与截图存放于 data/plugin_data/astrbot_plugin_dagongren/，更新/重装不丢失。
     """
 
     def __init__(self, context: Context, config: AstrBotConfig | None = None):
         super().__init__(context)
         self.config = config or {}
-        self.db = DB(self._data_dir() / "shangbanzu.db", cfg=self.config)
+        self.db = DB(self._data_dir() / "dagongren.db", cfg=self.config)
         self.ctx = GameCtx(self, self.db, self.config)
         self.renderer = PlaywrightRenderer(
             self._data_dir() / "screenshots",
@@ -86,7 +87,7 @@ class Shangbanzu(Star):
         # 每用户指令锁表由 install() 的 handler 闭包 lazy-init 到本实例字段
         self._player_locks = None
         self.backups = BackupManager(
-            self._data_dir() / "shangbanzu.db",
+            self._data_dir() / "dagongren.db",
             self._data_dir() / "backups",
             logger,
             max_keep=int(logic.cfg_get(self.config, "backup_max_keep", 20)),
@@ -369,10 +370,13 @@ class Shangbanzu(Star):
         """
         tx = gd.t("extra3", "daily_push")
         tpl = tx[0] if isinstance(tx, list) and tx and isinstance(tx[0], dict) else {}
-        empty = str(tpl.get("news_empty") or "暂无")
+        # 兜底文案同样外置（extra3.json 顶层）：daily_push 结构被改坏时用，
+        # 正常情况下永远读不到它们
+        empty = str(tpl.get("news_empty") or gd.s("extra3", "news_empty", "暂无"))
         lines = [
             logic.fill(
-                tpl.get("news") or "📰 今日职场早报：{news}",
+                tpl.get("news")
+                or gd.s("extra3", "news", "📰 今日职场早报：{news}"),
                 {"news": gd.news_of_day() or empty},
             )
         ]
@@ -382,12 +386,12 @@ class Shangbanzu(Star):
             downs = sorted((s for s in stocks if s["chg"] < 0), key=lambda s: s["chg"])[:3]
             if ups:
                 lines.append(
-                    str(tpl.get("up") or "📈 领涨：")
+                    str(tpl.get("up") or gd.s("extra3", "up", "📈 领涨："))
                     + " ".join(f"{s['name']} +{s['chg']}%" for s in ups)
                 )
             if downs:
                 lines.append(
-                    str(tpl.get("down") or "📉 领跌：")
+                    str(tpl.get("down") or gd.s("extra3", "down", "📉 领跌："))
                     + " ".join(f"{s['name']} {s['chg']}%" for s in downs)
                 )
         except Exception:  # noqa: BLE001, S110 - 股市摘要失败仅省略该段
@@ -492,7 +496,7 @@ class Shangbanzu(Star):
     # ------------------------------------------------------------------
 
     def _data_dir(self) -> Path:
-        """持久化数据目录：data/plugin_data/astrbot_plugin_shangbanzu/。"""
+        """持久化数据目录：data/plugin_data/astrbot_plugin_dagongren/。"""
         try:
             return StarTools.get_data_dir(PLUGIN_NAME)
         except Exception:  # noqa: BLE001 - 兜底路径，保证任何内核版本都能初始化
@@ -539,7 +543,7 @@ class Shangbanzu(Star):
 
     def _get_version(self) -> str:
         try:
-            meta = self.context.get_registered_star(PLUGIN_NAME)
+            meta = self.context.get_registered_star(METADATA_NAME)
             if meta and meta.version:
                 return meta.version
         except Exception:  # noqa: BLE001, S110 - 元数据不可用时用常量兜底

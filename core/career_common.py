@@ -9,7 +9,7 @@ from . import logic
 try:  # 允许脱离 AstrBot 的脚本/测试单独导入
     from astrbot.api import logger
 except ImportError:  # pragma: no cover
-    logger = logging.getLogger("shangbanzu.career_common")
+    logger = logging.getLogger("dagongren.career_common")
 
 
 class Txs:

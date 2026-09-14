@@ -1,0 +1,25 @@
+{
+  "meals": [
+    {
+      "name": "外卖",
+      "key": "takeout",
+      "cost": 20,
+      "health": 2,
+      "mind": 10
+    },
+    {
+      "name": "食堂",
+      "key": "canteen",
+      "cost": 10,
+      "health": 4,
+      "mind": 3
+    },
+    {
+      "name": "大餐",
+      "key": "feast",
+      "cost": 128,
+      "health": 10,
+      "mind": 25
+    }
+  ]
+}

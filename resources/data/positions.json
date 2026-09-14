@@ -1,0 +1,16 @@
+{
+  "positions": [
+    { "i": 0, "title": "无业游民", "mult": 0.0, "need": 0, "cost": 0 },
+    { "i": 1, "title": "实习生", "mult": 0.6, "need": 0, "cost": 0 },
+    { "i": 2, "title": "试用期员工", "mult": 0.8, "need": 30, "cost": 100 },
+    { "i": 3, "title": "正式员工", "mult": 1.0, "need": 100, "cost": 300 },
+    { "i": 4, "title": "资深员工", "mult": 1.25, "need": 250, "cost": 800 },
+    { "i": 5, "title": "小组长", "mult": 1.5, "need": 500, "cost": 2000 },
+    { "i": 6, "title": "主管", "mult": 1.8, "need": 900, "cost": 5000 },
+    { "i": 7, "title": "经理", "mult": 2.2, "need": 1500, "cost": 12000 },
+    { "i": 8, "title": "高级经理", "mult": 2.6, "need": 2400, "cost": 30000 },
+    { "i": 9, "title": "总监", "mult": 3.2, "need": 3600, "cost": 80000 },
+    { "i": 10, "title": "副总裁 VP", "mult": 4.0, "need": 5200, "cost": 200000 },
+    { "i": 11, "title": "合伙人·打工皇帝", "mult": 5.0, "need": 7500, "cost": 500000 }
+  ]
+}

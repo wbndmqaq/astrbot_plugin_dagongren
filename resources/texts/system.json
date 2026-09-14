@@ -74,5 +74,20 @@
   ],
   "fallback_house_name": [
     "桥洞风水宝地"
+  ],
+  "unknown_user": [
+    "用户{uid}"
+  ],
+  "tier_fallback_name": [
+    "菜鸟"
+  ],
+  "val_unit_hour": [
+    "小时"
+  ],
+  "val_unit_minute": [
+    "分"
+  ],
+  "val_unit_second": [
+    "秒"
   ]
 }

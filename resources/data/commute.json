@@ -1,0 +1,8 @@
+{
+  "commute": [
+    { "name": "地铁", "cost": 3.0, "health": -2, "mind": -1, "late_rate": 0.15 },
+    { "name": "公交", "cost": 2.0, "health": -1, "mind": -2, "late_rate": 0.18 },
+    { "name": "骑车", "cost": 1.5, "health": 2, "mind": 0, "late_rate": 0.2 },
+    { "name": "打车", "cost": 25.0, "health": 0, "mind": 4, "late_rate": 0.05 }
+  ]
+}

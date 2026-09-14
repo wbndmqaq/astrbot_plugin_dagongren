@@ -1,0 +1,181 @@
+{
+  "daily_tasks": [
+    {
+      "id": 1,
+      "name": "整理周报",
+      "desc": "把本周工作内容整理成周报提交",
+      "type": "work",
+      "reward_cash": 50,
+      "reward_exp": 8,
+      "reward_health": -2,
+      "reward_mind": -3,
+      "min_lvl": 1,
+      "weight": 10
+    },
+    {
+      "id": 2,
+      "name": "帮同事带咖啡",
+      "desc": "顺手帮隔壁工位的同事带杯咖啡",
+      "type": "social",
+      "reward_cash": 0,
+      "reward_exp": 3,
+      "reward_social": 5,
+      "reward_mind": 2,
+      "min_lvl": 1,
+      "weight": 12
+    },
+    {
+      "id": 3,
+      "name": "参加部门晨会",
+      "desc": "准时参加部门晨会并做好会议纪要",
+      "type": "work",
+      "reward_cash": 30,
+      "reward_exp": 5,
+      "reward_health": -1,
+      "min_lvl": 1,
+      "weight": 15
+    },
+    {
+      "id": 4,
+      "name": "回复积压邮件",
+      "desc": "清理收件箱里堆积如山的未读邮件",
+      "type": "work",
+      "reward_cash": 40,
+      "reward_exp": 6,
+      "reward_mind": -2,
+      "min_lvl": 1,
+      "weight": 10
+    },
+    {
+      "id": 5,
+      "name": "协助跨部门对接",
+      "desc": "帮其他部门同事处理一个紧急需求",
+      "type": "social",
+      "reward_cash": 80,
+      "reward_exp": 12,
+      "reward_social": 10,
+      "reward_health": -3,
+      "min_lvl": 2,
+      "weight": 8
+    },
+    {
+      "id": 6,
+      "name": "优化工作流程",
+      "desc": "发现一个低效环节并提出改进方案",
+      "type": "work",
+      "reward_cash": 100,
+      "reward_exp": 15,
+      "reward_mind": -5,
+      "min_lvl": 3,
+      "weight": 6
+    },
+    {
+      "id": 7,
+      "name": "新人答疑",
+      "desc": "给刚入职的新人讲解业务流程",
+      "type": "social",
+      "reward_cash": 0,
+      "reward_exp": 10,
+      "reward_social": 15,
+      "reward_mind": 3,
+      "min_lvl": 2,
+      "weight": 8
+    },
+    {
+      "id": 8,
+      "name": "加班赶项目",
+      "desc": "项目deadline临近，主动加班赶进度",
+      "type": "overtime",
+      "reward_cash": 200,
+      "reward_exp": 20,
+      "reward_health": -8,
+      "reward_mind": -10,
+      "reward_ot": 1,
+      "min_lvl": 1,
+      "weight": 7
+    },
+    {
+      "id": 9,
+      "name": "组织团建活动",
+      "desc": "策划并组织一次小型部门团建",
+      "type": "social",
+      "reward_cash": 0,
+      "reward_exp": 8,
+      "reward_social": 20,
+      "reward_mind": 5,
+      "min_lvl": 3,
+      "weight": 5
+    },
+    {
+      "id": 10,
+      "name": "撰写技术文档",
+      "desc": "把项目经验整理成文档供团队参考",
+      "type": "work",
+      "reward_cash": 60,
+      "reward_exp": 12,
+      "reward_mind": -3,
+      "min_lvl": 2,
+      "weight": 8
+    },
+    {
+      "id": 11,
+      "name": "客户拜访",
+      "desc": "跟随领导外出拜访重要客户",
+      "type": "social",
+      "reward_cash": 150,
+      "reward_exp": 18,
+      "reward_social": 8,
+      "reward_health": -4,
+      "min_lvl": 4,
+      "weight": 5
+    },
+    {
+      "id": 12,
+      "name": "内部培训分享",
+      "desc": "在内部技术分享会上做一次演讲",
+      "type": "work",
+      "reward_cash": 0,
+      "reward_exp": 25,
+      "reward_social": 12,
+      "reward_mind": -5,
+      "min_lvl": 3,
+      "weight": 4
+    },
+    {
+      "id": 13,
+      "name": "处理线上故障",
+      "desc": "紧急修复一个线上问题，争分夺秒",
+      "type": "overtime",
+      "reward_cash": 300,
+      "reward_exp": 30,
+      "reward_health": -10,
+      "reward_mind": -8,
+      "reward_ot": 2,
+      "min_lvl": 3,
+      "weight": 3
+    },
+    {
+      "id": 14,
+      "name": "竞品分析报告",
+      "desc": "调研竞品并输出一份分析报告",
+      "type": "work",
+      "reward_cash": 120,
+      "reward_exp": 18,
+      "reward_mind": -4,
+      "min_lvl": 3,
+      "weight": 6
+    },
+    {
+      "id": 15,
+      "name": "茶水间社交",
+      "desc": "在茶水间和同事聊聊天拉近关系",
+      "type": "social",
+      "reward_cash": 0,
+      "reward_exp": 2,
+      "reward_social": 8,
+      "reward_mind": 4,
+      "min_lvl": 1,
+      "weight": 15
+    }
+  ]
+}

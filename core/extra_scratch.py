@@ -16,7 +16,7 @@ import random
 try:  # 允许脱离 AstrBot 的脚本/测试单独导入本模块
     from astrbot.api import logger
 except ImportError:  # pragma: no cover
-    logger = logging.getLogger("shangbanzu.extra_scratch")
+    logger = logging.getLogger("dagongren.extra_scratch")
 
 from . import gamedata as gd
 from . import logic

@@ -1,0 +1,65 @@
+{
+  "_comment": "年终考评档位：名称/配色/图标为展示数据，阈值与倍数用配置键(*_key)+默认值(*_default)，运维在插件配置里调数值、在这里调文案。grades 按 threshold_default 降序匹配，最后一项应是兜底档（threshold_key 为 null）。",
+  "grades": [
+    {
+      "grade": "S",
+      "name": "传奇打工者",
+      "color": "#ffd86f",
+      "icon": "👑",
+      "threshold_key": "review_grade_s_threshold",
+      "threshold_default": 800,
+      "bonus_key": "review_bonus_multi_s",
+      "bonus_default": 3.0,
+      "raise_key": "review_raise_s",
+      "raise_default": 0.15
+    },
+    {
+      "grade": "A",
+      "name": "优秀员工",
+      "color": "#6fe08c",
+      "icon": "🌟",
+      "threshold_key": "review_grade_a_threshold",
+      "threshold_default": 500,
+      "bonus_key": "review_bonus_multi_a",
+      "bonus_default": 2.0,
+      "raise_key": "review_raise_a",
+      "raise_default": 0.1
+    },
+    {
+      "grade": "B",
+      "name": "合格员工",
+      "color": "#7fd1ff",
+      "icon": "📋",
+      "threshold_key": "review_grade_b_threshold",
+      "threshold_default": 300,
+      "bonus_key": "review_bonus_multi_b",
+      "bonus_default": 1.0,
+      "raise_key": "review_raise_b",
+      "raise_default": 0.05
+    },
+    {
+      "grade": "C",
+      "name": "待改进",
+      "color": "#ffb86f",
+      "icon": "⚠️",
+      "threshold_key": "review_grade_c_threshold",
+      "threshold_default": 150,
+      "bonus_key": "review_bonus_multi_c",
+      "bonus_default": 0.3,
+      "raise_key": "review_raise_c",
+      "raise_default": 0.0
+    },
+    {
+      "grade": "D",
+      "name": "绩效不达标",
+      "color": "#fc6262",
+      "icon": "🔴",
+      "threshold_key": null,
+      "threshold_default": null,
+      "bonus_key": "review_bonus_multi_d",
+      "bonus_default": 0.0,
+      "raise_key": null,
+      "raise_default": 0.0
+    }
+  ]
+}

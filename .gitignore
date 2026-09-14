@@ -1,5 +1,8 @@
 __pycache__/
 *.pyc
-data/
+# 只忽略仓库根目录的 data/（本地调试产物）。不能写成 `data/`：不带前导斜杠
+# 的模式会匹配任意层级的同名目录，把 resources/data/（游戏数值表，必须随仓库
+# 分发）也一并排除掉——插件克隆/安装后将没有任何公司、房产、股票等数据。
+/data/
 .ruff_cache/
 .pytest_cache/

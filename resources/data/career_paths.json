@@ -1,0 +1,136 @@
+{
+  "career_paths": [
+    {
+      "id": 1,
+      "name": "技术专家路线",
+      "desc": "深耕技术领域，成为不可替代的专家",
+      "tag": "技术",
+      "stages": [
+        { "name": "初级工程师", "min_exp": 0, "min_lvl": 1, "salary_mult": 1.0 },
+        { "name": "中级工程师", "min_exp": 100, "min_lvl": 3, "salary_mult": 1.3 },
+        { "name": "高级工程师", "min_exp": 300, "min_lvl": 5, "salary_mult": 1.6 },
+        { "name": "资深专家", "min_exp": 600, "min_lvl": 8, "salary_mult": 2.0 },
+        { "name": "首席科学家", "min_exp": 1200, "min_lvl": 12, "salary_mult": 3.0 }
+      ],
+      "required_skills": ["编程", "数据分析"],
+      "required_certs": [],
+      "bonus_exp": 5
+    },
+    {
+      "id": 2,
+      "name": "管理晋升路线",
+      "desc": "从基层走向管理层，带领团队冲锋",
+      "tag": "管理",
+      "stages": [
+        { "name": "普通员工", "min_exp": 0, "min_lvl": 1, "salary_mult": 1.0 },
+        { "name": "小组长", "min_exp": 80, "min_lvl": 2, "salary_mult": 1.2 },
+        { "name": "部门主管", "min_exp": 250, "min_lvl": 4, "salary_mult": 1.5 },
+        { "name": "部门经理", "min_exp": 500, "min_lvl": 7, "salary_mult": 1.8 },
+        { "name": "总监", "min_exp": 1000, "min_lvl": 10, "salary_mult": 2.5 },
+        { "name": "副总裁", "min_exp": 2000, "min_lvl": 15, "salary_mult": 3.5 }
+      ],
+      "required_skills": ["管理", "项目管理", "演讲"],
+      "required_certs": ["PMP"],
+      "bonus_exp": 3
+    },
+    {
+      "id": 3,
+      "name": "产品运营路线",
+      "desc": "洞察用户需求，打造爆款产品",
+      "tag": "产品",
+      "stages": [
+        { "name": "运营助理", "min_exp": 0, "min_lvl": 1, "salary_mult": 1.0 },
+        { "name": "运营专员", "min_exp": 80, "min_lvl": 2, "salary_mult": 1.2 },
+        { "name": "产品经理", "min_exp": 200, "min_lvl": 4, "salary_mult": 1.5 },
+        { "name": "高级产品经理", "min_exp": 450, "min_lvl": 6, "salary_mult": 1.8 },
+        { "name": "产品总监", "min_exp": 900, "min_lvl": 10, "salary_mult": 2.5 }
+      ],
+      "required_skills": ["产品思维", "数据分析", "写作能力"],
+      "required_certs": [],
+      "bonus_exp": 4
+    },
+    {
+      "id": 4,
+      "name": "金融精英路线",
+      "desc": "在金融行业摸爬滚打，向金字塔尖攀登",
+      "tag": "金融",
+      "stages": [
+        { "name": "分析师", "min_exp": 0, "min_lvl": 1, "salary_mult": 1.0 },
+        { "name": "高级分析师", "min_exp": 150, "min_lvl": 3, "salary_mult": 1.4 },
+        { "name": "副总裁", "min_exp": 400, "min_lvl": 6, "salary_mult": 1.8 },
+        { "name": "董事", "min_exp": 800, "min_lvl": 10, "salary_mult": 2.5 },
+        { "name": "合伙人", "min_exp": 1500, "min_lvl": 14, "salary_mult": 4.0 }
+      ],
+      "required_skills": ["财务知识", "谈判技巧", "外语"],
+      "required_certs": ["CPA", "CFA"],
+      "bonus_exp": 6
+    },
+    {
+      "id": 5,
+      "name": "创业冒险路线",
+      "desc": "不甘平庸，自己当老板搏一把",
+      "tag": "创业",
+      "stages": [
+        { "name": "打工攒钱", "min_exp": 0, "min_lvl": 1, "salary_mult": 1.0 },
+        { "name": "副业试水", "min_exp": 100, "min_lvl": 2, "salary_mult": 1.1 },
+        { "name": "辞职创业", "min_exp": 300, "min_lvl": 4, "salary_mult": 0.8 },
+        { "name": "小有规模", "min_exp": 600, "min_lvl": 7, "salary_mult": 1.5 },
+        { "name": "融资扩张", "min_exp": 1000, "min_lvl": 10, "salary_mult": 2.5 },
+        { "name": "上市敲钟", "min_exp": 2000, "min_lvl": 15, "salary_mult": 5.0 }
+      ],
+      "required_skills": ["管理", "谈判技巧", "财务知识", "产品思维"],
+      "required_certs": [],
+      "bonus_exp": 8
+    },
+    {
+      "id": 6,
+      "name": "自由职业路线",
+      "desc": "不受朝九晚五束缚，靠本事吃饭",
+      "tag": "自由",
+      "stages": [
+        { "name": "业余接单", "min_exp": 0, "min_lvl": 1, "salary_mult": 0.5 },
+        { "name": "全职自由", "min_exp": 150, "min_lvl": 3, "salary_mult": 1.0 },
+        { "name": "稳定客源", "min_exp": 400, "min_lvl": 5, "salary_mult": 1.3 },
+        { "name": "个人品牌", "min_exp": 800, "min_lvl": 8, "salary_mult": 1.8 },
+        { "name": "行业大咖", "min_exp": 1500, "min_lvl": 12, "salary_mult": 2.5 }
+      ],
+      "required_skills": ["写作能力", "设计", "谈判技巧"],
+      "required_certs": [],
+      "bonus_exp": 5
+    },
+    {
+      "id": 7,
+      "name": "体制内路线",
+      "desc": "考公考编，追求稳定与保障",
+      "tag": "体制",
+      "stages": [
+        { "name": "备考阶段", "min_exp": 0, "min_lvl": 1, "salary_mult": 0.3 },
+        { "name": "基层科员", "min_exp": 100, "min_lvl": 2, "salary_mult": 1.0 },
+        { "name": "主任科员", "min_exp": 300, "min_lvl": 4, "salary_mult": 1.2 },
+        { "name": "副处级", "min_exp": 600, "min_lvl": 7, "salary_mult": 1.5 },
+        { "name": "正处级", "min_exp": 1000, "min_lvl": 10, "salary_mult": 1.8 },
+        { "name": "厅局级", "min_exp": 1800, "min_lvl": 14, "salary_mult": 2.5 }
+      ],
+      "required_skills": ["写作能力", "法律常识", "管理"],
+      "required_certs": [],
+      "bonus_exp": 2
+    },
+    {
+      "id": 8,
+      "name": "学术研究路线",
+      "desc": "深耕学术，论文等身桃李满天下",
+      "tag": "学术",
+      "stages": [
+        { "name": "研究生", "min_exp": 0, "min_lvl": 1, "salary_mult": 0.5 },
+        { "name": "博士", "min_exp": 200, "min_lvl": 3, "salary_mult": 0.8 },
+        { "name": "讲师", "min_exp": 400, "min_lvl": 5, "salary_mult": 1.0 },
+        { "name": "副教授", "min_exp": 700, "min_lvl": 8, "salary_mult": 1.4 },
+        { "name": "教授", "min_exp": 1200, "min_lvl": 12, "salary_mult": 2.0 },
+        { "name": "院士", "min_exp": 2500, "min_lvl": 18, "salary_mult": 3.0 }
+      ],
+      "required_skills": ["写作能力", "外语", "数据分析"],
+      "required_certs": [],
+      "bonus_exp": 7
+    }
+  ]
+}

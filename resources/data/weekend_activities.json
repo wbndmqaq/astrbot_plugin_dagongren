@@ -1,0 +1,155 @@
+{
+  "weekend_activities": [
+    {
+      "id": 1,
+      "name": "睡到自然醒",
+      "desc": "关掉闹钟，睡到阳光晒屁股",
+      "cost": 0,
+      "effect_health": 8,
+      "effect_mind": 5,
+      "effect_social": 0,
+      "weight": 15
+    },
+    {
+      "id": 2,
+      "name": "逛公园",
+      "desc": "去附近公园散步呼吸新鲜空气",
+      "cost": 0,
+      "effect_health": 6,
+      "effect_mind": 4,
+      "effect_social": 2,
+      "weight": 12
+    },
+    {
+      "id": 3,
+      "name": "看电影",
+      "desc": "买桶爆米花看场新上映的电影",
+      "cost": 60,
+      "effect_health": 2,
+      "effect_mind": 6,
+      "effect_social": 3,
+      "weight": 10
+    },
+    {
+      "id": 4,
+      "name": "健身房锻炼",
+      "desc": "去健身房挥洒汗水，释放工作压力",
+      "cost": 80,
+      "effect_health": 10,
+      "effect_mind": 3,
+      "effect_social": 2,
+      "weight": 8
+    },
+    {
+      "id": 5,
+      "name": "约朋友聚餐",
+      "desc": "约上三五好友吃顿好的聊聊天",
+      "cost": 150,
+      "effect_health": 3,
+      "effect_mind": 8,
+      "effect_social": 15,
+      "weight": 10
+    },
+    {
+      "id": 6,
+      "name": "在家打游戏",
+      "desc": "窝在沙发上打一天游戏",
+      "cost": 0,
+      "effect_health": -2,
+      "effect_mind": 7,
+      "effect_social": 0,
+      "weight": 12
+    },
+    {
+      "id": 7,
+      "name": "读书充电",
+      "desc": "泡杯咖啡安静读一本好书",
+      "cost": 30,
+      "effect_health": 2,
+      "effect_mind": 6,
+      "effect_exp": 5,
+      "weight": 8
+    },
+    {
+      "id": 8,
+      "name": "短途旅行",
+      "desc": "去周边城市来个两天一夜小旅行",
+      "cost": 300,
+      "effect_health": 8,
+      "effect_mind": 12,
+      "effect_social": 5,
+      "weight": 5
+    },
+    {
+      "id": 9,
+      "name": "逛商场",
+      "desc": "去商场逛逛顺便吃个甜品",
+      "cost": 200,
+      "effect_health": 2,
+      "effect_mind": 5,
+      "effect_social": 3,
+      "weight": 8
+    },
+    {
+      "id": 10,
+      "name": "在家做饭",
+      "desc": "研究一道新菜谱，享受烹饪的乐趣",
+      "cost": 50,
+      "effect_health": 5,
+      "effect_mind": 4,
+      "effect_social": 0,
+      "weight": 10
+    },
+    {
+      "id": 11,
+      "name": "参加兴趣班",
+      "desc": "去上个画画/吉他/烘焙兴趣班",
+      "cost": 120,
+      "effect_health": 2,
+      "effect_mind": 8,
+      "effect_social": 8,
+      "effect_exp": 3,
+      "weight": 6
+    },
+    {
+      "id": 12,
+      "name": "按摩SPA",
+      "desc": "去按摩店放松一下僵硬的肩颈",
+      "cost": 180,
+      "effect_health": 12,
+      "effect_mind": 6,
+      "effect_social": 0,
+      "weight": 5
+    },
+    {
+      "id": 13,
+      "name": "宅家追剧",
+      "desc": "一口气追完一整季剧",
+      "cost": 20,
+      "effect_health": -1,
+      "effect_mind": 6,
+      "effect_social": 0,
+      "weight": 12
+    },
+    {
+      "id": 14,
+      "name": "户外运动",
+      "desc": "骑行/爬山/打球，出出汗",
+      "cost": 40,
+      "effect_health": 10,
+      "effect_mind": 5,
+      "effect_social": 5,
+      "weight": 8
+    },
+    {
+      "id": 15,
+      "name": "陪伴家人",
+      "desc": "回家陪父母吃顿饭聊聊天",
+      "cost": 100,
+      "effect_health": 4,
+      "effect_mind": 10,
+      "effect_social": 8,
+      "weight": 7
+    }
+  ]
+}

@@ -40,7 +40,9 @@ async def get_cert(ctx_db, gid, uid, nickname, cert_name, cfg):
     if cert_name in skills:
         return R(err=_t("cert_already", {"cert": cert_name}))
     p["cash"] = round(max(0.0, float(p["cash"]) - cost), 2)
-    exp_gain = int(certs[cert_name].get("exp") or 30)
+    # 不能写 `or 30`：certs.json 里把 exp 配成 0 会被 falsy 兜底静默抬成 30，
+    # 与 meals/commute 等数值表一致统一走 num_of（null/字符串/NaN 也一并兜住）
+    exp_gain = int(logic.num_of(certs[cert_name], "exp", 30))
     value_rate = float(logic.cfg_get(cfg, "cert_value_bonus_rate", 0.1))
     if random.random() < float(logic.cfg_get(cfg, "cert_pass_rate", 0.55)):
         skills.append(cert_name)

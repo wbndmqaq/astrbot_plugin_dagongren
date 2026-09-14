@@ -76,11 +76,14 @@ def fmt_money(value) -> str:
 def fmt_remaining(seconds) -> str:
     s = max(0, int(seconds))
     h, m, sec = s // 3600, (s % 3600) // 60, s % 60
+    hour = _system("val_unit_hour", "小时")
+    minute = _system("val_unit_minute", "分")
+    second = _system("val_unit_second", "秒")
     if h:
-        return f"{h}小时{m}分{sec}秒"
+        return f"{h}{hour}{m}{minute}{sec}{second}"
     if m:
-        return f"{m}分{sec}秒"
-    return f"{sec}秒"
+        return f"{m}{minute}{sec}{second}"
+    return f"{sec}{second}"
 
 
 def ri(lo: int, hi: int) -> int:
@@ -105,7 +108,8 @@ def _tier_tables():
     names = gd.tier_names()
     scores = gd.tier_scores()
     if not names:
-        names = ["菜鸟"]
+        # rankevents.json 缺失/损坏时的兜底档名，文案外置（system.json）
+        names = [_system("tier_fallback_name", "菜鸟")]
     if not scores:
         scores = [0]
     return names, scores
@@ -257,7 +261,14 @@ def name_of(p: dict, fallback: str = "") -> str:
     `p.get("card") or p["nickname"] or uid` 在 11 处逐字复制，其中几处还用
     `p["nickname"]` 直接下标（补录的档案没有这一列就 KeyError）。
     """
-    return p.get("card") or p.get("nickname") or str(fallback or "") or f"用户{p.get('uid', '')}"
+    return p.get("card") or p.get("nickname") or str(fallback or "") or unknown_user(
+        p.get("uid", "")
+    )
+
+
+def unknown_user(uid) -> str:
+    """「用户{id}」兜底展示名，文案外置（system.json 的 unknown_user）。"""
+    return fill(_system("unknown_user", "用户{uid}"), {"uid": str(uid or "")})
 
 
 def pick(seq):

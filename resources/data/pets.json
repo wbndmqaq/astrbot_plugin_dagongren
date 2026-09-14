@@ -1,0 +1,23 @@
+{
+  "_comment": "宠物表。type/action 决定「#养<type>」与「#<action>」两条路由（正则由本文件拼装）；actions_extra 是与会话宠物无关的通用互动别名。route 正则只在插件加载时求值，改本文件后需重载插件才会生效。",
+  "actions_extra": ["陪宠物"],
+  "pets": [
+    {
+      "type": "猫",
+      "cost": 2000,
+      "mind_bonus": 5,
+      "desc": "高冷但治愈，偶尔踩你键盘",
+      "icon": "🐱",
+      "action": "撸猫"
+    },
+    {
+      "type": "狗",
+      "cost": 2500,
+      "mind_bonus": 8,
+      "health_bonus": 3,
+      "desc": "忠诚活泼，每天遛狗强制运动",
+      "icon": "🐶",
+      "action": "遛狗"
+    }
+  ]
+}

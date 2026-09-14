@@ -1,0 +1,35 @@
+{
+  "_comment": "双色球玩法与奖级。red_max/blue_max/red_pick 决定号码池与每注红球个数（改了会影响历史票的判奖，请谨慎）。tiers 的名称与规则描述是展示文案，奖池占比只存配置键+默认值。red_hit=-1 表示「red_pick - 1 个」。",
+  "red_max": 16,
+  "blue_max": 8,
+  "red_pick": 3,
+  "tiers": [
+    {
+      "id": "jackpot",
+      "name": "一等奖",
+      "red_hit": 3,
+      "blue_hit": true,
+      "pct_key": "lottery_jackpot_pct",
+      "pct_default": 0.6,
+      "rule": "3红+蓝"
+    },
+    {
+      "id": "second",
+      "name": "二等奖",
+      "red_hit": 3,
+      "blue_hit": false,
+      "pct_key": "lottery_second_pct",
+      "pct_default": 0.25,
+      "rule": "3红"
+    },
+    {
+      "id": "third",
+      "name": "三等奖",
+      "red_hit": 2,
+      "blue_hit": true,
+      "pct_key": "lottery_third_pct",
+      "pct_default": 0.15,
+      "rule": "2红+蓝"
+    }
+  ]
+}

@@ -38,7 +38,7 @@ TTL = 12 * 3600
 JWT_ALG = "HS256"
 
 
-JWT_ISSUER = "astrbot_plugin_shangbanzu"
+JWT_ISSUER = "astrbot_plugin_dagongren"
 
 
 CONFIG_HIDDEN_KEYS = {"webui_password", "webui_jwt_secret", "_webui_must_change_password"}

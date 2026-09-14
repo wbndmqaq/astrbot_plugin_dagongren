@@ -1,9 +1,9 @@
 name: astrbot_plugin_dagongren
 desc: 打工人·上班族物语 —— 大型群聊职场生存模拟游戏。
-version: 1.0.1
+version: 1.0.2
 author: wbndm
 social_link: https://github.com/wbndmqaq
-repo: https://github.com/wbndmqaq/astrbot_plugin_shangbanzu
+repo: https://github.com/wbndmqaq/astrbot_plugin_dagongren
 display_name: 打工人·上班族物语
 short_desc: 上班族现实生存模拟：打卡领薪、摸鱼加班、租房买房、技能进修、股票基金、对线撕逼、卷王竞技、独立WebUI。
 astrbot_version: ">=4.9.2"

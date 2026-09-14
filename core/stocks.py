@@ -14,7 +14,7 @@ from .logic import today_str as _today
 try:  # 允许脱离 AstrBot 的脚本/测试单独导入本模块
     from astrbot.api import logger
 except ImportError:  # pragma: no cover
-    logger = logging.getLogger("shangbanzu.stocks")
+    logger = logging.getLogger("dagongren.stocks")
 
 SEED_FILE = Path(__file__).resolve().parent.parent / "resources" / "data" / "stocks.json"
 

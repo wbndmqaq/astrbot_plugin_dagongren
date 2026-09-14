@@ -1,0 +1,10 @@
+{
+  "_comment": "刮刮乐奖项。multiplier = 奖金相对售价的倍数（不是绝对金额），所以改 scratch_lottery_cost 不会破坏返奖率。prob 为各档中奖概率，其余概率自动视为不中奖；实际奖金会按配置项 scratch_rtp 统一缩放。",
+  "prizes": [
+    { "name": "特等奖 · 打工人逆袭", "multiplier": 250, "prob": 0.001, "color": "#ffd86f" },
+    { "name": "一等奖 · 年终奖提前发", "multiplier": 40, "prob": 0.005, "color": "#6fe08c" },
+    { "name": "二等奖 · 下午茶基金", "multiplier": 5, "prob": 0.05, "color": "#7fd1ff" },
+    { "name": "三等奖 · 回本安慰奖", "multiplier": 1.5, "prob": 0.15, "color": "#b48cff" }
+  ],
+  "lose": { "name": "谢谢惠顾 · 感谢为福彩做贡献", "color": "#fc6262" }
+}

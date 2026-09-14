@@ -8,7 +8,7 @@ import time
 try:  # 存储层可能被脱离 AstrBot 的脚本单独导入（备份/导出工具）
     from astrbot.api import logger
 except ImportError:  # pragma: no cover
-    logger = logging.getLogger("shangbanzu.db")
+    logger = logging.getLogger("dagongren.db")
 
 _write_lock = threading.Lock()
 
@@ -342,6 +342,45 @@ COLUMNS = [
     "created_at",
     "updated_at",
 ]
+
+
+def _parse_players_ddl(schema: str) -> dict[str, str]:
+    """从 SCHEMA 里解析 players 表的列定义，供缺列自动迁移拼 ALTER TABLE。
+
+    直接复用 SCHEMA 而不是再维护一份「列名 → 类型」映射：players 的字段定义
+    已经散落在 SCHEMA / COLUMNS / DEFAULTS / DELTA_* / START_CONFIG_KEYS 多处，
+    再加一份手写映射必然漂移。这里解析的是同一段 DDL，加列时只改 SCHEMA 即可。
+    """
+    body = schema.split("CREATE TABLE IF NOT EXISTS players (", 1)[-1]
+    body = body.split("\n);", 1)[0]
+    out: dict[str, str] = {}
+    for raw in body.splitlines():
+        line = raw.strip().rstrip(",").strip()
+        if not line or line.startswith(("--", "PRIMARY KEY", "UNIQUE", "FOREIGN KEY")):
+            continue
+        name, _, rest = line.partition(" ")
+        if name and rest.strip():
+            out[name] = rest.strip()
+    return out
+
+
+# {列名: "TYPE DEFAULT x"}，由 SCHEMA 解析而来，_CoreMixin.init 用它补缺列
+PLAYER_COLUMN_DDL = _parse_players_ddl(SCHEMA)
+
+# 解析器有两个静默失效模式：① 上面的定位串一旦和 SCHEMA 不再逐字一致，split
+# 会返回整个 SCHEMA，解析出一堆垃圾键；② 列定义写成跨行会把类型和 DEFAULT 拆散。
+# 两种情况下缺列都查不到 DDL，于是自动迁移退化成它本该防住的 "no such column"。
+# 这个断言在【导入时】就炸，比运行到 save_player 才报错好得多。
+if set(PLAYER_COLUMN_DDL) != set(COLUMNS):
+    raise RuntimeError(
+        "players 表的 DDL 解析结果与 COLUMNS 不一致，schema 自动迁移会失效。"
+        f"DDL 多出 {sorted(set(PLAYER_COLUMN_DDL) - set(COLUMNS))}，"
+        f"COLUMNS 多出 {sorted(set(COLUMNS) - set(PLAYER_COLUMN_DDL))}"
+    )
+
+# v1 曾把背包/技能/冷却存在 players 的 JSON 列里，v2 拆成了三张子表。
+# 迁移时要把这些列的内容搬进子表，搬完保留原列（SQLite 删列需重建表，不值得）。
+LEGACY_JSON_COLUMNS = ("items", "skills", "cds")
 
 
 DELTA_FLOAT_COLUMNS = {

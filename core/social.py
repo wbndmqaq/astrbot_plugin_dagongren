@@ -139,12 +139,20 @@ async def duel(db, gid, me, target, cfg, target_name="", app_id: str = ""):
     # 我方在 per-user 锁内走 save_player；对方走原子列更新，
     # 防止"读对方快照→全列覆盖"把对方并发改动（存款/打卡等）冲掉
     if win:
+        # 败方身价被 20.0 地板钳制时实际跌幅 < v_down，胜方涨幅必须按
+        # 【实际跌幅】取——否则败方在地板上的每一次对线都在净注入身价
+        # （与 slave_market 决斗同型问题）
+        actual_dec = float(td["value"]) - max(20.0, float(td["value"]) - v_down)
+        v_up = min(v_up, int(actual_dec))
         p["value"] = round(float(p["value"]) + v_up, 2)
         p["duel_wins"] = int(p["duel_wins"]) + 1
         await asyncio.to_thread(db.save_player, p)
         await asyncio.to_thread(db.bump_duel_loss, gid, str(target), float(v_down))
     else:
-        p["value"] = round(max(20.0, float(p["value"]) - v_down), 2)
+        old_value = float(p["value"])
+        p["value"] = round(max(20.0, old_value - v_down), 2)
+        actual_dec = old_value - float(p["value"])
+        v_up = min(v_up, int(actual_dec))
         p["duel_losses"] = int(p["duel_losses"]) + 1
         await asyncio.to_thread(db.save_player, p)
         await asyncio.to_thread(db.bump_duel_win, gid, str(target), float(v_up))

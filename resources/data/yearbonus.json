@@ -1,0 +1,38 @@
+{
+  "_comment": "年终奖档位：名称/配色/图标为展示数据，概率与倍数只存配置键(*_key)+默认值(*_default)，与 review.json 同一范式。tiers 按顺序累积概率匹配，最后一项为兜底档（rate_key 为 null）。text_key 指向 resources/texts/extra.json 里的文案数组。",
+  "tiers": [
+    {
+      "id": "jackpot",
+      "title": "年终奖翻倍！！",
+      "color": "#ffd86f",
+      "icon": "🎉",
+      "rate_key": "year_bonus_jackpot_rate",
+      "rate_default": 0.05,
+      "multi_key": "year_bonus_jackpot_multi",
+      "multi_default": 3.0,
+      "text_key": "yearbonus_ok"
+    },
+    {
+      "id": "good",
+      "title": "年终奖到账",
+      "color": "#6fe08c",
+      "icon": "🧧",
+      "rate_key": "year_bonus_good_rate",
+      "rate_default": 0.25,
+      "multi_key": "year_bonus_good_multi",
+      "multi_default": 1.5,
+      "text_key": "yearbonus_ok"
+    },
+    {
+      "id": "bad",
+      "title": "年终奖…就这？",
+      "color": "#fc6262",
+      "icon": "😞",
+      "rate_key": null,
+      "rate_default": null,
+      "multi_key": "year_bonus_bad_multi",
+      "multi_default": 0.3,
+      "text_key": "yearbonus_bad"
+    }
+  ]
+}

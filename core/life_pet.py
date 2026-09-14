@@ -103,7 +103,11 @@ async def pet_interact(ctx_db, gid, uid, nickname):
                     "label": _t("lbl_mind"),
                     "value": _t(
                         "val_delta_cur",
-                        {"delta": f"{ev.get('mind', 5):+g}", "cur": p["mind"]},
+                        # 展示值与实际生效值同源（num_of 归一后的 mind_delta）：
+                        # 用 ev.get('mind', 5) 时，运维把条目写成 null/字符串会让
+                        # :+g 格式化抛 TypeError —— 且崩溃点在 save_player 之后，
+                        # 状态已落库玩家却只收到异常提示。
+                        {"delta": f"{mind_delta:+g}", "cur": p["mind"]},
                     ),
                 }
             ],

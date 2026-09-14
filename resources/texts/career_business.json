@@ -116,5 +116,14 @@
   ],
   "kind_dividend": [
     "企业分红"
+  ],
+  "custom_company_desc": [
+    "群友自建公司，老板：{boss}"
+  ],
+  "custom_company_perk_1": [
+    "自建福利"
+  ],
+  "custom_company_perk_2": [
+    "企业分红池"
   ]
 }

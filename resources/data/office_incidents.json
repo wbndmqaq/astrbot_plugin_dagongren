@@ -1,0 +1,187 @@
+{
+  "office_incidents": [
+    {
+      "id": 1,
+      "name": "打印机卡纸",
+      "desc": "打印机又卡纸了，你的紧急文件卡在里面",
+      "type": "minor",
+      "effect_health": -1,
+      "effect_mind": -2,
+      "effect_cash": 0,
+      "weight": 15
+    },
+    {
+      "id": 2,
+      "name": "同事请客奶茶",
+      "desc": "隔壁工位的同事突然请全组喝奶茶",
+      "type": "positive",
+      "effect_health": 0,
+      "effect_mind": 5,
+      "effect_cash": 0,
+      "effect_social": 3,
+      "weight": 12
+    },
+    {
+      "id": 3,
+      "name": "电梯故障",
+      "desc": "电梯坏了，爬了八层楼梯到工位",
+      "type": "minor",
+      "effect_health": -3,
+      "effect_mind": -1,
+      "effect_cash": 0,
+      "weight": 10
+    },
+    {
+      "id": 4,
+      "name": "领导突击提问",
+      "desc": "开会时领导突然点名问你进度",
+      "type": "stress",
+      "effect_health": 0,
+      "effect_mind": -5,
+      "effect_cash": 0,
+      "weight": 8
+    },
+    {
+      "id": 5,
+      "name": "外卖被偷",
+      "desc": "你点的外卖在茶水间不翼而飞",
+      "type": "minor",
+      "effect_health": -2,
+      "effect_mind": -3,
+      "effect_cash": -25,
+      "weight": 10
+    },
+    {
+      "id": 6,
+      "name": "空调太冷",
+      "desc": "办公室空调开到16度，你冻得打字都抖",
+      "type": "minor",
+      "effect_health": -2,
+      "effect_mind": -1,
+      "effect_cash": 0,
+      "weight": 12
+    },
+    {
+      "id": 7,
+      "name": "同事吵架",
+      "desc": "两个同事在工位旁大声争吵，整个办公室气氛尴尬",
+      "type": "stress",
+      "effect_health": 0,
+      "effect_mind": -4,
+      "effect_cash": 0,
+      "weight": 6
+    },
+    {
+      "id": 8,
+      "name": "老板发红包",
+      "desc": "老板心情好，在群里发了个红包",
+      "type": "positive",
+      "effect_health": 0,
+      "effect_mind": 3,
+      "effect_cash": 20,
+      "weight": 8
+    },
+    {
+      "id": 9,
+      "name": "WiFi断了",
+      "desc": "办公室WiFi突然断连，全员摸鱼半小时",
+      "type": "minor",
+      "effect_health": 0,
+      "effect_mind": -2,
+      "effect_cash": 0,
+      "weight": 8
+    },
+    {
+      "id": 10,
+      "name": "被安排临时任务",
+      "desc": "领导临时塞了个急活，今天的工作计划全乱了",
+      "type": "stress",
+      "effect_health": -2,
+      "effect_mind": -5,
+      "effect_cash": 50,
+      "effect_exp": 5,
+      "weight": 7
+    },
+    {
+      "id": 11,
+      "name": "食堂出新菜",
+      "desc": "食堂今天居然出了个不错的新菜",
+      "type": "positive",
+      "effect_health": 3,
+      "effect_mind": 2,
+      "effect_cash": 0,
+      "weight": 10
+    },
+    {
+      "id": 12,
+      "name": "工位被占",
+      "desc": "来晚了发现工位被别的部门临时征用了",
+      "type": "minor",
+      "effect_health": -1,
+      "effect_mind": -3,
+      "effect_cash": 0,
+      "weight": 5
+    },
+    {
+      "id": 13,
+      "name": "收到表扬邮件",
+      "desc": "领导在全员邮件里点名表扬了你的工作",
+      "type": "positive",
+      "effect_health": 0,
+      "effect_mind": 8,
+      "effect_cash": 0,
+      "effect_social": 5,
+      "weight": 4
+    },
+    {
+      "id": 14,
+      "name": "加班餐补",
+      "desc": "加班到晚上九点，公司发了加班餐补",
+      "type": "positive",
+      "effect_health": -2,
+      "effect_mind": -2,
+      "effect_cash": 40,
+      "weight": 6
+    },
+    {
+      "id": 15,
+      "name": "会议室被抢",
+      "desc": "预定的会议室被别的团队抢先占了",
+      "type": "minor",
+      "effect_health": 0,
+      "effect_mind": -3,
+      "effect_cash": 0,
+      "weight": 8
+    },
+    {
+      "id": 16,
+      "name": "同事借钱",
+      "desc": "同事开口借钱说周转一下，你不好意思拒绝",
+      "type": "minor",
+      "effect_health": 0,
+      "effect_mind": -2,
+      "effect_cash": -100,
+      "weight": 4
+    },
+    {
+      "id": 17,
+      "name": "年终奖传闻",
+      "desc": "茶水间听到今年年终奖可能翻倍的传闻",
+      "type": "positive",
+      "effect_health": 0,
+      "effect_mind": 6,
+      "effect_cash": 0,
+      "weight": 3
+    },
+    {
+      "id": 18,
+      "name": "电脑蓝屏",
+      "desc": "正在赶方案时电脑突然蓝屏了",
+      "type": "stress",
+      "effect_health": -2,
+      "effect_mind": -8,
+      "effect_cash": 0,
+      "weight": 5
+    }
+  ]
+}

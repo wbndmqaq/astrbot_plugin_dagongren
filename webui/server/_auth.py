@@ -234,7 +234,7 @@ class _AuthMixin:
         前端 loadAll() 会再拉一次，这次带上完整负载。
         """
         out = {
-            "name": "astrbot_plugin_shangbanzu",
+            "name": "astrbot_plugin_dagongren",
             "display": "打工人·上班族物语",
             "auth_required": self.auth_on,
         }

@@ -2,7 +2,7 @@
 
 import asyncio
 
-from ._deps import BatchEditResult, gd, logic
+from ._deps import gd, logic
 from ._util import _json
 
 
@@ -151,7 +151,22 @@ class _ApiMixin:
                 result = await asyncio.to_thread(self.market.admin_edit_batch, valid)
             except Exception as e:  # noqa: BLE001 - 批量失败不能让整请求 500
                 self.log.warning(f"[上班族物语] 批量改价失败：{e}")
-                result = BatchEditResult(invalid=set(), missing=set(valid))
+                # DB 层异常 ≠ 「代码不存在」：把全部合法代码标成 missing 会让
+                # 运维去核对根本没问题的代码。如实报一条整体失败，一项都不算
+                # 已应用（价格确实没有写入）。
+                return _json(
+                    {
+                        "ok": False,
+                        "error": f"批量保存失败（数据库异常），本次改动未写入：{e}",
+                        "applied": [],
+                        "failed": [
+                            {"code": code, "error": "数据库异常，未写入", "kind": "db"}
+                            for code in valid
+                        ],
+                        "min_price": floor,
+                    },
+                    500,
+                )
             for code in valid:
                 # 两类失败分开回传（BatchEditResult），前端也分开提示：
                 # 「代码不存在」与「价格不在允许区间」要的处置完全不同。

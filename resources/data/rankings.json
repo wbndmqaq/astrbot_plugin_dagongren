@@ -1,0 +1,29 @@
+{
+  "_comment": "排行榜定义：key 为 db 列/口径，name/unit 为展示文案，aliases 是触发指令的别名（handlers/system_cmds.py 的路由正则由此拼装）。加一个榜只改这一处。",
+  "rankings": [
+    {
+      "key": "wealth",
+      "name": "富豪榜（总资产）",
+      "unit": "元",
+      "aliases": ["富豪榜"]
+    },
+    {
+      "key": "exp",
+      "name": "卷王榜（职场经验）",
+      "unit": "点经验",
+      "aliases": ["卷王榜"]
+    },
+    {
+      "key": "value",
+      "name": "身价榜",
+      "unit": "身价",
+      "aliases": ["身价榜"]
+    },
+    {
+      "key": "level",
+      "name": "职级榜（职位·月薪）",
+      "unit": "职级",
+      "aliases": ["职级榜"]
+    }
+  ]
+}
